@@ -2,20 +2,29 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{28c9d231-650d-4385-a672-a22b54daaadc}</UniqueIdentifier>
+      <UniqueIdentifier>{6638f469-4bcf-47db-869b-4c6fd8bc5079}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
+    <Filter Include="Source Files\SMD">
+      <UniqueIdentifier>{678d4e3b-2144-4e85-b744-9d8b8b64d883}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{d365df61-1dab-4fbc-aaf5-fd7ba6ce20e1}</UniqueIdentifier>
+      <UniqueIdentifier>{d4a02449-19f9-4530-9da3-8e1e29729148}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
+    <Filter Include="Header Files\SMD Include">
+      <UniqueIdentifier>{89a84a6b-2c37-4185-beb2-7e632cc090d3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{45912d54-6f53-400b-834d-7a8f19a5758c}</UniqueIdentifier>
+      <UniqueIdentifier>{a0f49e2e-4714-4660-ab4f-c46e5c2e7d2a}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\OpenTest\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fileCrawler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\OpenTest\glprocs.c">
@@ -28,6 +37,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\OpenTest\matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mstring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\OpenTest\OBJ_Exporter.cpp">
@@ -75,6 +87,9 @@
     <ClCompile Include="SH_Msg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="strParse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\OpenTest\tgaload.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,12 +99,27 @@
     <ClCompile Include="..\..\OpenTest\vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SMD\SMD_Animation_Frame.cpp">
+      <Filter>Source Files\SMD</Filter>
+    </ClCompile>
+    <ClCompile Include="SMD\SMD_Model.cpp">
+      <Filter>Source Files\SMD</Filter>
+    </ClCompile>
+    <ClCompile Include="SMD\SMD_Triangle.cpp">
+      <Filter>Source Files\SMD</Filter>
+    </ClCompile>
+    <ClCompile Include="SMD\SMD_Vertex.cpp">
+      <Filter>Source Files\SMD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\OpenTest\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="debugDrawing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fileCrawler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fontSystem.h">
@@ -105,6 +135,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\OpenTest\matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mvector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\OpenTest\OBJ_Exporter.h">
@@ -152,6 +188,9 @@
     <ClInclude Include="SH_Msg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="strParse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\OpenTest\tgaload.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -167,11 +206,25 @@
     <ClInclude Include="winutil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SMD\SMD_Animation_Frame.h">
+      <Filter>Header Files\SMD Include</Filter>
+    </ClInclude>
+    <ClInclude Include="SMD\SMD_Model.h">
+      <Filter>Header Files\SMD Include</Filter>
+    </ClInclude>
+    <ClInclude Include="SMD\SMD_Triangle.h">
+      <Filter>Header Files\SMD Include</Filter>
+    </ClInclude>
+    <ClInclude Include="SMD\SMD_Vertex.h">
+      <Filter>Header Files\SMD Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="fontTest.bmp">
+    <Image Include="fontTest.bmp">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ReadMe.txt" />
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
 </Project>
