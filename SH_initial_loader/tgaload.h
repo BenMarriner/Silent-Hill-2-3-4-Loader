@@ -1,4 +1,4 @@
-#include <gl\gl.h>
+#include <glad/gl.h>
 #ifndef TGA_LOAD_H
 #define TGA_LOAD_H
 /*  Definitions for bitflags  */

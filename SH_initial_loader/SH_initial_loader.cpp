@@ -1,18 +1,18 @@
 // SH_initial_loader.cpp : Defines the entry point for the application.
 //
-#include <windows.h>
-#ifndef __INTRIN_H_
-//#include <intrin.h>
-#endif /*__INTRIN_H_*/
 
 #pragma comment(lib,"user32.lib")
 #pragma comment(lib,"gdi32.lib")
 
-#include <gl\gl.h>
-#include <gl\glu.h>
-#include <gl\wglext.h>
-#include <gl\glext.h>
-#include <gl\glprocs.h>
+#include <glad/gl.h>
+#include <glad/wgl.h>
+//#include <gl/glu.h>
+#ifndef __INTRIN_H_
+#include <windows.h>
+//#include <intrin.h>
+#endif /*__INTRIN_H_*/
+//#include <glad/glext.h>
+//#include <glad\glprocs.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -44,7 +44,7 @@
 
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
-#pragma comment(lib, "glaux.lib")
+//#pragma comment(lib, "glaux.lib")
 
 extern int errno;
 
@@ -250,6 +250,11 @@ float computeFPS(LARGE_INTEGER *curTime);
 int pixelFormatSetup(DWORD *flags, BYTE *cbits, BYTE *depthBits, BYTE *stencil,BOOL check=FALSE);
 void readIndexData( char *filename, int numLongs, int place, int placeLongs, long placeShift, bool showSign = false);
 void readFileDataAtLocation( char *filename, int numLongs, long offset );
+
+//-----------------------------------------------------------------------------
+// GL Loader Functions
+//-----------------------------------------------------------------------------
+GLADapiproc glad_win32_loader(const char* name);
 
 void Load_SH2_SceneFile( char *fileToLoad );
 void Process_SH2_SceneKeyInput( );
@@ -1563,12 +1568,12 @@ int init( void )
 
 
 
-	if( ChangeDisplaySettings( &devMode, CDS_FULLSCREEN ) != DISP_CHANGE_SUCCESSFUL )
-	{
-		// TO DO: Respond to failure of ChangeDisplaySettings
-		LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't change the display\n\t...Exiting",__LINE__);
-		return 0;
-	}
+	//if( ChangeDisplaySettings( &devMode, CDS_FULLSCREEN ) != DISP_CHANGE_SUCCESSFUL )
+	//{
+	//	// TO DO: Respond to failure of ChangeDisplaySettings
+	//	LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't change the display\n\t...Exiting",__LINE__);
+	//	return 0;
+	//}
 
 	RECT winRect;
 	winRect.left	= 0;			
@@ -1601,8 +1606,27 @@ int init( void )
 
 	if(hdc==NULL)
 		hdc=GetDC(hwnd);
+
 	hglrc = wglCreateContext( hdc );
-	wglMakeCurrent( hdc, hglrc );
+	wglMakeCurrent(hdc, hglrc);
+
+	// Using compatibility profile for OpenGL for now. Uncomment this when moving to modern OpenGL and consequently, the core profile.
+	if (!gladLoadGL(glad_win32_loader))
+	{
+		MessageBox(NULL, "gladLoadGL failed", "Error", MB_OK);
+		return -1;
+	}
+	if (!gladLoadWGL(hdc, glad_win32_loader))
+	{
+		for (size_t i = 0; i < glad_wgl_max_function; ++i)
+		{
+
+		}
+
+		MessageBox(NULL, "gladLoadWGL failed", "Error", MB_OK);
+		return -1;
+	}
+
 	glEnable(GL_DEPTH_TEST);
 
 	viewCam.createCamView(75.0f, 4.0f/3.0f, 1.0f, zDist);
@@ -1623,7 +1647,23 @@ int init( void )
 	return 1;
 }
 
+//-----------------------------------------------------------------------------
+// Name: glad_win32_loader()
+// Desc: Loads Win32 GLAD
+//-----------------------------------------------------------------------------
+GLADapiproc glad_win32_loader(const char* name)
+{
+	GLADapiproc proc = (GLADapiproc)wglGetProcAddress(name);
+	if (proc == nullptr ||
+		proc == (GLADapiproc)0x1 || (GLADapiproc)0x2 ||
+		proc == (GLADapiproc)0x3 || (GLADapiproc)-1)
+	{
+		static HMODULE ogl32 = LoadLibraryA("opengl32.dll");
+		proc = (GLADapiproc)GetProcAddress(ogl32, name);
+	}
 
+	return proc;
+}
 
 int pixelFormatSetup(DWORD *flags, BYTE *cbits, BYTE *depthBits, BYTE *stencil,BOOL check)
 {
@@ -4148,3 +4188,4 @@ void readFileDataAtLocation( char *filename, int numLongs, long offset )
 	delete [] buffer;
 	LogFile(ERROR_LOG,"");
 }
+

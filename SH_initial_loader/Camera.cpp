@@ -1,7 +1,7 @@
-#include <windows.h>
 #include <stdio.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
+#include <glad/gl.h>
+#include <windows.h>
+//#include <gl\glu.h>
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>

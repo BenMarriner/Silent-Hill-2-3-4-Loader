@@ -1,12 +1,13 @@
 #ifndef __SH3LOADER__
 #define __SH3LOADER__
 
+#include <glad/gl.h>
 #include <windows.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
-#include <gl\wglext.h>
-#include <gl\glext.h>
-#include <gl\glprocs.h>
+//#include <gl\glu.h>
+//#include <gl\wglext.h>
+//#include <gl\glext.h>
+//#include <gl\glprocs.h>
+
 #include <stdio.h>
 
 #include <vector>

@@ -3,11 +3,12 @@
 
 #define MAX_SHADER_PARAMS 24
 
+#include <glad/gl.h>
 #include <windows.h>
-#include <gl\gl.h>
-#include <gl\glext.h>
-#include <gl\wglext.h>
-#include <gl\glprocs.h>
+//#include <gl\glext.h>
+//#include <gl\wglext.h>
+//#include <gl\glprocs.h>
+
 
 class ShaderObj{
 public:

@@ -1,10 +1,10 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <glad/gl.h>
 #include <windows.h>
 #include <string>
 #include <vector>
-#include <gl\gl.h>
 
 #include "vertex.h"
 #include "plane.h"

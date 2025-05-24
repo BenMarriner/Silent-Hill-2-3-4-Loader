@@ -1,12 +1,13 @@
 #ifndef __SH4_LOADER_H__
 #define __SH4_LOADER_H__
 
+#include <glad/gl.h>
 #include <windows.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
-#include <gl\wglext.h>
-#include <gl\glext.h>
-#include <gl\glprocs.h>
+//#include <gl\glu.h>
+//#include <gl\wglext.h>
+//#include <gl\glext.h>
+//#include <gl\glprocs.h>
+
 #include "vertex.h"
 #include "matrix.h"
 #include "quat.h"

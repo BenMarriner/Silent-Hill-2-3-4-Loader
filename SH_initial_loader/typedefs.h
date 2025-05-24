@@ -7,12 +7,12 @@
 #ifndef TYPEDEFS_H
 #define TYPEDEFS_H
 
+#include <glad/gl.h>
+#include <glad/wgl.h>
+#include <gl/glu.h>
 #include <windows.h>
 #include <string.h>
 #include <stdio.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
-#include <gl\glprocs.h>
 
 #include <iostream>
 #include <stdlib.h>

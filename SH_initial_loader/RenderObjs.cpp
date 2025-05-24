@@ -1,9 +1,9 @@
 
+#include <glad/gl.h>
 #include <windows.h>
-#include <gl\gl.h>
-#include <gl\glext.h>
-#include <gl\wglext.h>
-#include <gl\glprocs.h>
+//#include <gl\glext.h>
+//#include <gl\wglext.h>
+//#include <gl\glprocs.h>
 #include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>

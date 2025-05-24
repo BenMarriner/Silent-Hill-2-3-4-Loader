@@ -20,10 +20,10 @@
    Finally exorcised all the paletted texture code...
 */
 
- #include <windows.h>
- #include <gl\glu.h>
- #include <gl\glext.h>
- #include <gl\wglext.h>
+#include <windows.h>
+//#include <gl\glu.h>
+//#include <gl\glext.h>
+//#include <gl\wglext.h>
 // #include <mem.h>
 
 #include "typedefs.h"

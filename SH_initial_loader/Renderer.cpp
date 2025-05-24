@@ -1,10 +1,10 @@
-#include <windows.h>
 #include <string>
 #include <vector>
-#include <gl\gl.h>
-#include <gl\glext.h>
-#include <gl\wglext.h>
-#include <gl\glprocs.h>
+#include <glad/gl.h>
+#include <glad/wgl.h>
+#include <windows.h>
+//#include <glad/glext.h>
+//#include <glad\glprocs.h>
 #include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>

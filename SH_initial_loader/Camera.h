@@ -2,12 +2,12 @@
 #define CAMERA_H
 
 //#include "glut.h"
-#include <windows.h>
 #ifndef __INTRIN_H_
 //#include <intrin.h>
 #endif /*__INTRIN_H_*/
-#include <gl\gl.h>
-#include <gl\glu.h>
+#include <glad/gl.h>
+//#include <gl\glu.h>
+#include <windows.h>
 
 #include "vertex.h"
 #include "matrix.h"
