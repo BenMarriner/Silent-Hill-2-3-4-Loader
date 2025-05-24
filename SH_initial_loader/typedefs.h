@@ -51,7 +51,7 @@ enum refreshScreen {r60 = 60 ,r70 = 70 ,r72 = 72 ,r75 = 75 ,r85 = 85 ,r100 = 100
 #define DATA_LOG    2
 #define TEST_LOG    3
 
-static void LogFile(int logType, char *s, ...)
+static void LogFile(int logType, const char *s, ...)
 {
 	static int e1st = 1, d1st = 0, t1st = 1;
 	char *filename = NULL;

@@ -41,6 +41,7 @@
 #include "SH_Collision.h"
 
 #include "OBJ_Exporter.h"
+#include <filesystem>
 
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
@@ -144,39 +145,39 @@ int numScenes = 1;
 int sceneLimit = 30;
 int minSceneNum, maxSceneNum;
 int minModelNum, maxModelNum;
-char baseSH2dir[256];
-char baseSH3dir[256];
-char baseSH4dir[256];
+filesystem::path baseSH2dir;
+filesystem::path baseSH3dir;
+filesystem::path baseSH4dir;
 
-char **sceneFiles = NULL;
+vector<std::filesystem::path> sceneFiles;
 int numSceneFiles = 0;
 int curSceneFile = 0;
 
-char **modelFiles = NULL;
+vector<std::filesystem::path> modelFiles;
 int numModelFiles = 0;
 int curModelFile = 0;
 
-char **modelSH2Dirs = NULL;
+vector<std::filesystem::path> modelSH2Dirs;
 int numSH2ModelDirs = 0;
 int curSH2ModelDir = 0;
 
-char **modelSH2Files = NULL;
+vector<std::filesystem::path>modelSH2Files;
 int numSH2ModelFiles = 0;
 int curSH2ModelFile = 0;
 
-char **animSH2Files = NULL;
+vector<std::filesystem::path> animSH2Files;
 int numSH2AnimFiles = 0;
 int curSH2AnimFile = 0;
 
-char **sceneSH2Files = NULL;
+vector<std::filesystem::path> sceneSH2Files;
 int numSH2SceneFiles = 0;
 int curSH2SceneFile = 0;
 
-char **sceneSH2Dirs = NULL;
+vector<std::filesystem::path> sceneSH2Dirs;
 int numSH2SceneDirs = 0;
 int curSH2SceneDir = 0;
 
-char **allSH4Files = NULL;
+vector<std::filesystem::path> allSH4Files;
 int numSH4Files = 0;
 int curSH4File = 0;
 
@@ -208,7 +209,7 @@ rgbf white={1.0,1.0,1.0};
 vertex zeroVec(0.0f, 20.0f, 0.0f);
 vertex lightPos;
 
-LPSTR className="GL_TEST";
+const char* className="GL_TEST";
 bool testShit = true;
 bool g_bPostQuit = false;
 
@@ -357,12 +358,12 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	}
 
 
-	numSceneFiles	= GetDirectoryFilelist( baseSH3dir, "bg*.arc",&sceneFiles);
+	numSceneFiles	= GetDirectoryFilelist( baseSH3dir, "bg*.arc", sceneFiles);
 	numSH2SceneDirs	= GetSH2DirectoryFilelist( baseSH2dir, ".map",&sceneSH2Dirs); //NOTE: Do not use '*' for the SH2 Directory filelist
 	numSH2ModelDirs	= GetSH2DirectoryFilelist( baseSH2dir, ".mdl",&modelSH2Dirs); //NOTE: Do not use '*' for the SH2 Directory filelist
 	numSH2AnimFiles = GetSH2DirectoryFilelist( baseSH2dir, ".anm",&animSH2Files, true);
-	numModelFiles	= GetDirectoryFilelist( baseSH3dir, "chr*.arc",&modelFiles);
-	numSH4Files		= GetDirectoryFilelist( baseSH4dir, "*.bin",&allSH4Files);
+	numModelFiles	= GetDirectoryFilelist( baseSH3dir, "chr*.arc",modelFiles);
+	numSH4Files		= GetDirectoryFilelist( baseSH4dir, "*.bin",allSH4Files);
 
 //readFileDataAtLocation("C:\\Users\\Mike\\Desktop\\fuckMS\\samples\\Silent Hill 2\\data\\chr\\agl\\p_agl.anm",1000, 0 );
 //testMode = true;
@@ -1471,7 +1472,6 @@ int init( void )
 
 				if( debugMode )
 					LogFile(ERROR_LOG,"TEST: command [%s] space[%s] option [%s]",command,junkStr,option);
-
 				if     (strncmp(command,"d_colordepth",12)==0)		colorBits=atoi(option);
 				else if(strncmp(command,"d_depthbuff",11)==0)		depthBits=atoi(option);
 				else if(strncmp(command,"d_stencil",9)==0)			stencilBits=atoi(option);
@@ -1616,16 +1616,16 @@ int init( void )
 		MessageBox(NULL, "gladLoadGL failed", "Error", MB_OK);
 		return -1;
 	}
-	if (!gladLoadWGL(hdc, glad_win32_loader))
-	{
-		for (size_t i = 0; i < glad_wgl_max_function; ++i)
-		{
+	//if (!gladLoadWGL(hdc, glad_win32_loader))
+	//{
+	//	/*for (size_t i = 0; i < glad_wgl_max_function; ++i)
+	//	{
 
-		}
+	//	}*/
 
-		MessageBox(NULL, "gladLoadWGL failed", "Error", MB_OK);
-		return -1;
-	}
+	//	MessageBox(NULL, "gladLoadWGL failed", "Error", MB_OK);
+	//	return -1;
+	//}
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -2018,24 +2018,27 @@ void throttleSetRate( int rate )
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-int GetDirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName)
+int GetDirectoryFilelist(filesystem::path& fileDirExt, string_view fileExt, vector<filesystem::path>& foundFileNames)
 {
-	vector< string > fileList;
+	//vector< filesystem::path > fileList;
 	WIN32_FIND_DATA fileData;	
 	HANDLE fileHandle;
-	int numFiles;
-	char searchStr[512];
+	//int numFiles;
+	std::string searchStr[512];
 
-	if( fileDirExt != NULL && fileDirExt[ strlen( fileDirExt ) - 1 ] != '\\' )
-		sprintf( searchStr, "%s\\%s",fileDirExt, fileExt );
+	if (!fileDirExt.empty() && fileDirExt.string()[fileDirExt.string().length() - 1] != '\\')
+		//sprintf( searchStr, "%s\\%s",fileDirExt->string().c_str(), fileExt);
+		searchStr->append(std::format("%s\\%s", fileDirExt.string().c_str(), fileExt));
 	else
-		sprintf( searchStr,  "%s%s",fileDirExt, fileExt );
+		//sprintf( searchStr,  "%s%s",fileDirExt->string().c_str(), fileExt );
+		searchStr->append(std::format("%s%s", fileDirExt.string().c_str(), fileExt));
 
-	if((fileHandle = FindFirstFile(searchStr,&fileData)) != INVALID_HANDLE_VALUE )
+	if((fileHandle = FindFirstFile(searchStr->c_str(), &fileData)) != INVALID_HANDLE_VALUE)
 	{
 		do
 		{
-			fileList.push_back( string( fileDirExt ) + string(fileData.cFileName) );
+			//fileList.push_back( string( fileDirExt ) + string(fileData.cFileName) );
+			foundFileNames.push_back(fileDirExt/fileData.cFileName);
 		}
 		while(FindNextFile(fileHandle, &fileData));
 		FindClose(fileHandle);
@@ -2046,24 +2049,24 @@ int GetDirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName)
 		return 0;
 	}
 
-	if( foundFileName == NULL )
-		return fileList.size( );
-	if( !fileList.size( ) )
-		return 0;
+	/*if( foundFileName.size() = 0)
+		return foundFileName.size( );
+	if( !foundFileName.size( ) )
+		return 0;*/
 //LogFile(TEST_LOG,"Array     : Addr: 0x%08x\t PRE",(*foundFileName));
 //LogFile(TEST_LOG,"----------------GetDirectoryFilelist-------------------");
 //LogFile(TEST_LOG,"CREATING: Dest-  foundFileName = 0x%08x", foundFileName);
 //LogFile(TEST_LOG,"CREATING: Pre - *foundFileName = 0x%08x",*foundFileName);
 //LogFile(TEST_LOG,"CHECK: Address of sceneSH2Files= 0x%08x",&sceneSH2Files);
 //LogFile(TEST_LOG,"CHECK: CurVal  of sceneSH2Files= 0x%08x",sceneSH2Files);
-	*foundFileName = new char *[ fileList.size( ) + 1 ];
+	//*foundFileName = new char *[ fileList.size( ) + 1 ];
 //LogFile(TEST_LOG,"Array     : Addr: 0x%08x\t POST",(*foundFileName));
 //LogFile(TEST_LOG,"CREATING: Post- *foundFileName = 0x%08x",*foundFileName);
 //LogFile(TEST_LOG,"CHECK: CurVal  of sceneSH2Files= 0x%08x",sceneSH2Files);	
-	for( numFiles = 0; numFiles < fileList.size( ); numFiles ++ )
+	/*for( numFiles = 0; numFiles < fileList.size( ); numFiles ++ )
 	{
 		(*foundFileName)[ numFiles ] = new char[ fileList[ numFiles ].length( ) + 1 ];
-		strcpy( (*foundFileName)[ numFiles ], fileList[ numFiles ].c_str() );
+		strcpy( (*foundFileName)[ numFiles ], fileList[ numFiles ].c_str() );*/
 //LogFile(TEST_LOG,"CREATING: %ld  - *foundFileName[%2.2ld] = 0x%08x\tval[%s]\tlen: %ld\tstrlen: %ld",numFiles,numFiles,(*foundFileName)[numFiles],(*foundFileName)[numFiles],fileList[ numFiles ].length(),strlen(fileList[ numFiles ].c_str()));
 		/*{
 			int k1;
@@ -2074,9 +2077,9 @@ int GetDirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName)
 				LogFile(ERROR_LOG,"%d\t[%c]\t Addr: 0x%08x",k1,(*foundFileName)[ numFiles ][k1],&((*foundFileName)[ numFiles ][k1]));
 		}*/
 
-	}
+	//}
 
-	return numFiles;
+	return foundFileNames.size();
 }
 
 
