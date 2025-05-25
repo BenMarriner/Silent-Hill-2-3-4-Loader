@@ -161,7 +161,7 @@ vector<std::filesystem::path> modelSH2Dirs;
 int numSH2ModelDirs = 0;
 int curSH2ModelDir = 0;
 
-vector<std::filesystem::path>modelSH2Files;
+vector<std::filesystem::path> modelSH2Files;
 int numSH2ModelFiles = 0;
 int curSH2ModelFile = 0;
 
@@ -2119,37 +2119,37 @@ void CleanDirectoryFilelist(int numNames, char ***pppFileName)
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-int GetSH2DirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName, bool getFiles )
+int GetSH2DirectoryFilelist(filesystem::path& fileDirExt, string& fileExt, vector<filesystem::path>& foundFileNames, bool getFiles )
 {
 	int numFiles;
-	vector< string > fileList;
 //	WIN32_FIND_DATA fileData;	
 //	HANDLE fileHandle;
 	char searchStr[512];
 
-	if( fileDirExt != NULL && fileDirExt[ strlen( fileDirExt ) - 1 ] != '\\' )
+	//if( fileDirExt != NULL && fileDirExt[ strlen( fileDirExt ) - 1 ] != '\\' )
+	if (!fileDirExt.empty() && fileDirExt.native().back() != '\\')
 		sprintf( searchStr, "%s\\",fileDirExt );
 	else
 		sprintf( searchStr, "%s",fileDirExt );
 
 	if( getFiles )
-		GetSH2DirectoryFilelistAux( searchStr, fileExt, fileList );
+		GetSH2DirectoryFilelistAux( searchStr, fileExt, foundFileNames );
 	else
-		GetSH2DirectoryListAux( searchStr, fileExt, fileList );
+		GetSH2DirectoryListAux( searchStr, fileExt, foundFileNames );
 
 	if( foundFileName == NULL )
-		return fileList.size( );
+		return foundFileNames.size( );
 
 //LogFile(TEST_LOG,"+-+-+-+-+-+-+-+-GetSH2DirectoryFilelist-+-+-+-+-+-+-+-+-+");
 //LogFile(TEST_LOG,"CREATING: Dest-  foundFileName = 0x%08x", foundFileName);
 //LogFile(TEST_LOG,"CREATING: Pre - *foundFileName = 0x%08x",*foundFileName);
-	*foundFileName = new char *[ fileList.size( ) ];
+	*foundFileName = new char *[ foundFileNames.size( ) ];
 //LogFile(TEST_LOG,"CREATING: Post- *foundFileName = 0x%08x",*foundFileName);
 
-	for( numFiles = 0; numFiles < fileList.size( ); numFiles ++ )
+	for( numFiles = 0; numFiles < foundFileNames.size( ); numFiles ++ )
 	{
-		(*foundFileName)[ numFiles ] = new char[ fileList[ numFiles ].length( ) + 1 ];
-		strcpy( (*foundFileName)[ numFiles ], fileList[ numFiles ].c_str() );
+		(*foundFileName)[ numFiles ] = new char[ foundFileNames[ numFiles ].length( ) + 1 ];
+		strcpy( (*foundFileName)[ numFiles ], foundFileNames[ numFiles ].c_str() );
 //LogFile(TEST_LOG,"CREATING: %ld  - *foundFileName[%2.2ld] = 0x%08x\tval[%s]",numFiles,numFiles,(*foundFileName)[numFiles],(*foundFileName)[numFiles]);
 	}
 
