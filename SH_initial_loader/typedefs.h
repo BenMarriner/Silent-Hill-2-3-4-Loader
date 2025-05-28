@@ -115,7 +115,7 @@ static void LogFile(int logType, const char *s, ...)
 }
 
 
-static void checkGLerror(int lineNum, char *filename,char *module)
+static void checkGLerror(int lineNum, const char *filename, const char *module)
 {
 	GLenum errorCode;
 	int    eFlag = 0;
@@ -166,7 +166,7 @@ static void HexDump(int numBytes,char *buf,FILE *fp)
 
 #endif
 
-static GLboolean IsExtensionSupported(char *checkExtension)
+static GLboolean IsExtensionSupported(const char *checkExtension)
 {
     const GLubyte  *s;
 	const GLubyte *glString=glGetString(GL_EXTENSIONS);
@@ -459,4 +459,20 @@ private:
 #define FRONT(x)   if((x)->front!=NULL)(x)=(x)->front;
 #define BACK(x)    if((x)->back!=NULL)(x)=(x)->back;
 
+
+//---------------------------------------------------------------------------/
+//--							Asset Macros                               --/
+//--  Regex macros for searching for specific asset types				   --/
+//---------------------------------------------------------------------------/
+#define SH2_MAP R"(.*\.map$)"
+#define SH2_MDL R"(.*\.mdl$)"
+#define SH2_ANM R"(.*\.anm$)"
+#define SH3_MAP R"(bg.*\.arc)"
+#define SH3_MDL R"(chr.*\.arc)"
+#define SH4_BIN R"(.*\.bin)"
+
+/// <summary>
+/// Used to execute code based on game type
+/// </summary>
+typedef enum GameType { SH2, SH3, SH4 };
 #endif

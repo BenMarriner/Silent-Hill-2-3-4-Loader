@@ -264,37 +264,37 @@ mstring FileCrawler::getLastError( )
 	switch ( _err )
 	{
 		case FCERR_NONE:
-			l_sLastError = "";
+			l_sLastError = (char*)"";
 			break;
 		case FCERR_NOT_OPEN:
-			l_sLastError = "File Not Open";
+			l_sLastError = (char*)"File Not Open";
 			break;
 		case FCERR_NOT_FOUND:
-			l_sLastError = "Data Not Found From Point Of Search";
+			l_sLastError = (char*)"Data Not Found From Point Of Search";
 			break;
 		case FCERR_BAD_ARG:
-			l_sLastError = "Argument passed in was invalid";
+			l_sLastError = (char*)"Argument passed in was invalid";
 			break;
 /*		case FCERR_:
-			l_sLastError = "";
+			l_sLastError = (char*)"";
 			break;
 */		case FCERR_SYNTAX:
-			l_sLastError = "Expected Syntax Missing";
+			l_sLastError = (char*)"Expected Syntax Missing";
 			break;
 		case FCERR_START:
-			l_sLastError = "Special Block Does Not Start With Correct Token";
+			l_sLastError = (char*)"Special Block Does Not Start With Correct Token";
 			break;
 		case FCERR_BOUNDS:
-			l_sLastError = "File Pointer Moved to Out of Bounds";
+			l_sLastError = (char*)"File Pointer Moved to Out of Bounds";
 			break;
 		case FCERR_EOF:
-			l_sLastError = "End ofFile Reached";
+			l_sLastError = (char*)"End ofFile Reached";
 			break;
 		case FCERR_INTERNAL:
-			l_sLastError = "INTERNAL ERROR: Unknown error code";
+			l_sLastError = (char*)"INTERNAL ERROR: Unknown error code";
 			break;
 		default:
-			l_sLastError = "INTERNAL ERROR: Unknown error code";
+			l_sLastError = (char*)"INTERNAL ERROR: Unknown error code";
 			LogFile( ERROR_LOG, "FileCrawler::setLastErrorByCode( ) - ERROR: Unknown code '%d'", _err );
 			break;
 	}
@@ -719,7 +719,7 @@ mstring FileCrawler::peekLine( )
 	{
 		setLastErrorByCode( FCERR_NOT_OPEN );
 		m_bHasError = true;
-		return "";
+		return (char*)"";
 	}
 
 	long l_lTempPos = getPos( );

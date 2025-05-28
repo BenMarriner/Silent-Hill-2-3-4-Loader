@@ -622,8 +622,8 @@ bool peelAllOuterParen( char *str, char **res )
 	len = strlen( str );
 
 //LogFile( ERROR_LOG, "\t\t\tEntered peeling func w/ str [%s] and len %ld",str, len);
-	start = findNextCharSetIndex( str, "[{(" );
-	end = findNextCharSetIndexRev( str,"]})", len - 1 );
+	start = findNextCharSetIndex( str, (char*)"[{(" );
+	end = findNextCharSetIndexRev( str, (char*)"]})", len - 1 );
 
 	startChar = getNextCharIndex( str );
 	endChar = getNextCharIndexRev( str );
@@ -875,8 +875,8 @@ bool peelAllOuterQuotes( char *str, char **res )
 	len = strlen( str );
 
 //LogFile( ERROR_LOG, "\t\t\tEntered peeling func w/ str [%s] and len %ld",str, len);
-	start = findNextCharSetIndex( str, "\"" );
-	end = findNextCharSetIndexRev( str,"\"", len - 1 );
+	start = findNextCharSetIndex( str, (char*)"\"" );
+	end = findNextCharSetIndexRev( str, (char*)"\"", len - 1 );
 
 	startChar = getNextCharIndex( str );
 	endChar = getNextCharIndexRev( str );
@@ -1345,7 +1345,7 @@ mvector<mstring> getTokenVector( mstring & sTokenList, char *pDelimiter, bool bP
 	long startIndex;
 	
 	if( bPeelOuterWhitespace )
-		startIndex = sTokenList.find_first_not_of(" \t\n");
+		startIndex = sTokenList.find_first_not_of((char*)" \t\n");
 	else
 		startIndex = 0;
 
@@ -1467,7 +1467,7 @@ mvector<mstring> getTokenVector( const mstring & sTokenList, char *pDelimiter, b
 	long startIndex;
 	
 	if( bPeelOuterWhitespace )
-		startIndex = sTokenList.find_first_not_of(" \t\n");
+		startIndex = sTokenList.find_first_not_of((char*)" \t\n");
 	else
 		startIndex = 0;
 
@@ -1603,7 +1603,9 @@ long baseName( char *i_pcFilename, char *o_pcBasename )
 
 mstring baseName( mstring & _sFilename )
 {
-	return removeDir( removeExt( _sFilename ) );
+	removeDir(_sFilename);
+	removeExt(_sFilename);
+	return _sFilename;
 }
 
 //################################################333
@@ -1643,7 +1645,7 @@ mstring dirName( mstring & _sFilename )
 	long l_pcSlash = _sFilename.find_last_of('\\');
 	long l_pcAltSlash = _sFilename.find_last_of('/');
 
-	if( _sFilename.find_first_not_of("\n\t\r ") == -1 )
+	if( _sFilename.find_first_not_of((char*)"\n\t\r ") == -1 )
 		return string("");
 
 	if( l_pcAltSlash > l_pcSlash )
@@ -1658,9 +1660,9 @@ mstring dirName( mstring & _sFilename )
 
 mstring extName( mstring & _sFilename )
 {
-	long l_pcDot = _sFilename.find_last_of(".");
+	long l_pcDot = _sFilename.find_last_of((char*)".");
 
-	if( _sFilename.find_first_not_of("\n\t\r ") == -1 )
+	if( _sFilename.find_first_not_of((char*)"\n\t\r ") == -1 )
 		return mstring("");
 
 	if( l_pcDot == -1 )
@@ -1674,13 +1676,13 @@ mstring extName( mstring & _sFilename )
 
 mstring removeDir( mstring & _sFilename )
 {
-	long l_pcSlash = _sFilename.find_last_of("\\");
+	long l_pcSlash = _sFilename.find_last_of((char*)"\\");
 
-	if( _sFilename.find_first_not_of("\n\t\r ") == -1 )
+	if( _sFilename.find_first_not_of((char*)"\n\t\r ") == -1 )
 		return mstring("");
 
-	if( l_pcSlash < _sFilename.find_last_of("/") )
-		l_pcSlash = _sFilename.find_last_of("/");
+	if( l_pcSlash < _sFilename.find_last_of((char*)"/") )
+		l_pcSlash = _sFilename.find_last_of((char*)"/");
 
 	if( l_pcSlash == -1 )
 		return _sFilename;
@@ -1691,9 +1693,9 @@ mstring removeDir( mstring & _sFilename )
 
 mstring removeExt( mstring & _sFilename )
 {
-	long l_pcDot = _sFilename.find_last_of(".");
+	long l_pcDot = _sFilename.find_last_of((char*)".");
 
-	if( _sFilename.find_first_not_of("\n\t\r ") == -1 )
+	if( _sFilename.find_first_not_of((char*)"\n\t\r ") == -1 )
 		return mstring("");
 
 	if( l_pcDot == -1 )

@@ -1563,7 +1563,7 @@ int SceneMap::loadScene( FILE *sceneFile, long bOffset )
 		{
 			if( res == 1 )
 			{
-				char texStr[64];
+				char texChar[64];
 				memcpy(&curTH,&(tempData[sceneIndex]),sizeof(scene_tex_header));
 				l_numTH++;
 
@@ -1572,14 +1572,15 @@ int SceneMap::loadScene( FILE *sceneFile, long bOffset )
 
 				sceneIndex += curTH.headerSize;
 				if( curTH.texNumLoc == 3 )
-					sprintf(texStr,"%ld_%d_%d",baseOffset,curTH.texNumLoc,curTH.texNum);
+					sprintf(texChar,"%ld_%d_%d",baseOffset,curTH.texNumLoc,curTH.texNum);
 				else
-					sprintf(texStr,"%d_%d",curTH.texNumLoc,curTH.texNum);
+					sprintf(texChar,"%d_%d",curTH.texNumLoc,curTH.texNum);
 
-				if((curTexID = textureMgr.GetTexture(string(texStr))) == 0 )
+				string texCharStr = string(texChar);
+				if((curTexID = textureMgr.GetTexture(texCharStr)) == 0 )
 				{
 					if((curTexID = loadTex(sceneFile,&curTH)) != 0 )
-						textureMgr.AddTex(string(texStr),curTexID,0);
+						textureMgr.AddTex(texCharStr,curTexID,0);
 
 					if(debugMode)
 						LogFile(ERROR_LOG,"loadScene - CurTexID is %ud",curTexID);
@@ -1716,7 +1717,7 @@ int SceneMap::loadScene( FILE *sceneFile, long bOffset )
 
 
 
-int SceneMap::loadArcScene( char *filename, int sceneNum )
+int SceneMap::loadArcScene( const char *filename, int sceneNum )
 {
 	FILE *infile;
 	long offset;
@@ -1748,7 +1749,7 @@ int SceneMap::loadArcScene( char *filename, int sceneNum )
 //-- getMinScene                                                        --/
 //--   Returns the minimum scene number in a bg*.arc file               --/
 //------------------------------------------------------------------------/
-int SceneMap::getMinScene( char *filename )
+int SceneMap::getMinScene( const char *filename )
 {
 	FILE *infile;
 	arc_index_data index;
@@ -1799,7 +1800,7 @@ int SceneMap::getMinScene( char *filename )
 //-- getMaxScene                                                        --/
 //--   Returns the maximum scene number in a bg*.arc file               --/
 //------------------------------------------------------------------------/
-int SceneMap::getMaxScene( char *filename )
+int SceneMap::getMaxScene( const char *filename )
 {
 	FILE *infile;
 	arc_index_data index;
@@ -2598,7 +2599,7 @@ int  SH3_Actor::loadAnim( char *filename, long modelID, long segNum )
 //--    Loads a model from an arc file based upone the filename and model number. --/
 //--    Calls the loadModelPrimitive to load each tri-strip section of the model  --/
 //----------------------------------------------------------------------------------/
-int  SH3_Actor::loadModel( char *filename, int modelNum )
+int  SH3_Actor::loadModel( const char *filename, int modelNum )
 {
 	FILE *infile;
 	int dataCount;
@@ -2975,7 +2976,7 @@ int  SH3_Actor::loadModelPrimitive( long offset, model_primitive *pPrim, FILE *i
 	int res;
 	int dataCount;
 	int k;
-	char texStr[128];
+	char texChar[128];
 	long vertSize;
 	void *vertDest;
 	short texIndex;
@@ -3160,15 +3161,16 @@ int  SH3_Actor::loadModelPrimitive( long offset, model_primitive *pPrim, FILE *i
 
 	pPrim->texModify = texSeqData[pPrim->texNum*2+1 ];
 
-	sprintf( texStr,"%ld_%d",baseOffset,texIndex);
+	sprintf( texChar,"%ld_%d",baseOffset,texIndex);
 
-	if((pPrim->texID = textureMgr.GetTexture(string(texStr))) == 0 )
+	string texCharStr = string(texChar);
+	if((pPrim->texID = textureMgr.GetTexture(texCharStr)) == 0 )
 	{
 		//if((pPrim->texID = loadTex( baseOffset + m_mBaseHeader.baseHeaderSize + m_mDataHeader.offsetAltVertHead, texStr, pPrim->texNum, infile)) != 0 )
-		if((pPrim->texID = loadTex( baseOffset + m_mBaseHeader.texOffset, texStr, texIndex, infile)) != 0 )
-			textureMgr.AddTex(string(texStr),pPrim->texID,0);
+		if((pPrim->texID = loadTex( baseOffset + m_mBaseHeader.texOffset, texChar, texIndex, infile)) != 0 )
+			textureMgr.AddTex(texCharStr,pPrim->texID,0);
 		else
-			LogFile(ERROR_LOG, "SH3_Actor::loadModelPrimitive - ERROR: Couldn't load texture %s",texStr);
+			LogFile(ERROR_LOG, "SH3_Actor::loadModelPrimitive - ERROR: Couldn't load texture %s",texChar);
 	}
 
 /*********************** UNKNOWN FIELD ANALYSIS *********************************/
@@ -3209,7 +3211,7 @@ void SH3_Actor::releaseModelData()
 //-- getMinModel                                                        --/
 //--   Returns the minimum model number in a ch*.arc file               --/
 //------------------------------------------------------------------------/
-int SH3_Actor::getMinModel( char *filename )
+int SH3_Actor::getMinModel( const char *filename )
 {
 	FILE *infile;
 	arc_index_data index;
@@ -3259,7 +3261,7 @@ int SH3_Actor::getMinModel( char *filename )
 //-- getMaxModel                                                        --/
 //--   Returns the maximum model number in a ch*.arc file               --/
 //------------------------------------------------------------------------/
-int SH3_Actor::getMaxModel( char *filename )
+int SH3_Actor::getMaxModel( const char *filename )
 {
 	FILE *infile;
 	arc_index_data index;
@@ -3425,7 +3427,8 @@ void SH3_Actor::AddVerticies( SMD::SMD_Model & _Model )
 
 			sprintf( l_TexName, "%d_%d.tga", this->baseOffset, this->texSeqData[ m_pmPrimitive[ j ].texNum * 2 ] % this->m_mDataHeader.numTex );
 
-			l_Triangle.setMaterial( mstring( l_TexName ) );
+			mstring l_TexNameMS = mstring(l_TexName);
+			l_Triangle.setMaterial( l_TexNameMS );
 
 			if( m_pmPrimitive[j].verts == NULL && m_pmPrimitive[j].altVerts == NULL )
 			{
@@ -3581,7 +3584,8 @@ void SH3_Actor::ExportSMD(  )
 	std::fstream  l_OutputFile;
 	char l_OutputModelName[ 256 ];
 
-	sprintf( l_OutputModelName, "%s_%ld.smd",baseName( mstring(this->modelFilename) ).c_str(), this->baseOffset );
+	mstring l_ModelFileNameMS = mstring(this->modelFilename);
+	sprintf( l_OutputModelName, "%s_%ld.smd",baseName( l_ModelFileNameMS ).c_str(), this->baseOffset );
 
 	l_OutputFile.open( l_OutputModelName, ios::out | ios::trunc );
 	

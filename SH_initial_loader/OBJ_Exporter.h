@@ -46,7 +46,7 @@ public:
 	bool	AddFace( long *index, bool _hasTC = true, bool _hasNorm = true );
 	bool	AddFace( vector<long> & index, bool _hasTC = true, bool _hasNorm = true );
 
-	void	AddComment( char *s, ...);
+	void	AddComment(const char *s, ...);
 
 	void	DecodeTriStrip( bool setting = true ){ m_bDecodeTristrip = setting; }
 	void	StartNewVertexRange( );

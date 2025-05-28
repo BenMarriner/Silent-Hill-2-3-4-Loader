@@ -65,9 +65,9 @@ bool		SMD_Animation_Frame::Load( FileCrawler & _is )
 
 	this->DeleteData();
 
-	while( l_curLine != "end" && l_curLine.substr( 0, 4 ) != "time" && ( !_is.isAtEnd() ) )
+	while( l_curLine != (char*)"end" && l_curLine.substr( 0, 4 ) != (char*)"time" && ( !_is.isAtEnd() ) )
 	{
-		if( l_curLine == "end" )
+		if( l_curLine == (char*)"end" )
 		{
 			return false;
 		}
@@ -77,7 +77,7 @@ bool		SMD_Animation_Frame::Load( FileCrawler & _is )
 		}
 		else
 		{
-			mvector<mstring>	l_lineVals = getTokenVector( l_curLine," \t",false, false);
+			mvector<mstring>	l_lineVals = getTokenVector( l_curLine, (char*)" \t",false, false);
 
 			if( l_lineVals.size() != 7 )
 			{
@@ -85,12 +85,13 @@ bool		SMD_Animation_Frame::Load( FileCrawler & _is )
 				continue;
 			}
 
-			this->AddPositionAndAngle(	vertex( static_cast<float>(atof( l_lineVals[ 1 ].c_str() )), 
-												static_cast<float>(atof( l_lineVals[ 2 ].c_str() )), 
-												static_cast<float>(atof( l_lineVals[ 3 ].c_str() )) ),
-										vertex( static_cast<float>(atof( l_lineVals[ 4 ].c_str() )), 
-												static_cast<float>(atof( l_lineVals[ 5 ].c_str() )), 
-												static_cast<float>(atof( l_lineVals[ 6 ].c_str() )) ) );
+			vertex pos = vertex(static_cast<float>(atof(l_lineVals[1].c_str())),
+				static_cast<float>(atof(l_lineVals[2].c_str())),
+				static_cast<float>(atof(l_lineVals[3].c_str())));
+			vertex angles = vertex(static_cast<float>(atof(l_lineVals[4].c_str())),
+				static_cast<float>(atof(l_lineVals[5].c_str())),
+				static_cast<float>(atof(l_lineVals[6].c_str())));
+			this->AddPositionAndAngle(pos, angles);
 		}
 
 		l_curLine = _is.readLine().toLower();

@@ -301,7 +301,9 @@ bool	OBJ_Exporter::AddGroup( )
 
 	++m_lCurGroup;
 
-	return AddGroup( string( l_pcGroupNum ) );
+	string l_pcGroupNumStr = string(l_pcGroupNum);
+
+	return AddGroup( l_pcGroupNumStr );
 }
 
 
@@ -539,7 +541,7 @@ bool	OBJ_Exporter::AddFace( vector<long> & index, bool _hasTC, bool _hasNorm )
 }
 
 
-void	OBJ_Exporter::AddComment( char *s, ...)
+void	OBJ_Exporter::AddComment(const char *s, ...)
 {
 	char l_pcWriteBuf[4096];
 	va_list l_vaArgs;

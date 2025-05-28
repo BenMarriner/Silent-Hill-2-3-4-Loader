@@ -338,9 +338,9 @@ public:
 
 	void setNullAll( );
 	void deleteData( );
-	long loadData( char *filename = NULL );
+	long loadData( const char *filename = NULL );
 	long loadDataAux( FILE *inFile = NULL );
-	GLuint loadTex( char *texName, FILE *inFile );
+	GLuint loadTex( const char *texName, FILE *inFile );
 	void Render( );
 
 	bool AttachAnim( sh4_anim *_pcAnimDat = NULL ){ m_pcAnimDat = _pcAnimDat; return( m_pcAnimDat != 0 ); }

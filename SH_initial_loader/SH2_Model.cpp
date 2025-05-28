@@ -216,7 +216,7 @@ long sh2_vertex_data_long::loadDataHeader( FILE *inFile )
 	deleteData( );
 
 	lNumRead = _loadBlock( (void*)&m_sHeaderSize, sizeof(sh2_model_prim_size_header) , inFile,
-						"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim size head",ERROR_LOG);
+		(char*)"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim size head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -224,7 +224,7 @@ long sh2_vertex_data_long::loadDataHeader( FILE *inFile )
 
 
 	lNumRead = _loadBlock( (void*)&m_sSeqHeader, sizeof(sh2_vertex_prim_seq_header) , inFile,
-						"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim seq head",ERROR_LOG);
+		(char*)"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim seq head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -232,7 +232,7 @@ long sh2_vertex_data_long::loadDataHeader( FILE *inFile )
 
 
 	lNumRead = _loadBlock( (void*)&m_sDataHeader, sizeof(sh2_vertex_prim_data_header) , inFile,
-						"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
+		(char*)"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -247,7 +247,7 @@ long sh2_vertex_data_long::loadDataHeader( FILE *inFile )
 					lStartOffset + m_sDataHeader.offsetTexIDs, ftell( inFile ) );
 
 	lNumRead = _loadBlock( (void*)&m_sTexHeader, sizeof(sh2_vertex_tex_block) , inFile,
-						"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
+		(char*)"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -259,7 +259,7 @@ long sh2_vertex_data_long::loadDataHeader( FILE *inFile )
 	fseek( inFile, lStartOffset + m_sSeqHeader.offsetSeq1Data, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)seqData1, sizeof(short) * m_sSeqHeader.numSeq1Data , inFile,
-						"sh2_vertex_data_long::loadDataHeader() - Could not read vertex seq 1 data",ERROR_LOG);
+		(char*)"sh2_vertex_data_long::loadDataHeader() - Could not read vertex seq 1 data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -269,7 +269,7 @@ long sh2_vertex_data_long::loadDataHeader( FILE *inFile )
 	fseek( inFile, lStartOffset + m_sSeqHeader.offsetSeq2Data, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)seqData2, sizeof(short) * m_sSeqHeader.numSeq2Data , inFile,
-						"sh2_vertex_data_long::loadDataHeader() - Could not read vertex seq 2 data",ERROR_LOG);
+		(char*)"sh2_vertex_data_long::loadDataHeader() - Could not read vertex seq 2 data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -279,7 +279,7 @@ long sh2_vertex_data_long::loadDataHeader( FILE *inFile )
 	fseek( inFile, lStartOffset + m_sDataHeader.offsetEndMarker, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)&m_sEndHeader, sizeof(sh2_vertex_end_marker), inFile,
-						"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim end header",ERROR_LOG);
+		(char*)"sh2_vertex_data_long::loadDataHeader() - Could not read vertex prim end header",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -332,7 +332,7 @@ long sh2_vertex_data_short::loadDataHeader( FILE *inFile )
 	deleteData( );
 
 	lNumRead = _loadBlock( (void*)&m_sHeaderSize, sizeof(sh2_model_prim_size_header) , inFile,
-						"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim size head",ERROR_LOG);
+		(char*)"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim size head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -340,7 +340,7 @@ long sh2_vertex_data_short::loadDataHeader( FILE *inFile )
 
 
 	lNumRead = _loadBlock( (void*)&m_sDataHeader, sizeof(sh2_vertex_prim_data_header) , inFile,
-						"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
+		(char*)"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -353,7 +353,7 @@ long sh2_vertex_data_short::loadDataHeader( FILE *inFile )
 					lStartOffset + m_sDataHeader.offsetTexIDs, ftell( inFile ) );
 
 	lNumRead = _loadBlock( (void*)&m_sTexHeader, sizeof(sh2_vertex_tex_block) , inFile,
-						"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
+		(char*)"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim data head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -363,7 +363,7 @@ long sh2_vertex_data_short::loadDataHeader( FILE *inFile )
 	fseek( inFile, lStartOffset + m_sDataHeader.offsetEndMarker, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)&m_sEndHeader, sizeof(sh2_vertex_end_marker), inFile,
-						"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim end header",ERROR_LOG);
+		(char*)"sh2_vertex_data_short::loadDataHeader() - Could not read vertex prim end header",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -485,7 +485,7 @@ long sh2_vertex_large_header::loadDataVerts( FILE *inFile, long i_lCount )
 
 
 	lNumRead = _loadBlock( (void*)verts, sizeof(sh2_model_vert_short) * i_lCount , inFile,
-						"sh2_vertex_large_header::loadDataVerts() - Could not read vertex data",ERROR_LOG);
+		(char*)"sh2_vertex_large_header::loadDataVerts() - Could not read vertex data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -505,7 +505,7 @@ long sh2_vertex_large_header::loadDataIndex( FILE *inFile, long i_lCount )
 
 
 	lNumRead = _loadBlock( (void*)indicies, sizeof(short) * i_lCount , inFile,
-						"sh2_vertex_large_header::loadDataIndex() - Could not read index data",ERROR_LOG);
+		(char*)"sh2_vertex_large_header::loadDataIndex() - Could not read index data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -622,7 +622,7 @@ long sh2_vertex_small_header::loadDataVerts( FILE *inFile, long i_lCount )
 
 
 	lNumRead = _loadBlock( (void*)verts, sizeof(sh2_model_vert_long) * i_lCount , inFile,
-						"sh2_vertex_small_header::loadDataVerts() - Could not read vertex data",ERROR_LOG);
+		(char*)"sh2_vertex_small_header::loadDataVerts() - Could not read vertex data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -642,7 +642,7 @@ long sh2_vertex_small_header::loadDataIndex( FILE *inFile, long i_lCount )
 
 
 	lNumRead = _loadBlock( (void*)indicies, sizeof(short) * i_lCount , inFile,
-						"sh2_vertex_small_header::loadDataIndex() - Could not read index data",ERROR_LOG);
+		(char*)"sh2_vertex_small_header::loadDataIndex() - Could not read index data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -757,7 +757,7 @@ void sh2_model::deleteData( )
 }
 
 
-long sh2_model::loadAnim( SH_Anim_Loader & i_pcAnimSet, char *i_pcFilename )
+long sh2_model::loadAnim( SH_Anim_Loader & i_pcAnimSet, const char *i_pcFilename )
 {
 	long l_lRes;
 
@@ -918,7 +918,7 @@ long sh2_model::computeInverseMats( )
 
 
 
-long sh2_model::loadData( char *filename )
+long sh2_model::loadData( const char *filename )
 {
 	FILE *inFile = NULL;
 	long lNumRead;
@@ -944,7 +944,7 @@ long sh2_model::loadData( char *filename )
 	//--[ Load Initial Header for Model ]--/
 
 	lNumRead = _loadBlock( (void*)&m_sModelBaseHeader, sizeof(m_sModelBaseHeader) , inFile,
-						"sh2_model::loadData() - ERROR: Could not read base model head",ERROR_LOG);
+		(char*)"sh2_model::loadData() - ERROR: Could not read base model head",ERROR_LOG);
 	if( lNumRead == -1 )
 	{
 		fclose( inFile );
@@ -959,7 +959,7 @@ long sh2_model::loadData( char *filename )
 	lBaseOffset = ftell( inFile );
 
 	lNumRead = _loadBlock( (void*)&m_sModelHeader, sizeof(m_sModelHeader) , inFile,
-						"sh2_model::loadData() - Could not read model head",ERROR_LOG);
+		(char*)"sh2_model::loadData() - Could not read model head",ERROR_LOG);
 	if( lNumRead == -1 )
 	{
 		fclose( inFile );
@@ -973,7 +973,7 @@ long sh2_model::loadData( char *filename )
 	//--[ Don't Forget the Vertex Offsets ]--/
 
 	lNumRead = _loadBlock( (void*)&m_sVertexHeader, sizeof(m_sVertexHeader) , inFile,
-						"sh2_model::loadData() - Could not read vertex offset head",ERROR_LOG);
+		(char*)"sh2_model::loadData() - Could not read vertex offset head",ERROR_LOG);
 	if( lNumRead == -1 )
 	{
 		fclose( inFile );
@@ -991,7 +991,7 @@ long sh2_model::loadData( char *filename )
 	m_plTexSetIDs = new long[ m_sModelHeader.numTexSetIDs ];
 		
 	lNumRead = _loadBlock( (void*)m_plTexSetIDs, sizeof(long) * m_sModelHeader.numTexSetIDs , inFile,
-						"sh2_model::loadData() - Could not read tex set IDs",ERROR_LOG);
+		(char*)"sh2_model::loadData() - Could not read tex set IDs",ERROR_LOG);
 	if( lNumRead == -1 )
 	{
 		fclose( inFile );
@@ -1006,7 +1006,7 @@ long sh2_model::loadData( char *filename )
 	fseek( inFile, lBaseOffset + m_sModelHeader.offsetTexIDMapping, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)m_pcTexSetMapping, sizeof(sh_tex_mapping) * m_sModelHeader.numTexIDMapping , inFile,
-						"sh2_model::loadData() - Could not read tex ID mapping",ERROR_LOG);
+		(char*)"sh2_model::loadData() - Could not read tex ID mapping",ERROR_LOG);
 	if( lNumRead == -1 )
 	{
 		fclose( inFile );
@@ -1163,7 +1163,8 @@ void sh2_model::Render( )
 	vertex4f tempWeights;
 
 //	char outFile[128];
-	char tempTexStr[ 128 ];
+	char tempTexChar[ 128 ];
+	string tempTexStr;
 
 	printData = firstRender;
 
@@ -1441,9 +1442,10 @@ useQuat = false;
 		checkGLerror(__LINE__,__FILE__,"Before Render");
 		glActiveTextureARB(GL_TEXTURE0_ARB);
 		checkGLerror(__LINE__,__FILE__,"Before 1");
-			
-		sprintf( tempTexStr, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimLarge.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
-		texID = sh2TexList.GetTex( string(tempTexStr), true );
+		
+		tempTexStr = string(tempTexChar);
+		sprintf( tempTexChar, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimLarge.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
+		texID = sh2TexList.GetTex( tempTexStr, true );
 		if( texID < 1 )
 			texID = 1;
 		if( m_cVertPrimLarge.m_sVertexType[ j ].m_sDataHeader.q1_vpdh == 1 )
@@ -1548,8 +1550,8 @@ useQuat = false;
 
 				glActiveTextureARB(GL_TEXTURE0_ARB);
 			
-				sprintf( tempTexStr, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ i ].m_sTexHeader.texID * 2 ] ]);
-				texID = sh2TexList.GetTex( string(tempTexStr), true );
+				sprintf( tempTexChar, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ i ].m_sTexHeader.texID * 2 ] ]);
+				texID = sh2TexList.GetTex( tempTexStr, true );
 				if( texID < 1 )
 					texID = 1;
 				glBindTexture(GL_TEXTURE_2D, texID );
@@ -1628,7 +1630,8 @@ void sh2_model::RenderAlt( )
 	vertex4f tempWeights;
 
 //	char outFile[128];
-	char tempTexStr[ 128 ];
+	char tempTexChar[ 128 ];
+	string tempTexStr;
 
 	printData = firstRender;
 
@@ -1872,8 +1875,9 @@ void sh2_model::RenderAlt( )
 		glActiveTextureARB(GL_TEXTURE0_ARB);
 		checkGLerror(__LINE__,__FILE__,"Before 1");
 			
-		sprintf( tempTexStr, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimLarge.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
-		texID = sh2TexList.GetTex( string(tempTexStr), true );
+		sprintf( tempTexChar, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimLarge.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
+		tempTexStr = string(tempTexChar);
+		texID = sh2TexList.GetTex( tempTexStr, true );
 		if( texID < 1 )
 			texID = 1;
 		if( m_cVertPrimLarge.m_sVertexType[ j ].m_sDataHeader.q1_vpdh == 1 )
@@ -1983,8 +1987,9 @@ void sh2_model::RenderAlt( )
 
 				glActiveTextureARB(GL_TEXTURE0_ARB);
 			
-				sprintf( tempTexStr, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ i ].m_sTexHeader.texID * 2 ] ]);
-				texID = sh2TexList.GetTex( string(tempTexStr), true );
+				sprintf( tempTexChar, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ i ].m_sTexHeader.texID * 2 ] ]);
+				tempTexStr = string(tempTexChar);
+				texID = sh2TexList.GetTex(tempTexStr, true );
 				if( texID < 1 )
 					texID = 1;
 				glBindTexture(GL_TEXTURE_2D, texID );
@@ -2070,7 +2075,8 @@ void sh2_model::Render2( )
 
 
 //	char outFile[128];
-	char tempTexStr[ 128 ];
+	char tempTexChar[ 128 ];
+	string tempTexStr;
 	
 	l_pcAnimMat = new matrix[ m_sModelHeader.numMatSet1 ];
 /*
@@ -2243,8 +2249,9 @@ void sh2_model::Render2( )
 		glActiveTextureARB(GL_TEXTURE0_ARB);
 		checkGLerror(__LINE__,__FILE__,"Before 1");
 			
-		sprintf( tempTexStr, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimLarge.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
-		texID = sh2TexList.GetTex( string(tempTexStr), true );
+		sprintf( tempTexChar, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimLarge.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
+		tempTexStr = string(tempTexChar);
+		texID = sh2TexList.GetTex(tempTexStr, true );
 		if( texID < 1 )
 			texID = 1;
 		glBindTexture(GL_TEXTURE_2D, texID );
@@ -2412,8 +2419,9 @@ void sh2_model::Render2( )
 
 				glActiveTextureARB(GL_TEXTURE0_ARB);
 			
-				sprintf( tempTexStr, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ i ].m_sTexHeader.texID * 2 ] ]);
-				texID = sh2TexList.GetTex( string(tempTexStr), true );
+				sprintf( tempTexChar, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ i ].m_sTexHeader.texID * 2 ] ]);
+				tempTexStr = string(tempTexChar);
+				texID = sh2TexList.GetTex(tempTexStr, true );
 				if( texID < 1 )
 					texID = 1;
 				glBindTexture(GL_TEXTURE_2D, texID );
@@ -2494,7 +2502,8 @@ void sh2_model::Render3( )
 
 
 //	char outFile[128];
-	char tempTexStr[ 128 ];
+	char tempTexChar[ 128 ];
+	string tempTexStr;
 	
 	l_pcAnimMat = new matrix[ m_sModelHeader.numMatSet1 ];
 /*
@@ -2631,8 +2640,9 @@ void sh2_model::Render3( )
 		glActiveTextureARB(GL_TEXTURE0_ARB);
 		checkGLerror(__LINE__,__FILE__,"Before 1");
 			
-		sprintf( tempTexStr, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
-		texID = sh2TexList.GetTex( string(tempTexStr), true );
+		sprintf( tempTexChar, "%ld", this->m_cHeaderData.texIDs[ m_cHeaderData.texIDMapping[ m_cVertPrimSmall.m_sVertexType[ j ].m_sTexHeader.texID * 2 ] ]);
+		tempTexStr = string(tempTexChar);
+		texID = sh2TexList.GetTex(tempTexStr, true );
 		if( texID < 1 )
 			texID = 1;
 		glBindTexture(GL_TEXTURE_2D, texID );
@@ -2702,7 +2712,7 @@ long testLoadSH2_Model( char *filename )
 	}
 
 	lNumRead = _loadBlock( (void*)&l_sModelBaseHeader, sizeof(l_sModelBaseHeader) , inFile,
-						"testLoadSH2_Model() - Could not read base model head",ERROR_LOG);
+		(char*)"testLoadSH2_Model() - Could not read base model head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 

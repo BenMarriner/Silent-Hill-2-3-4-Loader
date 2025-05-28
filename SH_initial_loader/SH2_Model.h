@@ -369,7 +369,7 @@ public:
 
 	void setNullAll( );
 	void deleteData( );
-	long loadData( char *filename = NULL );
+	long loadData( const char *filename = NULL );
 	long loadTexData( FILE *inFile = NULL );
 	GLuint loadTex( char *texName, FILE *inFile );
 	bool isLoaded( ){ return m_bModelLoaded; }
@@ -379,7 +379,7 @@ public:
 	void Render3( );
 
 	//---[ ANIMATION METHODS ]---/
-	long loadAnim( SH_Anim_Loader & i_pcAnimSet, char *i_pcFilename = NULL );
+	long loadAnim( SH_Anim_Loader & i_pcAnimSet, const char *i_pcFilename = NULL );
 	bool setCurFrameRange( long i_lStartFrame = 0, long i_lFrameCount = -1 );
 	bool nextFrame( );		//Increments current frame data.  Returns true until the EndFrame is reached.  Calling after that point repeats the sequence at the start
 	bool prevFrame( );		//Decrements current frame data.  Returns true until the StartFrame is reached.  Calling after that point repeats the sequence at the end

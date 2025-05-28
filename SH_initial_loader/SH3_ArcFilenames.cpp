@@ -86,7 +86,7 @@ int sh3_arc_section_header::Load( gzFile iHandle )
 }
 
 
-long sh3_arc_section_header::GetCountFileType( char *pcFileExt )
+long sh3_arc_section_header::GetCountFileType( const char *pcFileExt )
 {
 	long k;
 	long fileCount = 0;
@@ -158,7 +158,7 @@ int sh3_arc_filename::Load( gzFile iHandle )
 }
 
 
-bool sh3_arc_filename::IsFileType( char *pcFileExt )
+bool sh3_arc_filename::IsFileType( const char *pcFileExt )
 {
 	LogFile(ERROR_LOG,"TEST: name to check is: %s, ext is %s and is at %s",fileName,pcFileExt,(strstr( fileName, pcFileExt ))?strstr( fileName, pcFileExt ):"NULL");
 	return (strcmp( &(fileName[ strlen(fileName) - strlen( pcFileExt ) ]), pcFileExt ) == 0 );
@@ -251,7 +251,7 @@ int sh3_arcfile::Load( char *filename )
 
 
 
-bool sh3_dropList::buildList( sh3_arc_section_header *pcArcSection, char *pFileExt )
+bool sh3_dropList::buildList( sh3_arc_section_header *pcArcSection, const char *pFileExt )
 {
 	long k;
 	long lCountFound = 0;

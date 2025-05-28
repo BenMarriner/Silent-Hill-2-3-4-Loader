@@ -259,7 +259,7 @@ long sh4_model_tex::loadData( long offsetT1, long offsetT2, FILE *inFile )
 	fseek( inFile, lStartOffset + offsetT1, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)&m_sT1, sizeof(m_sT1), inFile,
-						"sh4_model_tex::loadData() - Could not read struct type 1",ERROR_LOG);
+		(char*)"sh4_model_tex::loadData() - Could not read struct type 1",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -269,7 +269,7 @@ long sh4_model_tex::loadData( long offsetT1, long offsetT2, FILE *inFile )
 	fseek( inFile, lStartOffset + offsetT2, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)&m_sT2, sizeof(m_sT2), inFile,
-						"sh4_model_tex::loadData() - Could not read struct type 2",ERROR_LOG);
+		(char*)"sh4_model_tex::loadData() - Could not read struct type 2",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -288,7 +288,7 @@ long sh4_model_tex::loadData( long offsetT1, long offsetT2, FILE *inFile )
 		fseek( inFile, lCurOffset, SEEK_SET );
 
 		lNumRead = _loadBlock( (void*)&(m_sT3[k]), sizeof(sh4_model_tex_type3), inFile,
-							"sh4_model_tex::loadData() - Could not read struct type 3",ERROR_LOG);
+			(char*)"sh4_model_tex::loadData() - Could not read struct type 3",ERROR_LOG);
 		if( lNumRead == -1 )
 		{
 			LogFile( ERROR_LOG, "sh4_model_tex::loadData( ) - ERROR: Read failed on type3 struct %ld of %ld",k+1, m_sT2.numTex);
@@ -305,7 +305,7 @@ long sh4_model_tex::loadData( long offsetT1, long offsetT2, FILE *inFile )
 		texData = new BYTE[ m_sT3[k].texDataSize ];
 
 		lNumRead = _loadBlock( (void *)texData, m_sT3[k].texDataSize, inFile,
-							"sh4_model_tex::loadData() - Could not read image data",ERROR_LOG);
+			(char*)"sh4_model_tex::loadData() - Could not read image data",ERROR_LOG);
 		if( lNumRead == -1 )
 		{
 			LogFile( ERROR_LOG, "sh4_model_tex::loadData( ) - ERROR: Read failed on image data for tex %ld of %ld",k+1, m_sT2.numTex);
@@ -539,7 +539,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	matSet1 = new matrix[ loadDat->numMatSet1 ];
 
 	lNumRead = _loadBlock( (void*)matSet1, sizeof(matrix) * loadDat->numMatSet1, inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read first matrix set",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read first matrix set",ERROR_LOG);
 	if( lNumRead == 0 )
 		return 0;
 
@@ -553,7 +553,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	matSet2 = new matrix[ loadDat->numMatSet2 ];
 
 	lNumRead = _loadBlock( (void*)matSet2, sizeof(matrix) * loadDat->numMatSet2, inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read 2nd matrix set",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read 2nd matrix set",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -567,7 +567,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	mSeq1 = new unsigned char[ loadDat->numMatSet1 ];
 
 	lNumRead = _loadBlock( (void*)mSeq1, sizeof(unsigned char) * loadDat->numMatSet1, inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read 1st Sequence set",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read 1st Sequence set",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -580,7 +580,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	mSeq2 = new unsigned char[ loadDat->numMatSet2 * 2 ];
 
 	lNumRead = _loadBlock( (void*)mSeq2, sizeof(unsigned char) * loadDat->numMatSet2 * 2, inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read 2nd Sequence set",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read 2nd Sequence set",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -592,7 +592,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	texIDs = new long[ loadDat->numTexSetIDs ];
 
 	lNumRead = _loadBlock( (void*)texIDs, sizeof(long) * loadDat->numTexSetIDs, inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read tex IDs",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read tex IDs",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -603,7 +603,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	texIDMapping = new long[ loadDat->numTexIDMapping * 2 ];		//Each element is 8 bytes
 
 	lNumRead = _loadBlock( (void*)texIDMapping, sizeof( long ) * loadDat->numTexIDMapping * 2 , inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read Q3 Array",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read Q3 Array",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -615,7 +615,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	quatData = new short[ loadDat->numQuatData * 3 ];		//Each element is 3 shorts
 
 	lNumRead = _loadBlock( (void*)quatData, sizeof( short ) * loadDat->numQuatData * 3 , inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read quat data",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read quat data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -642,7 +642,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	fseek( inFile, baseOffset + loadDat->offsetExtents, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)extents, sizeof( vertex4f ) * 8 , inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read extents",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read extents",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -652,7 +652,7 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 	fseek( inFile, baseOffset + loadDat->offset_q7_mh, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)&lTempOffset, sizeof( long ) , inFile,
-						"sh4_model_header_dynamic::loadData() - Could not read q7_mh offset",ERROR_LOG);
+		(char*)"sh4_model_header_dynamic::loadData() - Could not read q7_mh offset",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -663,14 +663,14 @@ long sh4_model_header_dynamic::loadData( long baseOffset, sh4_model_header *load
 		fseek( inFile, baseOffset + lTempOffset, SEEK_SET );
 
 		lNumRead = _loadBlock( (void*)qa1, sizeof( short ) * 4 , inFile,
-							"sh4_model_header_dynamic::loadData() - Could not read qa1",ERROR_LOG);
+			(char*)"sh4_model_header_dynamic::loadData() - Could not read qa1",ERROR_LOG);
 		if( lNumRead == -1 )
 			return 0;
 
 		lTotalread += lNumRead;
 
 		lNumRead = _loadBlock( (void*)&q2, sizeof( matrix ) , inFile,
-							"sh4_model_header_dynamic::loadData() - Could not read suspected affine",ERROR_LOG);
+			(char*)"sh4_model_header_dynamic::loadData() - Could not read suspected affine",ERROR_LOG);
 		if( lNumRead == -1 )
 			return 0;
 
@@ -754,7 +754,7 @@ long sh4_vertex_data::loadDataHeader( FILE *inFile )
 	m_lStartOffset = ftell( inFile );
 
 	lNumRead = _loadBlock( (void*)&m_sVertexType, sizeof(m_sVertexType), inFile,
-						"sh4_vertex_data::loadDataHeader() - Could not read vertex header data",ERROR_LOG);
+		(char*)"sh4_vertex_data::loadDataHeader() - Could not read vertex header data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 	//LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 6");
@@ -778,7 +778,7 @@ long sh4_vertex_data::loadDataVerts( FILE *inFile )
 	verts = new sh4_model_vert[ m_sVertexType.numVertex ];
 	
 	lNumRead = _loadBlock( (void*)verts, sizeof(sh4_model_vert) * m_sVertexType.numVertex, inFile,
-						"sh4_vertex_data::loadDataHeader() - Could not read vertex data",ERROR_LOG);
+		(char*)"sh4_vertex_data::loadDataHeader() - Could not read vertex data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 //LogFile( DATA_LOG,"CHECK: %ld total verts, %ld total indicies",m_sVertexType.numVertex,m_sVertexType.numIndex);
@@ -795,7 +795,7 @@ long sh4_vertex_data::loadDataVerts( FILE *inFile )
 	//LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 7");
 	indicies = new short[ m_sVertexType.numIndex ];
 	lNumRead = _loadBlock( (void*)indicies, sizeof(short) * m_sVertexType.numIndex, inFile,
-						"sh4_vertex_data::loadDataHeader() - Could not read index data",ERROR_LOG);
+		(char*)"sh4_vertex_data::loadDataHeader() - Could not read index data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -872,7 +872,7 @@ LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 1");
 	deleteData( );
 
 	lNumRead = _loadBlock( (void*)&m_cPrimHeader, sizeof(sh4_vertex_prim_header) , inFile,
-						"sh4_vertex_prim::loadData() - Could not read static prim head",ERROR_LOG);
+		(char*)"sh4_vertex_prim::loadData() - Could not read static prim head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 debugSH4_VP( &m_cPrimHeader );
@@ -882,7 +882,7 @@ LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 2");
 
 	seqData1 = new short[ m_cPrimHeader.numSeq1Data ];
 	lNumRead = _loadBlock( (void*)seqData1, sizeof(short) * m_cPrimHeader.numSeq1Data, inFile,
-						"sh4_vertex_prim::loadData() - Could not read seq1 data",ERROR_LOG);
+		(char*)"sh4_vertex_prim::loadData() - Could not read seq1 data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -892,7 +892,7 @@ LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 3");
 
 	seqData2 = new short[ m_cPrimHeader.numSeq2Data ];
 	lNumRead = _loadBlock( (void*)seqData2, sizeof(short) * m_cPrimHeader.numSeq2Data, inFile,
-						"sh4_vertex_prim::loadData() - Could not read seq2 data",ERROR_LOG);
+		(char*)"sh4_vertex_prim::loadData() - Could not read seq2 data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -902,7 +902,7 @@ LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 3");
 LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 4");	
 	texIDs = new short[ m_cPrimHeader.numTexID ];
 	lNumRead = _loadBlock( (void*)texIDs, sizeof(short) * m_cPrimHeader.numTexID, inFile,
-						"sh4_vertex_prim::loadData() - Could not read texID data",ERROR_LOG);
+		(char*)"sh4_vertex_prim::loadData() - Could not read texID data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -912,7 +912,7 @@ LogFile(ERROR_LOG,"sh4_vertex_prim::loadData - 5");
 	fseek( inFile, lStartOffset + m_cPrimHeader.offsetStaticData, SEEK_SET );
 
 	lNumRead = _loadBlock( (void*)&l_cVertexType, sizeof(l_cVertexType), inFile,
-						"sh4_vertex_prim::loadData() - Could not read vertex type header data",ERROR_LOG);
+		(char*)"sh4_vertex_prim::loadData() - Could not read vertex type header data",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -965,7 +965,7 @@ LogFile( ERROR_LOG,"CHECK: The size of the seq reorder for %ld of %ld is %ld",k+
 			fseek( inFile, m_cVertexData[ k ].m_lStartOffset + m_cVertexData[ k ].m_sVertexType.offsetSeqOrder, SEEK_SET );
 
 			lNumRead = _loadBlock( (void*)tempReorder, sizeof(long) * tempNumReorder, inFile,
-							"sh4_vertex_prim::loadData() - Could not read reorder data",ERROR_LOG);
+				(char*)"sh4_vertex_prim::loadData() - Could not read reorder data",ERROR_LOG);
 			if( lNumRead == -1 )
 				return 0;
 
@@ -990,7 +990,7 @@ LogFile( ERROR_LOG,"CHECK: The size of the seq reorder for %ld of %ld is %ld",k+
 			fseek( inFile, m_cVertexData[ k ].m_lStartOffset + m_cVertexData[ k ].m_sVertexType.offsetSeqOrder, SEEK_SET );
 
 			lNumRead = _loadBlock( (void*)m_cVertexData[ k ].seqReorder, sizeof(long) * tempNumReorder, inFile,
-							"sh4_vertex_prim::loadData() - Could not read reorder data",ERROR_LOG);
+				(char*)"sh4_vertex_prim::loadData() - Could not read reorder data",ERROR_LOG);
 			if( lNumRead == -1 )
 				return 0;
 
@@ -1093,7 +1093,7 @@ long sh4_model::loadDataAux( FILE *inFile )
 	deleteData( );
 
 	lNumRead = _loadBlock( (void*)&m_sModelHeader, sizeof(m_sModelHeader) , inFile,
-						"sh4_model::loadDataAux() - Could not read base model head",ERROR_LOG);
+		(char*)"sh4_model::loadDataAux() - Could not read base model head",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -1142,7 +1142,7 @@ LogFile(ERROR_LOG,"sh4_model::loadDataAux - 3");
 }
 
 
-long sh4_model::loadData( char *filename )
+long sh4_model::loadData( const char *filename )
 {
 	long numOffsets;
 	long *offsets;
@@ -1166,7 +1166,7 @@ LogFile( DATA_LOG, "\nFilename = %s",filename);
 
 	lNumRead = _loadBlock( (void*)&numOffsets, sizeof(long), inFile,
 
-		"sh4_model::loadData() - Could not read num offsets",ERROR_LOG);
+		(char*)"sh4_model::loadData() - Could not read num offsets",ERROR_LOG);
 	if( lNumRead == -1 )
 	{
 		fclose( inFile );
@@ -1176,7 +1176,7 @@ LogFile( ERROR_LOG, "sh4_model::loadData 1");
 	offsets = new long[ numOffsets ];
 
 	lNumRead = _loadBlock( (void*)offsets, sizeof(long) * numOffsets, inFile,
-						"sh4_model::loadData() - Could not read offsets",ERROR_LOG);
+		(char*)"sh4_model::loadData() - Could not read offsets",ERROR_LOG);
 	if( lNumRead == -1 )
 	{
 		delete [] offsets;
@@ -1690,7 +1690,7 @@ quat sh4_model::convertToQuat( short int xVal, short int yVal, short int zVal )
 }
 
 
-GLuint sh4_model::loadTex( char *texName, FILE *inFile )
+GLuint sh4_model::loadTex( const char *texName, FILE *inFile )
 {
 	long lNumRead;
 	long lTotalread = 0;
@@ -1711,7 +1711,7 @@ GLuint sh4_model::loadTex( char *texName, FILE *inFile )
 	lStartOffset = ftell( inFile );
 
 	lNumRead = _loadBlock( (void*)&texHeader, sizeof(texHeader), inFile,
-						"sh4_model::loadTex() - Could not read tex header",ERROR_LOG);
+		(char*)"sh4_model::loadTex() - Could not read tex header",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 debugSH4_MTH( &texHeader );
@@ -1721,14 +1721,14 @@ debugSH4_MTH( &texHeader );
 	offsetsT2 = new long[ texHeader.numT2 ];
 
 	lNumRead = _loadBlock( (void*)offsetsT1, sizeof(long) * texHeader.numT1, inFile,
-						"sh4_model::loadTex() - Could not read tex T1 offsets",ERROR_LOG);
+		(char*)"sh4_model::loadTex() - Could not read tex T1 offsets",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
 	lTotalread += lNumRead;
 
 	lNumRead = _loadBlock( (void*)offsetsT2, sizeof(long) * texHeader.numT2, inFile,
-						"sh4_model::loadTex() - Could not read tex T2 offsets",ERROR_LOG);
+		(char*)"sh4_model::loadTex() - Could not read tex T2 offsets",ERROR_LOG);
 	if( lNumRead == -1 )
 		return 0;
 
@@ -1762,7 +1762,8 @@ debugSH4_MTH( &texHeader );
 	for( k = 0; k < m_lNumTex; k++ )
 	{
 		sprintf( filename, "%s_%ld",texName, k );
-		textureMgr.AddTex( string(filename), texIDs[ k ], 0 );
+		string filenameStr = string(filename);
+		textureMgr.AddTex( filenameStr, texIDs[ k ], 0 );
 	}
 
 	return lTotalread;

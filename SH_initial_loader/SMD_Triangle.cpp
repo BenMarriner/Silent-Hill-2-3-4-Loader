@@ -31,7 +31,7 @@ SMD_Triangle & SMD_Triangle::operator=( const SMD_Triangle & rhs )
 //-------------------------/
 void	SMD_Triangle::SetNullAll( )
 {
-	m_Material = "";
+	m_Material = (char*)"";
 }
 
 

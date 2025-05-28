@@ -22,7 +22,7 @@ void _writeBytes( char *prefixStr, long val, long numBytes )
 		LogFile( ERROR_LOG, "\t%s\t= <empty>", prefixStr );
 }
 
-long getFileSize( char *i_pcFilename )
+long getFileSize( const char *i_pcFilename )
 {
 	struct _stat l_sBuf;
 	long l_lRes;

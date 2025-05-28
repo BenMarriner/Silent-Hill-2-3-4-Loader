@@ -26,7 +26,7 @@ long SH3_CldIndex::LoadData( FILE *inFile, long _lDataSize )
 	m_plIndices = new long[ m_lNumIndex ];
 
 	l_lRes = _loadBlock( (void *)m_plIndices, m_lNumIndex * sizeof( long ), inFile,
-						"SH3_CldIndex::LoadData( ) - ERROR: Could not load index data", ERROR_LOG );
+		(char*)"SH3_CldIndex::LoadData( ) - ERROR: Could not load index data", ERROR_LOG );
 
 	if( l_lRes == -1 )
 		return 0;
@@ -50,7 +50,7 @@ long SH3_CldPrim::LoadData( FILE *inFile )
 	DeleteData( );
 
 	l_lRes = _loadBlock( (void *)&m_sVertHeader, sizeof( m_sVertHeader ), inFile,
-						"SH3_CldPrim::LoadData( ) - ERROR: Could not load header data", ERROR_LOG );
+		(char*)"SH3_CldPrim::LoadData( ) - ERROR: Could not load header data", ERROR_LOG );
 
 	if( l_lRes == -1 )
 		return 0;
@@ -60,7 +60,7 @@ long SH3_CldPrim::LoadData( FILE *inFile )
 	m_pcVerts = new vertex4f[ m_sVertHeader.s_lNumVerts ];
 
 	l_lRes = _loadBlock( (void *)m_pcVerts, m_sVertHeader.s_lNumVerts * sizeof( vertex4f ), inFile,
-						"SH3_CldPrim::LoadData( ) - ERROR: Could not load vertex data", ERROR_LOG );
+		(char*)"SH3_CldPrim::LoadData( ) - ERROR: Could not load vertex data", ERROR_LOG );
 
 	if( l_lRes == -1 )
 		return 0;
@@ -185,7 +185,7 @@ long SH3_Collision::Load( char *filename, long _offset )
 	fseek( inFile, _offset, SEEK_SET );
 
 	l_lRes = _loadBlock( (void *)&m_sHeader, sizeof( m_sHeader ), inFile,
-						"SH3_Collision::Load( ) - ERROR: Could not load header", ERROR_LOG );
+		(char*)"SH3_Collision::Load( ) - ERROR: Could not load header", ERROR_LOG );
 
 	if( l_lRes == -1 )
 	{
@@ -206,7 +206,7 @@ debugLong( m_sHeader.f_sh3_ch );
 LogFile( ERROR_LOG, "SH3_Collision::Load( ) - Index Loop %ld of %ld at offset %ld",k+1, 5, ftell( inFile ) );
 		l_lCurOffset = ftell( inFile );
 		l_lRes = _loadBlock( (void *)&l_sIndexOffsets, sizeof( sh3_cld_index_offsets ), inFile,
-						"SH3_Collision::Load( ) - ERROR: Could not load index offsets", ERROR_LOG );
+			(char*)"SH3_Collision::Load( ) - ERROR: Could not load index offsets", ERROR_LOG );
 
 		if( l_lRes == -1 )
 		{
@@ -241,7 +241,7 @@ LogFile( ERROR_LOG, "SH3_Collision::Load( ) - Index Loop %ld of %ld at offset %l
 	}
 LogFile( ERROR_LOG, "SH3_Collision::Load( ) - Done w/ Index Data");
 	l_lRes = _loadBlock( (void *)&l_sDataOffsets, sizeof( l_sDataOffsets ), inFile,
-						"SH3_Collision::Load( ) - ERROR: Could not load data offsets", ERROR_LOG );
+		(char*)"SH3_Collision::Load( ) - ERROR: Could not load data offsets", ERROR_LOG );
 
 	if( l_lRes == -1 )
 	{

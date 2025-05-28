@@ -260,7 +260,7 @@ void SH_Anim_Loader::ReleaseData( )
 	SetNullAll( );
 }
 
-long SH_Anim_Loader::LoadAnim( char *_fName, long modelNum, long startInd )
+long SH_Anim_Loader::LoadAnim(const char* _fName, long modelNum, long startInd)
 {
 	long firstLong;
 	FILE *infile;
@@ -270,7 +270,6 @@ long SH_Anim_Loader::LoadAnim( char *_fName, long modelNum, long startInd )
 	arc_index_data indexData;
 	long t_lModelIndex = 0;
 	long startIndex;
-
 //	debugMode = true;
 //	LogFile( ERROR_LOG,"HERE");
 //	LogFile( ERROR_LOG,"Debug Mode is: %s",(debugMode)?"TRUE":"False");
@@ -398,7 +397,7 @@ long SH_Anim_Loader::LoadAnim( char *_fName, long modelNum, long startInd )
 }
 
 
-long SH_Anim_Loader::LoadAnimSH2( char *_fName, long startInd )
+long SH_Anim_Loader::LoadAnimSH2( const char *_fName, long startInd )
 {
 //	long firstLong;
 	FILE *infile;
@@ -579,7 +578,7 @@ long SH_Anim_Loader::LoadAnim( FILE *inFile, unsigned char *ps_mSeq, long _lNumS
 }
 
 
-bool SH_Anim_Loader::LoadNextAnim( char * _fName )
+bool SH_Anim_Loader::LoadNextAnim( const char * _fName )
 {
 	if( ! LoadAnim( _fName, -1, m_lModelIndex ) )
 	{
@@ -715,7 +714,8 @@ void SH_Anim_Loader::ExportSMDAnimation(  )
 	std::fstream  l_OutputFile;
 	char l_OutputModelName[ 256 ];
 
-	sprintf( l_OutputModelName, "%s_%ld_anim.smd",baseName( mstring(this->m_pcModel_SH3->modelFilename) ).c_str(), this->m_pcModel_SH3->baseOffset );
+	mstring l_ModelFileNameMS = mstring(this->m_pcModel_SH3->modelFilename);
+	sprintf( l_OutputModelName, "%s_%ld_anim.smd",baseName( l_ModelFileNameMS ).c_str(), this->m_pcModel_SH3->baseOffset );
 
 	l_OutputFile.open( l_OutputModelName, ios::out | ios::trunc );
 	
@@ -846,7 +846,8 @@ void SH_Anim_Loader::AddVerticies( SMD::SMD_Model & _Model )
 
 			sprintf( l_TexName, "%d_%d.tga", this->m_pcModel_SH3->baseOffset, this->m_pcModel_SH3->texSeqData[ this->m_pcModel_SH3->m_pmPrimitive[ j ].texNum * 2 ] % this->m_pcModel_SH3->m_mDataHeader.numTex );
 
-			l_Triangle.setMaterial( mstring( l_TexName ) );
+			mstring l_TexNameMS = mstring(l_TexName);
+			l_Triangle.setMaterial( l_TexNameMS );
 
 			if( this->m_pcModel_SH3->m_pmPrimitive[j].verts == NULL && this->m_pcModel_SH3->m_pmPrimitive[j].altVerts == NULL )
 			{
@@ -1007,7 +1008,8 @@ void SH_Anim_Loader::ExportSMD(  )
 	std::fstream  l_OutputFile;
 	char l_OutputModelName[ 256 ];
 
-	sprintf( l_OutputModelName, "%s_%ld.smd",baseName( mstring(this->m_pcModel_SH3->modelFilename) ).c_str(), this->m_pcModel_SH3->baseOffset );
+	mstring l_ModelFileNameMS = mstring(this->m_pcModel_SH3->modelFilename);
+	sprintf( l_OutputModelName, "%s_%ld.smd",baseName( l_ModelFileNameMS ).c_str(), this->m_pcModel_SH3->baseOffset );
 
 	l_OutputFile.open( l_OutputModelName, ios::out | ios::trunc );
 	
@@ -2076,6 +2078,7 @@ int SH_AnimSet::LoadAnimSet( FILE * inFile, unsigned char *ps_mSeq, long _lNumSe
 	quat			tempQuat;
 	QuatAnim		tempQAnim;
 	QuatAnim		tempQAnim2;
+	vertex originVert = vertex(0, 0, 0);
 	long			startFlagOffset = ftell( inFile );
 	long			preOffset;
 	unsigned long	nextFlag = 0;
@@ -2202,7 +2205,7 @@ int SH_AnimSet::LoadAnimSet( FILE * inFile, unsigned char *ps_mSeq, long _lNumSe
 								QUnit( &tempQuat );
 								QTOM( &tempQuat, &tempMat );
 								QINVERSE(&tempQuat,&tempQuat);
-								tempQAnim = QuatAnim( tempQuat, vertex( 0, 0, 0 ) );
+								tempQAnim = QuatAnim( tempQuat, originVert );
 
 								if( getSeq( flagArray[ k ] ) == 8 || getSeq( flagArray[ k ] ) == 0 )
 								//if( !sh2_load && getSeq( flagArray[ k ] ) == 8 || getSeq( flagArray[ k ] ) == 0 )
@@ -2252,7 +2255,7 @@ int SH_AnimSet::LoadAnimSet( FILE * inFile, unsigned char *ps_mSeq, long _lNumSe
 							QUnit( &tempQuat );
 							QTOM( &tempQuat, &tempMat );
 							QINVERSE(&tempQuat,&tempQuat);
-							tempQAnim = QuatAnim( tempQuat, vertex( 0, 0, 0 ) );
+							tempQAnim = QuatAnim(tempQuat, originVert);
 							
 							if( getSeq( flagArray[ k ] ) == 8 || getSeq( flagArray[ k ] ) == 0 )
 							//if( !sh2_load && getSeq( flagArray[ k ] ) == 8 || getSeq( flagArray[ k ] ) == 0 )
@@ -2307,8 +2310,8 @@ int SH_AnimSet::LoadAnimSet( FILE * inFile, unsigned char *ps_mSeq, long _lNumSe
 							QUnit( &tempQuat );
 							QTOM( &tempQuat, &tempMat );
 							QINVERSE(&tempQuat,&tempQuat);		//---[ Needed to Make Quat Animation Work ]---/
-
-							tempQAnim = QuatAnim( tempQuat, vertex( l_sAnimPosAng.xPosL, l_sAnimPosAng.yPosL, l_sAnimPosAng.zPosL ) );
+							vertex l_sAnimPosAngVert = vertex(l_sAnimPosAng.xPosL, l_sAnimPosAng.yPosL, l_sAnimPosAng.zPosL);
+							tempQAnim = QuatAnim(tempQuat, l_sAnimPosAngVert);
 
 							if( getSeq( flagArray[ k ] ) == 8 || getSeq( flagArray[ k ] ) == 0 )
 							//if( !sh2_load && getSeq( flagArray[ k ] ) == 8 || getSeq( flagArray[ k ] ) == 0 )
@@ -2345,7 +2348,7 @@ int SH_AnimSet::LoadAnimSet( FILE * inFile, unsigned char *ps_mSeq, long _lNumSe
 						QUnit( &tempQuat );
 						QTOM( &tempQuat, &tempMat );
 						QINVERSE(&tempQuat,&tempQuat);
-						tempQAnim = QuatAnim( tempQuat, vertex( 0, 0, 0 ) );
+						tempQAnim = QuatAnim(tempQuat, originVert);
 
 
 						if( getSeq( flagArray[ k ] ) == 8 || getSeq( flagArray[ k ] ) == 0 )
@@ -2370,7 +2373,7 @@ int SH_AnimSet::LoadAnimSet( FILE * inFile, unsigned char *ps_mSeq, long _lNumSe
 						tempMat.identity( );
 						matVec.push_back( tempMat );
 						tempQuat = quat::UNIT;
-						tempQAnim = QuatAnim( tempQuat, vertex( 0, 0, 0 ) );
+						tempQAnim = QuatAnim(tempQuat, originVert);
 						quatVec.push_back( tempQAnim );
 						break;
 				}

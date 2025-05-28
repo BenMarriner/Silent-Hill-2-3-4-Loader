@@ -39,9 +39,11 @@
 #include "SH2_Model.h"
 #include "SH_Msg.h"
 #include "SH_Collision.h"
+#include "AssetLists.h"
 
 #include "OBJ_Exporter.h"
 #include <filesystem>
+#include <regex>
 
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
@@ -53,7 +55,7 @@ extern int errno;
 
 //PLACE IN IT"S OWN STATIC CLASS
 void createFont();
-void printText(float x,float y,float z,char *text,rgbf *color);
+void printText(float x,float y,float z,const char *text,rgbf *color);
 void startText();
 void endText();
 bool m_bTextStarted;
@@ -105,7 +107,7 @@ bool sh3_modelMode = false; //true;
 bool sh3_sceneMode = false;
 bool debugMode = false;
 bool animDebugMode = false;
-bool testMode = false;
+bool testMode = true;
 bool showBox = false;
 bool clearAllTex = true;
 bool dumpScene = false;
@@ -145,41 +147,6 @@ int numScenes = 1;
 int sceneLimit = 30;
 int minSceneNum, maxSceneNum;
 int minModelNum, maxModelNum;
-filesystem::path baseSH2dir;
-filesystem::path baseSH3dir;
-filesystem::path baseSH4dir;
-
-vector<std::filesystem::path> sceneFiles;
-int numSceneFiles = 0;
-int curSceneFile = 0;
-
-vector<std::filesystem::path> modelFiles;
-int numModelFiles = 0;
-int curModelFile = 0;
-
-vector<std::filesystem::path> modelSH2Dirs;
-int numSH2ModelDirs = 0;
-int curSH2ModelDir = 0;
-
-vector<std::filesystem::path> modelSH2Files;
-int numSH2ModelFiles = 0;
-int curSH2ModelFile = 0;
-
-vector<std::filesystem::path> animSH2Files;
-int numSH2AnimFiles = 0;
-int curSH2AnimFile = 0;
-
-vector<std::filesystem::path> sceneSH2Files;
-int numSH2SceneFiles = 0;
-int curSH2SceneFile = 0;
-
-vector<std::filesystem::path> sceneSH2Dirs;
-int numSH2SceneDirs = 0;
-int curSH2SceneDir = 0;
-
-vector<std::filesystem::path> allSH4Files;
-int numSH4Files = 0;
-int curSH4File = 0;
 
 int doDebug = 0;
 
@@ -257,21 +224,23 @@ void readFileDataAtLocation( char *filename, int numLongs, long offset );
 //-----------------------------------------------------------------------------
 GLADapiproc glad_win32_loader(const char* name);
 
-void Load_SH2_SceneFile( char *fileToLoad );
+void Load_SH2_SceneFile(filesystem::path& fileToLoad );
 void Process_SH2_SceneKeyInput( );
-void Load_SH3_SceneFile( char *fileToLoad );
+void Load_SH3_SceneFile( filesystem::path& fileToLoad );
 void Process_SH3_SceneKeyInput( );
-bool Load_SH3_ModelFile( char *fileToLoad );
+bool Load_SH3_ModelFile( filesystem::path& fileToLoad );
 void Process_SH3_ModelKeyInput( );
-void Load_SH2_ModelFile( char *fileToLoad );
+void Load_SH2_ModelFile( filesystem::path& fileToLoad );
 void Process_SH2_ModelKeyInput( );
-void Load_SH4_File( char *fileToLoad );
+void Load_SH4_File( filesystem::path& fileToLoad );
 void Process_SH4_KeyInput( );
-void CleanDirectoryFilelist(int numNames, char ***pppFileName);
-int GetDirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName);
-int GetSH2DirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName, bool getFiles = false);
-void GetSH2DirectoryListAux(char *pDirName,char *fileExt, vector< string > & tempList );
-void GetSH2DirectoryFilelistAux(char *pDirName,char *fileExt, vector< string > & tempList );
+void CleanDirectoryFilelist(vector<filesystem::path>& filePaths);
+//int GetDirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName);
+//int GetSH2DirectoryFilelist(char *fileDirExt,char *fileExt, char ***foundFileName, bool getFiles = false);
+//void GetSH2DirectoryListAux(char *pDirName,char *fileExt, vector< string > & tempList );
+//void GetSH2DirectoryFilelistAux(char *pDirName,char *fileExt, vector< string > & tempList );
+int GetDirectoryFileList(const filesystem::path& rootDataDir, const string& fileExtRegexPattern, vector<filesystem::path>& foundFileNames);
+
 
 //---------------[ CLEANUP FUNCTIONS ]----------------/
 void DeleteSH3Scene( );
@@ -327,272 +296,79 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	
 	origin.identity( );
 
-	if( false )//testMode )
+
+	numSH2SceneFiles	= GetDirectoryFileList( baseSH2dir, SH2_MAP, SH2SceneFiles);
+	numSH2ModelFiles	= GetDirectoryFileList( baseSH2dir, SH2_MDL, SH2ModelFiles);
+	numSH2AnimFiles		= GetDirectoryFileList( baseSH2dir, SH2_ANM, SH2AnimFiles);
+	numSH3SceneFiles	= GetDirectoryFileList( baseSH3dir, SH3_MAP, SH3SceneFiles);
+	numSH3ModelFiles	= GetDirectoryFileList( baseSH3dir, SH3_MDL, SH3ModelFiles);
+	numSH4Files			= GetDirectoryFileList( baseSH4dir, SH4_BIN, SH4Files);
+
+	if (testMode)
 	{
-		long res;
-		char arcFilename[256];
-
-		sprintf( arcFilename, "%sarc.arc",baseSH3dir);
-		if(( res = arcList.Load( arcFilename )) < 1 )
-		{
-			LogFile( ERROR_LOG, "TESTING ERROR:  Unable to load the arc data from %s   - Res: %ld,",arcFilename,res);
-		}
-		else
-		{
-			long k,j;
-
-			LogFile( ERROR_LOG, "TEST: Success - Loaded %ld bytes for %s",res,arcFilename);
-			for( k = 0; k < arcList.m_sArcData.arcFileCount; k++ )
-			{
-				LogFile( ERROR_LOG, "Arc Basename [%s]",arcList.m_pcArcSections[ k ].sectionName);
-
-				for( j = 0; j < arcList.m_pcArcSections[ k ].nameCount; j++ )
-				{
-					LogFile( ERROR_LOG, "\t%2ld\t%2d\t%d\t%s",
-						j,arcList.m_pcArcSections[ k ].m_pcArcFilenames[ j ].fileIndex,
-						arcList.m_pcArcSections[ k ].m_pcArcFilenames[ j ].sectIndex,
-						arcList.m_pcArcSections[ k ].m_pcArcFilenames[ j ].fileName);
-				}
-			}
-		}
-	}
-
-
-	numSceneFiles	= GetDirectoryFilelist( baseSH3dir, "bg*.arc", sceneFiles);
-	numSH2SceneDirs	= GetSH2DirectoryFilelist( baseSH2dir, ".map",&sceneSH2Dirs); //NOTE: Do not use '*' for the SH2 Directory filelist
-	numSH2ModelDirs	= GetSH2DirectoryFilelist( baseSH2dir, ".mdl",&modelSH2Dirs); //NOTE: Do not use '*' for the SH2 Directory filelist
-	numSH2AnimFiles = GetSH2DirectoryFilelist( baseSH2dir, ".anm",&animSH2Files, true);
-	numModelFiles	= GetDirectoryFilelist( baseSH3dir, "chr*.arc",modelFiles);
-	numSH4Files		= GetDirectoryFilelist( baseSH4dir, "*.bin",allSH4Files);
-
-//readFileDataAtLocation("C:\\Users\\Mike\\Desktop\\fuckMS\\samples\\Silent Hill 2\\data\\chr\\agl\\p_agl.anm",1000, 0 );
-//testMode = true;
-	if( testMode )
-	{
-animDebugMode = true;
-debugMode = true;
-
-//		if(numModelFiles)
-//		{
-//			for( k = 0; k < numModelFiles; k++ )
-//				GetFileInfo( modelFiles[ k ] );
-//		}
-	//	LogFile(ERROR_LOG,"\nCHREN - doggy.kg1\n-----------------------------------------------------------------");
-	//	readIndexData("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chren.arc",48,7,3188,0,true);
-	//	readIndexData("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chren.arc",48,7,3188,2,false);
-	//	readIndexData("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chren.arc",48,7,3188,3,false);
-	//	LogFile(ERROR_LOG,"\nCHRBG legs.kg1\n-----------------------------------------------------------------");
-	//	readIndexData("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chrbg.arc",100,17,977,0,true);
-	//	LogFile(ERROR_LOG,"\nCHRWP hgun.kg1\n-----------------------------------------------------------------");
-	//	readIndexData("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chrwp.arc",12,1,404,0,true);
-	//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chrit.arc",100,2948);
-	//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chrbg.arc",532,862434);
-	//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chren.arc",1000,0);
-		quat qTest( 12288.0f/32768.0f, 0.0f/32768.0f,0.0f/32768.0f, 0);
-		qTest.computeR( );
-		LogFile( TEST_LOG,"------------\n QUAT VALS:\n------------\n x: %f\n y: %f\n z: %f\n w: %f\n",qTest.x,qTest.y,qTest.z,qTest.w);
-		matrix testM;
-		QTOM( &qTest, &testM );
-
-		LogFile( TEST_LOG, "------------\n As a matrix\n------------\n\n\t[[ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]]",testM.mat[0],testM.mat[1],testM.mat[2],testM.mat[3],testM.mat[4],testM.mat[5],testM.mat[6],testM.mat[7],testM.mat[8],testM.mat[9],testM.mat[10],testM.mat[11],testM.mat[12],testM.mat[13],testM.mat[14],testM.mat[15]);
-		quatToMat( &qTest, &testM );
-		LogFile( TEST_LOG, "----------------\n  New Function\n----------------");
-		LogFile( TEST_LOG, "------------\n As a matrix\n------------\n\n\t[[ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]]",testM.mat[0],testM.mat[1],testM.mat[2],testM.mat[3],testM.mat[4],testM.mat[5],testM.mat[6],testM.mat[7],testM.mat[8],testM.mat[9],testM.mat[10],testM.mat[11],testM.mat[12],testM.mat[13],testM.mat[14],testM.mat[15]);
-
-	sh2_run = false;//true;
-
-		if(sh2_run)
-		{
-	displayMatrix = true;
-//	LogFile( ERROR_LOG, "############################\n# EXTRA PRIMITIVES IN MODELS      #\n#########################");
-//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chrpl.arc",5000, 16329116 + 758688 );
-//	LogFile( ERROR_LOG, "\n###########################\n# NOTE.mdl kg1 FILE     #\n#####################");
-//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\chrit.arc",100, 2948 );
-//	LogFile( ERROR_LOG, "\n######################\n# ded File for amff in bgam #\n####################");
-//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bgam.arc",136, 76932 );
-//	LogFile( ERROR_LOG, "\n######################\n# KG2 File for amff in bgam #\n####################");
-//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bgam.arc",932, 67668 );
-//	LogFile( ERROR_LOG, "\n######################\n# KG2 File for hpdf in bghp #\n####################");
-//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bghp.arc",108, 252704 );
-//	LogFile( ERROR_LOG, "\n######################\n# KG2 File for hp41 in bghp #\n####################");
-//	readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bghp.arc",12, 261088 );
-//	readFileDataAtLocation("H:\\Silent Hill 2\\data\\chr\\agl\\p_agl.anm",1000, 0 );
-
-//	sh2Act.loadData( "H:\\Silent Hill 2\\data\\chr\\agl\\agl.mdl" );
-//	sh2Act.loadData( "H:\\Silent Hill 2\\data\\chr\\tyu\\tyu.mdl" );
-	//	shutDown( );
-	//	return 0;
-			{//28 63407 59179 
-				quat qTest( 28.0f/32768.0f,	-2129.0f/32768.0f,	-6357.0f/32768.0f, 0);
-				qTest.computeR( );
-				LogFile( TEST_LOG,"------------\n QUAT VALS:\n------------\n x: %f\n y: %f\n z: %f\n w: %f\n",qTest.x,qTest.y,qTest.z,qTest.w);
-				matrix testM;
-				QTOM( &qTest, &testM );
-	
-				LogFile( TEST_LOG, "------------\n As a matrix\n------------\n\n\t[[ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]]",testM.mat[0],testM.mat[1],testM.mat[2],testM.mat[3],testM.mat[4],testM.mat[5],testM.mat[6],testM.mat[7],testM.mat[8],testM.mat[9],testM.mat[10],testM.mat[11],testM.mat[12],testM.mat[13],testM.mat[14],testM.mat[15]);
-			}
-			{
-				quat qTest( 28.0f/65536.0f, 63407.0f/65536.0f,59179.0f/65536.0f, 0);
-				float t= 1.0f-(qTest.x*qTest.x)-(qTest.y*qTest.y)-(qTest.z*qTest.z);
-				float w=(t < 0.0f) ? 0.0f : -sqrtf(t);
-				LogFile( TEST_LOG, "CHECKTHIS: qVals = x: %f\ty: %f\tw: %f",qTest.x, qTest.y, qTest.z);
-				qTest.computeR( );
-				LogFile( TEST_LOG, "CHECKTHIS: t = %f\tw= %f",t,w);
-				LogFile( TEST_LOG,"------------\n QUAT VALS:\n------------\n x: %f\n y: %f\n z: %f\n w: %f\n",qTest.x,qTest.y,qTest.z,qTest.w);
-				matrix testM;
-				QTOM( &qTest, &testM );
-	
-				LogFile( TEST_LOG, "------------\n As a matrix\n------------\n\n\t[[ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]\n\t [ %.3f\t%.3f\t%.3f\t%.3f ]]",testM.mat[0],testM.mat[1],testM.mat[2],testM.mat[3],testM.mat[4],testM.mat[5],testM.mat[6],testM.mat[7],testM.mat[8],testM.mat[9],testM.mat[10],testM.mat[11],testM.mat[12],testM.mat[13],testM.mat[14],testM.mat[15]);
-			}
-			sh2TexList.BuildTexList( "H:\\Silent Hill 2\\data\\chr\\red\\" );
-			long l_lTestRes;
-
-			if( ! ( l_lTestRes = sh2Act.loadData( "H:\\Silent Hill 2\\data\\chr\\red\\red.mdl" )) )
-				MessageBox( NULL, "Could not load SH2 Model","E R R O R !!!", MB_OK );
-			else
-			{
-				LogFile( ERROR_LOG, "CHECK: Loaded %ld bytes for sh2 model", l_lTestRes );
-				if( ! ( l_lTestRes = sh2Act.loadAnim( testActAnim, "H:\\Silent Hill 2\\data\\chr\\red\\red.anm" ) ) )
-					MessageBox( NULL, "Did not load SH2 Model's Animation","E R R O R !!!!", MB_OK );
-				else
-					LogFile( ERROR_LOG, "NOTE: Loaded %ld animations for SH2 Model", l_lTestRes );
-			}
-		}
-		else
-		{
-			unsigned char testAscii[256];
-			for( k = 0; k < 128; k++ )
-				testAscii[ k ] = k+128;
-			testAscii[ k ] = 0;
-			LogFile( ERROR_LOG, "TESTARONI:\n"
-				"          1         2         3         4         5         6         7         8         9         0         1         2\n"
-				"0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789\n"
-				"%s", testAscii );
-
-			SH3_AllMsg testMsg;
-			arc_index_data arcFile;
-			long numMsgs;
-
-			numMsgs = arcFile.LoadFullData( baseSH3dir, "chren" );
-			LogFile( ERROR_LOG, "CHECK: arcfile returned %ld loaded internal filenames", numMsgs );
-			LogFile( ERROR_LOG, "CHECK: The actual totals are: %ld index, and %ld internal names",arcFile.numIndex, arcFile.internalFilenames.size( ));
-
-			for( k = 0; k < max(arcFile.numIndex , arcFile.internalFilenames.size( )); k++ )
-			{
-				LogFile( TEST_LOG, "Got to %ld of %ld",k+1,(arcFile.numIndex < arcFile.internalFilenames.size( ))?arcFile.internalFilenames.size( ):arcFile.numIndex);
-				if( arcFile.numIndex > k && arcFile.internalFilenames.size( ) > k )
-					LogFile( ERROR_LOG, "%ld -\t%s\t\t%ld\t%ld\t%ld\t%ld",k,arcFile.internalFilenames[ k ].c_str(),arcFile.index[ k ].offset, arcFile.index[ k ].q1, arcFile.index[ k ].size, arcFile.index[ k ].size2 );
-				else if( arcFile.numIndex > k )
-					LogFile( ERROR_LOG, "%ld -\t%s\t\t%ld\t%ld\t%ld\t%ld",k,"<NULL>\t",arcFile.index[ k ].offset, arcFile.index[ k ].q1, arcFile.index[ k ].size, arcFile.index[ k ].size2 );
-				else
-					LogFile( ERROR_LOG, "%ld -\t%s\t\t%ld\t%ld\t%ld\t%ld",k,arcFile.internalFilenames[ k ].c_str(),0,0,0, 0 );
-			}
-			LogFile( ERROR_LOG, "Go fuck your mom yourself - I'm getting sick of it   =(");
-//			readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bgam.arc",932, 67670 );
-//			readFileDataAtLocation("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bgam.arc",5000, 56650692 );
-	numMsgs = testMsg.LoadAll( baseSH3dir, MSG_LANG_ENGLISH );
-	for( k = 0; k < numMsgs; k++)
-	{
-		int j;
-		for( j = 0; j < testMsg.m_pcAllMsg[k].m_lNumMessages; j++)
-		{
-			
-			LogFile( ERROR_LOG, "Message: ID=%.6d   Alt=%.6d  %.*s", testMsg.m_pcAllMsg[k].m_pcMessages[j].m_sID,
-				testMsg.m_pcAllMsg[k].m_pcMessages[j].m_sAltID, testMsg.m_pcAllMsg[k].m_pcMessages[j].m_lLength,
-				testMsg.m_pcAllMsg[k].m_pcMessages[j].m_pcMsg);
-		}
-	}
-	
-//	LogFile( ERROR_LOG, "CHECK: I have loaded %ld message files", numMsgs );
-
-			debugMode = true;
-			dumpScene = true;
-			//testScene.loadArcScene("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bgmr.arc", 100 );
-			testScene.loadArcScene("C:\\Program Files (x86)\\KONAMI\\SILENT HILL 3\\data\\bgam.arc", 34 );
-			viewCam.movePos( testScene.mainHeader.skybox[ 0 ].x, testScene.mainHeader.skybox[ 0 ].y, testScene.mainHeader.skybox[ 0 ].z );
-			
-			dumpScene = false;
-			model_mode = false;
-			viewCam.setInvertUp( true );
-			
-			//testCollision.Load( "C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\bgmr.arc", 97200 );
-			testCollision.Load( "C:\\Program Files (x86)\\KONAMI\\SILENT HILL 3\\data\\bgam.arc", 4724 );
-			debugMode = false;
-			//	shutDown();
-	//		UnregisterClass( className , winClass.hInstance );
-	//	return 0;
-			if( model_mode )
-			{
-				testAct.loadModel( "C:\\Program Files (x86)\\KONAMI\\SILENT HILL 3\\data\\chrpl.arc",51);
-				testActAnim.AttachModel( &testAct );
-				LogFile(ERROR_LOG,"After Attach");
-	//animDebugMode = true;
-	//debugMode = true;
-				testActAnim.LoadAnim( );
-				LogFile(ERROR_LOG,"After Anim Load");
-				//testActAnim.ApplyAnimFrame( 0 );
-				LogFile(ERROR_LOG,"After Frame Apply");
-			}
-		}		
-		
+		LogFile(DATA_LOG, "No. SH2 Scene Files: %i\n", numSH2SceneFiles);
+		LogFile(DATA_LOG, "No. SH2 Model Files: %i\n", numSH2ModelFiles);
+		LogFile(DATA_LOG, "No. SH2 Anm Files: %i\n", numSH2AnimFiles);
+		LogFile(DATA_LOG, "No. SH3 Scene Files: %i\n", numSH3SceneFiles);
+		LogFile(DATA_LOG, "No. SH3 Model Files: %i\n", numSH3ModelFiles);
+		LogFile(DATA_LOG, "No. SH4 Files: %i\n", numSH4Files);
 	}
 
 
 
-
-	if( !numSceneFiles && !numSH2SceneDirs && !numSH2ModelDirs && !numModelFiles && !numSH4Files && !testMode )
+	if( !numSH3SceneFiles && !numSH2SceneFiles && !numSH2ModelFiles && !numSH3ModelFiles && !numSH4Files && !testMode )
 	{
 		MessageBox(NULL,"No SH2 or SH3 or SH4 Data Files Found - Cannot Continue","ERROR",MB_OK);
 		shutDown();
 		exit(1);
 	}
 
-	if( numModelFiles == 0 && !testMode )
+	if( numSH3ModelFiles == 0 && !testMode )
 	{
 		MessageBox(NULL,"No SH3 Model Files Found - Model Mode Not Available","ERROR",MB_OK);
 	}
 	else if( !testMode )
 	{
-		for( k = 0; k < numModelFiles; k ++ )
+		for( k = 0; k < numSH3ModelFiles; k ++ )
 		{
-			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",modelFiles[k]);
+			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",SH3ModelFiles[k]);
 		}
 	}
 
-	if( numSceneFiles == 0 && !testMode )
+	if( numSH3SceneFiles == 0 && !testMode )
 	{
 		MessageBox(NULL,"No SH3 Level Files Found - Scene Mode Not Available","ERROR",MB_OK);
 	}
 	else if( !testMode )
 	{
-		for( k = 0; k < numSceneFiles; k ++ )
+		for( k = 0; k < numSH3SceneFiles; k ++ )
 		{
-			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",sceneFiles[k]);
+			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",SH3SceneFiles[k]);
 		}
 	}
 
 
-	if( numSH2SceneDirs == 0 && !testMode )
+	if( numSH2SceneFiles == 0 && !testMode )
 	{
 		MessageBox(NULL,"No SH2 Level Files Found - SH2 Scene Mode Not Available","ERROR",MB_OK);
 	}
 	else if( !testMode )
 	{
-		for( k = 0; k < numSH2SceneDirs; k ++ )
+		for( k = 0; k < numSH2SceneFiles; k ++ )
 		{
-			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",sceneSH2Dirs[k]);
+			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",SH2SceneFiles[k]);
 		}
 	}
 
-	if( numSH2ModelDirs == 0 && !testMode )
+	if( numSH2ModelFiles == 0 && !testMode )
 	{
 		MessageBox(NULL,"No SH2 Model Files Found - SH2 Model Mode Not Available","ERROR",MB_OK);
 	}
 	else if( !testMode )
 	{
-		for( k = 0; k < numSH2ModelDirs; k ++ )
+		for( k = 0; k < numSH2ModelFiles; k ++ )
 		{
-			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",modelSH2Dirs[k]);
+			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",SH2ModelFiles[k]);
 		}
 	}
 
@@ -604,7 +380,7 @@ debugMode = true;
 	{
 		for( k = 0; k < numSH2AnimFiles; k ++ )
 		{
-			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",animSH2Files[k]);
+			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",SH2AnimFiles[k]);
 		}
 	}
 
@@ -616,12 +392,13 @@ debugMode = true;
 	{
 		for( k = 0; k < numSH4Files; k ++ )
 		{
-			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",allSH4Files[k]);
+			if( debugMode )LogFile(ERROR_LOG,"Found Data File [%s]",SH4Files[k]);
 		}
 	}
 
+	//-------------Loading Scene Files-------------//
 
-	if( numSH2SceneDirs && !testMode )
+	if( numSH2SceneFiles && !testMode )
 	{
 		sh2_mode = true;
 		sh3_mode = false;
@@ -632,11 +409,11 @@ debugMode = true;
 		sh2_sceneMode = true;
 		sh3_sceneMode = false;
 		sh3_modelMode = false;
-		//numSH2SceneFiles = GetDirectoryFilelist( sceneSH2Dirs[ curSH2SceneDir ], "*.map",&sceneSH2Files);
+		//numSH2SceneFiles = GetDirectoryFilelist( sceneSH2Dirs[ curSH2SceneDir ], "*.map",&SH2SceneFiles);
 		dirLooped = 0;
-		Load_SH2_SceneFile( sceneSH2Dirs[ curSH2SceneDir ] );
+		Load_SH2_SceneFile( SH2SceneFiles[ curSH2SceneDir ] );
 	}
-	else if( numSH2ModelDirs && !testMode )
+	else if( numSH2ModelFiles && !testMode )
 	{
 		sh2_mode = true;
 		sh3_mode = false;
@@ -647,11 +424,11 @@ debugMode = true;
 		sh2_sceneMode = true;
 		sh3_sceneMode = false;
 		sh3_modelMode = false;
-		//numSH2SceneFiles = GetDirectoryFilelist( sceneSH2Dirs[ curSH2SceneDir ], "*.map",&sceneSH2Files);
+		//numSH2SceneFiles = GetDirectoryFilelist( sceneSH2Dirs[ curSH2SceneDir ], "*.map",&SH2SceneFiles);
 		dirLooped = 0;
-		Load_SH2_ModelFile( modelSH2Dirs[ curSH2ModelDir ] );
+		Load_SH2_ModelFile( SH2ModelFiles[ curSH2ModelDir ] );
 	}
-	else if( numSceneFiles && !testMode )
+	else if( numSH3SceneFiles && !testMode )
 	{
 		sh2_mode = false;
 		sh3_mode = true;
@@ -662,9 +439,9 @@ debugMode = true;
 		sh2_sceneMode = false;
 		sh3_sceneMode = true;
 		sh3_modelMode = false;
-		Load_SH3_SceneFile( sceneFiles[curSceneFile] );
+		Load_SH3_SceneFile( SH3SceneFiles[curSceneFile]);
 	}
-	else if( numModelFiles && !testMode )
+	else if( numSH3ModelFiles && !testMode )
 	{
 		sh2_mode = false;
 		sh3_mode = true;
@@ -675,7 +452,7 @@ debugMode = true;
 		sh2_sceneMode = false;
 		sh3_sceneMode = false;
 		sh3_modelMode = true;
-		Load_SH3_ModelFile( modelFiles[curModelFile] );
+		Load_SH3_ModelFile( SH3ModelFiles[curModelFile]);
 	}
 	else if( numSH4Files && !testMode )
 	{
@@ -688,7 +465,7 @@ debugMode = true;
 		sh2_sceneMode = false;
 		sh3_sceneMode = false;
 		sh3_modelMode = true;
-		Load_SH4_File( allSH4Files[curSH4File] );
+		Load_SH4_File( SH4Files[curSH4File]);
 	}
 
 
@@ -890,7 +667,7 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 					if (GetAsyncKeyState(VK_INSERT) & 0x8000){  if(modelPart < 1) modelPart = testAct.numPrimitives; modelPart--; throttleOn();}
 				}
 
-				if( ( numSH2SceneDirs || numSH2ModelDirs ) && GetAsyncKeyState(VK_F9) & 0x8000 && !sh2_mode && !testMode )
+				if( ( numSH2SceneFiles || numSH2ModelFiles ) && GetAsyncKeyState(VK_F9) & 0x8000 && !sh2_mode && !testMode )
 				{
 					sh2_mode = true;
 					sh3_mode = false;
@@ -899,12 +676,12 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 					if( debugMode )LogFile(ERROR_LOG,"WM_PAINT - Switching Mode to SH2 - About to delete SH3 Tex");
 										dirLooped = 0;
 					if( model_mode )
-						Load_SH2_ModelFile( modelSH2Dirs[ curSH2ModelDir ] );
+						Load_SH2_ModelFile( SH2ModelFiles[ curSH2ModelDir ] );
 					else
-						Load_SH2_SceneFile( sceneSH2Dirs[curSH2SceneDir] );
+						Load_SH2_SceneFile( SH2SceneFiles[curSH2SceneDir] );
 					throttleOn();
 				}
-				else if( ( numSceneFiles || numModelFiles ) && GetAsyncKeyState(VK_F10) & 0x8000 && !sh3_mode && !testMode )
+				else if( ( numSH3SceneFiles || numSH3ModelFiles ) && GetAsyncKeyState(VK_F10) & 0x8000 && !sh3_mode && !testMode )
 				{
 					if( debugMode )LogFile(ERROR_LOG,"WM_PAINT - Switching Mode to SH3 - About to delete SH2/4 Tex");
 					DeleteAllData( );
@@ -913,12 +690,12 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 					sh3_mode = true;
 					sh4_mode = false;
 					if( model_mode )
-						Load_SH3_ModelFile( modelFiles[ curModelFile ] );
+						Load_SH3_ModelFile( SH3ModelFiles[ curModelFile ]);
 					else
-						Load_SH3_SceneFile( sceneFiles[curSceneFile] );
+						Load_SH3_SceneFile( SH3SceneFiles[curSceneFile]);
 					throttleOn();
 				}
-				else if( numModelFiles && GetAsyncKeyState(VK_F11) & 0x8000 && !sh3_modelMode && !testMode )
+				else if( numSH3ModelFiles && GetAsyncKeyState(VK_F11) & 0x8000 && !sh3_modelMode && !testMode )
 				{
 					if( debugMode )LogFile(ERROR_LOG,"WM_PAINT - Switching Mode to SH4 - About to delete SH2/3 Tex");
 					DeleteAllData( );
@@ -927,7 +704,7 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 					sh3_mode = false;
 					sh4_mode = true;
 				
-					Load_SH4_File( allSH4Files[ curSH4File] );
+					Load_SH4_File( SH4Files[ curSH4File]);
 					throttleOn();
 				}
 
@@ -940,15 +717,15 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 					if( sh2_mode )
 					{
 						if( debugMode )LogFile(ERROR_LOG,"WM_PAINT - Switching to SCENE MODE - Loading SH2 Scene");
-					//	CleanDirectoryFilelist( numSH2ModelFiles, &modelSH2Files );
+					//	CleanDirectoryFilelist( numSH2ModelFiles, &SH2ModelFiles );
 					//	CleanDirectoryFilelist( numSH2AnimFiles, &animSH2Files );
-					//	CleanDirectoryFilelist( numSH2SceneFiles, &sceneSH2Files );
-						Load_SH2_SceneFile( sceneSH2Dirs[curSH2SceneDir] );
+					//	CleanDirectoryFilelist( numSH2SceneFiles, &SH2SceneFiles );
+						Load_SH2_SceneFile( SH2SceneFiles[curSH2SceneDir] );
 					}
 					else if( sh3_mode )
 					{
 						if( debugMode )LogFile(ERROR_LOG,"WM_PAINT - Switching to SCENE MODE - Loading SH3 Scene");
-						Load_SH3_SceneFile( sceneFiles[curSceneFile] );
+						Load_SH3_SceneFile( SH3SceneFiles[curSceneFile] );
 					}
 					throttleOn();
 				}
@@ -961,12 +738,12 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 					if( sh2_mode )
 					{
 						if( debugMode )LogFile(ERROR_LOG,"WM_PAINT - Switching to MODEL MODE - Loding SH2 Model");
-						Load_SH2_ModelFile( modelSH2Dirs[curSH2ModelDir] );
+						Load_SH2_ModelFile( SH2ModelFiles[curSH2ModelDir] );
 					}
 					else if( sh3_mode )
 					{
 						if( debugMode )LogFile(ERROR_LOG,"WM_PAINT - Switching to MODEL MODE - Loding SH3 Model");
-						Load_SH3_ModelFile( modelFiles[curModelFile] );
+						Load_SH3_ModelFile( SH3ModelFiles[curModelFile]);
 					}
 					throttleOn();
 				}
@@ -1122,7 +899,7 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 						if( modelPart > -1 )
 							sprintf(statStr,"No Animation For Model   ModelPart: %ld of %ld",curFrame+1,testActAnim.m_lNumSets,modelPart,testAct.numPrimitives-1);
 						else
-							printText(0, 668, 0,"No Animation For Model", &white );
+							printText(0, 668, 0, (char*)"No Animation For Model", &white );
 					}
 
 				}
@@ -1281,7 +1058,7 @@ glDisable( GL_TEXTURE_2D );
 			//sprintf(statStr,"Dump Scene: %s   Dump Model: %s   Debug Mode: %s",(dumpScene)?"Yes":"No",(dumpModel)?"Yes":"No",(debugMode)?"Yes":"No");
 			//printText(0,728,0,statStr,&white);
 			if( displayMatrix && !model_mode )
-				printText( 0, 688, 0, "Displaying Matricies", &white );
+				printText( 0, 688, 0, (char*)"Displaying Matricies", &white );
 			
 			if( sh2_mode )
 				sprintf(statStr,"Tex In Mem: %3.3ld",sh2TexList.CountTexInMem( ));
@@ -1289,7 +1066,7 @@ glDisable( GL_TEXTURE_2D );
 				sprintf(statStr,"Tex In Mem: %3.3ld",textureMgr.textures.size());
 			printText(0,728,0,statStr,&white);
 
-			printText(0,10,0,"Hold 'HOME' For Help",&white);
+			printText(0,10,0, (char*)"Hold 'HOME' For Help",&white);
 
 			if( sh2_mode && scene_mode && !testMode )
 			{
@@ -1324,8 +1101,8 @@ glDisable( GL_TEXTURE_2D );
 				printText(300,520,0,statStr,&white);
 				if( g_bHasAnim )
 				{
-					printText(300,500,0,"F5  - Decrease Frame Num",&white);
-					printText(300,480,0,"F6  - Increase Frame Num",&white);
+					printText(300,500,0, (char*)"F5  - Decrease Frame Num",&white);
+					printText(300,480,0, (char*)"F6  - Increase Frame Num",&white);
 				}
 				else
 				{
@@ -1479,9 +1256,12 @@ int init( void )
 				else if(strncmp(command,"d_refresh",9)==0)			refreshRate=atoi(option);
 				else if(strncmp(command,"d_fullscreen",12)==0)		fullScreen=atoi(option);
 				else if(strncmp(command,"o_num_scenes",12)==0)		sceneLimit=atoi(option);
-				else if(strncmp(command,"o_sh2_data_dir",14)==0)	sprintf(baseSH2dir,"%.256s",option);
+				/*else if(strncmp(command,"o_sh2_data_dir",14)==0)	sprintf(baseSH2dir,"%.256s",option);
 				else if(strncmp(command,"o_sh3_data_dir",14)==0)	sprintf(baseSH3dir,"%.256s",option);
-				else if(strncmp(command,"o_sh4_data_dir",14)==0)	sprintf(baseSH4dir,"%.256s",option);
+				else if(strncmp(command,"o_sh4_data_dir",14)==0)	sprintf(baseSH4dir,"%.256s",option);*/
+				else if(strncmp(command,"o_sh2_data_dir",14)==0)	baseSH2dir = option;
+				else if(strncmp(command,"o_sh3_data_dir",14)==0)	baseSH3dir = option;
+				else if(strncmp(command,"o_sh4_data_dir",14)==0)	baseSH4dir = option;
 				else if(strncmp(command,"o_sh2_anim",10)==0)		sh2_anim = (atoi(option) != 0 );
 				else if(strncmp(command,"d_zdist",7)==0)			zDist = (float)atof(option);
 				else if(strncmp(command,"o_debug_render",14)==0)	debugRender = (atoi(option) != 0);
@@ -1782,7 +1562,7 @@ void DeleteSH3Scene( )
 	{
 //		LogFile( ERROR_LOG, "Does this work?");
 //		LogFile(ERROR_LOG,"    Delete Tex %d - [%s]", k,textureMgr.textures[k-1].texName.c_str());
-		textureMgr.DeleteTex( k - 1 );
+		textureMgr.DeleteTex( (int)(k - 1) );
 	}
 //LogFile( ERROR_LOG, "DeleteSH3Scene - Deleted Tex, starting scene data");
 	if( testScene2 )
@@ -1857,21 +1637,21 @@ void DeleteAllData( )
 
 void DeleteFilesysData( )
 {
-	CleanDirectoryFilelist( numSH2SceneFiles, &sceneSH2Files );
+	CleanDirectoryFilelist( SH2SceneFiles );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH2 scene files");
-	CleanDirectoryFilelist( numSH2SceneDirs, &sceneSH2Dirs );
+	CleanDirectoryFilelist( SH2SceneFiles );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH2 scene dirs");
-	CleanDirectoryFilelist( numSceneFiles, &sceneFiles );
+	CleanDirectoryFilelist( SH3SceneFiles );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH3 Scene files");
-	CleanDirectoryFilelist( numModelFiles, &modelFiles );
+	CleanDirectoryFilelist( SH3ModelFiles );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH3 Model files");
-	CleanDirectoryFilelist( numSH2ModelFiles, &modelSH2Files );
+	CleanDirectoryFilelist( SH2ModelFiles );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH2 Model files");
-	CleanDirectoryFilelist( numSH2ModelDirs, &modelSH2Dirs );
+	CleanDirectoryFilelist( SH2ModelFiles );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH2 Model dirs ");
-	CleanDirectoryFilelist( numSH4Files, &allSH4Files );
+	CleanDirectoryFilelist( SH4Files );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH4 files");
-	CleanDirectoryFilelist( numSH2AnimFiles, &animSH2Files );
+	CleanDirectoryFilelist( SH2AnimFiles );
 	if( debugMode )LogFile( ERROR_LOG, "DeleteAllData( ) - SH2 Anim files");
 
 }
@@ -1969,7 +1749,7 @@ void endText()
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-void printText(float x,float y,float z,char *text,rgbf *color)
+void printText(float x,float y,float z,const char *text,rgbf *color)
 {
 	startText();
 	glColor4f(color->r,color->g,color->b,1.0);
@@ -2018,287 +1798,313 @@ void throttleSetRate( int rate )
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-int GetDirectoryFilelist(filesystem::path& fileDirExt, string_view fileExt, vector<filesystem::path>& foundFileNames)
-{
-	//vector< filesystem::path > fileList;
-	WIN32_FIND_DATA fileData;	
-	HANDLE fileHandle;
-	//int numFiles;
-	std::string searchStr[512];
-
-	if (!fileDirExt.empty() && fileDirExt.string()[fileDirExt.string().length() - 1] != '\\')
-		//sprintf( searchStr, "%s\\%s",fileDirExt->string().c_str(), fileExt);
-		searchStr->append(std::format("%s\\%s", fileDirExt.string().c_str(), fileExt));
-	else
-		//sprintf( searchStr,  "%s%s",fileDirExt->string().c_str(), fileExt );
-		searchStr->append(std::format("%s%s", fileDirExt.string().c_str(), fileExt));
-
-	if((fileHandle = FindFirstFile(searchStr->c_str(), &fileData)) != INVALID_HANDLE_VALUE)
-	{
-		do
-		{
-			//fileList.push_back( string( fileDirExt ) + string(fileData.cFileName) );
-			foundFileNames.push_back(fileDirExt/fileData.cFileName);
-		}
-		while(FindNextFile(fileHandle, &fileData));
-		FindClose(fileHandle);
-	}
-	else
-	{
-		LogFile(ERROR_LOG,"GetDirectoryFilelist( ) - ERROR: Unable to find any files that match the search path [%s]", searchStr);
-		return 0;
-	}
-
-	/*if( foundFileName.size() = 0)
-		return foundFileName.size( );
-	if( !foundFileName.size( ) )
-		return 0;*/
-//LogFile(TEST_LOG,"Array     : Addr: 0x%08x\t PRE",(*foundFileName));
-//LogFile(TEST_LOG,"----------------GetDirectoryFilelist-------------------");
-//LogFile(TEST_LOG,"CREATING: Dest-  foundFileName = 0x%08x", foundFileName);
-//LogFile(TEST_LOG,"CREATING: Pre - *foundFileName = 0x%08x",*foundFileName);
-//LogFile(TEST_LOG,"CHECK: Address of sceneSH2Files= 0x%08x",&sceneSH2Files);
-//LogFile(TEST_LOG,"CHECK: CurVal  of sceneSH2Files= 0x%08x",sceneSH2Files);
-	//*foundFileName = new char *[ fileList.size( ) + 1 ];
-//LogFile(TEST_LOG,"Array     : Addr: 0x%08x\t POST",(*foundFileName));
-//LogFile(TEST_LOG,"CREATING: Post- *foundFileName = 0x%08x",*foundFileName);
-//LogFile(TEST_LOG,"CHECK: CurVal  of sceneSH2Files= 0x%08x",sceneSH2Files);	
-	/*for( numFiles = 0; numFiles < fileList.size( ); numFiles ++ )
-	{
-		(*foundFileName)[ numFiles ] = new char[ fileList[ numFiles ].length( ) + 1 ];
-		strcpy( (*foundFileName)[ numFiles ], fileList[ numFiles ].c_str() );*/
-//LogFile(TEST_LOG,"CREATING: %ld  - *foundFileName[%2.2ld] = 0x%08x\tval[%s]\tlen: %ld\tstrlen: %ld",numFiles,numFiles,(*foundFileName)[numFiles],(*foundFileName)[numFiles],fileList[ numFiles ].length(),strlen(fileList[ numFiles ].c_str()));
-		/*{
-			int k1;
-			LogFile(ERROR_LOG,"CHECK: Array length: %ld",sizeof((*foundFileName)[ numFiles ])/sizeof((*foundFileName)[ numFiles ][0]));
-			LogFile(TEST_LOG,"Array[%3d]: Base Addr: 0x%08x\tChar Addr: 0x%08x",numFiles,&((*foundFileName)[ numFiles ]),(*foundFileName)[ numFiles ]);
-			LogFile(ERROR_LOG,"CHECK: length: %d   strlen: %d",fileList[ numFiles ].length(),strlen((*foundFileName)[numFiles]));
-			for( k1 = 0; k1 < fileList[ numFiles ].length( ); k1++ )
-				LogFile(ERROR_LOG,"%d\t[%c]\t Addr: 0x%08x",k1,(*foundFileName)[ numFiles ][k1],&((*foundFileName)[ numFiles ][k1]));
-		}*/
-
-	//}
-
-	return foundFileNames.size();
-}
+//int GetDirectoryFilelist(filesystem::path& fileDirExt, string_view fileExt, vector<filesystem::path>& foundFileNames)
+//{
+//	//vector< filesystem::path > fileList;
+//	WIN32_FIND_DATA fileData;	
+//	HANDLE fileHandle;
+//	//int numFiles;
+//	std::string searchStr[512];
+//
+//	if (!fileDirExt.empty() && fileDirExt.string()[fileDirExt.string().length() - 1] != '\\')
+//		//sprintf( searchStr, "%s\\%s",fileDirExt->string().c_str(), fileExt);
+//		searchStr->append(std::format("%s\\%s", fileDirExt.string().c_str(), fileExt));
+//	else
+//		//sprintf( searchStr,  "%s%s",fileDirExt->string().c_str(), fileExt );
+//		searchStr->append(std::format("%s%s", fileDirExt.string().c_str(), fileExt));
+//
+//	if((fileHandle = FindFirstFile(searchStr->c_str(), &fileData)) != INVALID_HANDLE_VALUE)
+//	{
+//		do
+//		{
+//			//fileList.push_back( string( fileDirExt ) + string(fileData.cFileName) );
+//			foundFileNames.push_back(fileDirExt/fileData.cFileName);
+//		}
+//		while(FindNextFile(fileHandle, &fileData));
+//		FindClose(fileHandle);
+//	}
+//	else
+//	{
+//		LogFile(ERROR_LOG,"GetDirectoryFilelist( ) - ERROR: Unable to find any files that match the search path [%s]", searchStr);
+//		return 0;
+//	}
+//
+//	/*if( foundFileName.size() = 0)
+//		return foundFileName.size( );
+//	if( !foundFileName.size( ) )
+//		return 0;*/
+////LogFile(TEST_LOG,"Array     : Addr: 0x%08x\t PRE",(*foundFileName));
+////LogFile(TEST_LOG,"----------------GetDirectoryFilelist-------------------");
+////LogFile(TEST_LOG,"CREATING: Dest-  foundFileName = 0x%08x", foundFileName);
+////LogFile(TEST_LOG,"CREATING: Pre - *foundFileName = 0x%08x",*foundFileName);
+////LogFile(TEST_LOG,"CHECK: Address of SH2SceneFiles= 0x%08x",&SH2SceneFiles);
+////LogFile(TEST_LOG,"CHECK: CurVal  of SH2SceneFiles= 0x%08x",SH2SceneFiles);
+//	//*foundFileName = new char *[ fileList.size( ) + 1 ];
+////LogFile(TEST_LOG,"Array     : Addr: 0x%08x\t POST",(*foundFileName));
+////LogFile(TEST_LOG,"CREATING: Post- *foundFileName = 0x%08x",*foundFileName);
+////LogFile(TEST_LOG,"CHECK: CurVal  of SH2SceneFiles= 0x%08x",SH2SceneFiles);	
+//	/*for( numFiles = 0; numFiles < fileList.size( ); numFiles ++ )
+//	{
+//		(*foundFileName)[ numFiles ] = new char[ fileList[ numFiles ].length( ) + 1 ];
+//		strcpy( (*foundFileName)[ numFiles ], fileList[ numFiles ].c_str() );*/
+////LogFile(TEST_LOG,"CREATING: %ld  - *foundFileName[%2.2ld] = 0x%08x\tval[%s]\tlen: %ld\tstrlen: %ld",numFiles,numFiles,(*foundFileName)[numFiles],(*foundFileName)[numFiles],fileList[ numFiles ].length(),strlen(fileList[ numFiles ].c_str()));
+//		/*{
+//			int k1;
+//			LogFile(ERROR_LOG,"CHECK: Array length: %ld",sizeof((*foundFileName)[ numFiles ])/sizeof((*foundFileName)[ numFiles ][0]));
+//			LogFile(TEST_LOG,"Array[%3d]: Base Addr: 0x%08x\tChar Addr: 0x%08x",numFiles,&((*foundFileName)[ numFiles ]),(*foundFileName)[ numFiles ]);
+//			LogFile(ERROR_LOG,"CHECK: length: %d   strlen: %d",fileList[ numFiles ].length(),strlen((*foundFileName)[numFiles]));
+//			for( k1 = 0; k1 < fileList[ numFiles ].length( ); k1++ )
+//				LogFile(ERROR_LOG,"%d\t[%c]\t Addr: 0x%08x",k1,(*foundFileName)[ numFiles ][k1],&((*foundFileName)[ numFiles ][k1]));
+//		}*/
+//
+//	//}
+//
+//	return foundFileNames.size();
+//}
 
 
 //----------------------------------------------------------------------------/
 //- CleanDirectoryFilelist                                                   -/
 //-     Cleans a single directory list of files                              -/
 //----------------------------------------------------------------------------/
-void CleanDirectoryFilelist(int numNames, char ***pppFileName)
+void CleanDirectoryFilelist(vector<filesystem::path>& filePaths)
 {
-	int k;
-	char ** ppFiles, *pFile;
-	if( *pppFileName == NULL || numNames == 0 )
-		return;
-	
-	ppFiles = *pppFileName;
-//	LogFile(ERROR_LOG,"TEST: The address of the char** array is: 0x%08x",pppFileName);
-//	LogFile(ERROR_LOG,"TEST: The address of the char* array is: 0x%08x or 0x%08x",*pppFileName,ppFiles);
-	for( k = numNames - 1; k >= 0; k-- )
-	{
-		pFile = ppFiles[k];
-//		LogFile(ERROR_LOG,"Point 5.1.%d of %d - Addr: 0x%08x\tString [%s]",k,numNames,pFile,pFile);
-		delete [] ppFiles[k];
-//		LogFile(ERROR_LOG,"Point 5.1.%d.2",k);
-		pFile = NULL;
-		//SAFEDELETE( pFile );
-	}
-//	LogFile(ERROR_LOG,"Point 5.2");
+	filePaths.clear();
 
-	SAFEDELETE( ppFiles );
-//	LogFile(ERROR_LOG,"Point 5.3");
+//	int k;
+//	char ** ppFiles, *pFile;
+//	if( *pppFileName == NULL || numNames == 0 )
+//		return;
+//	
+//	ppFiles = *pppFileName;
+////	LogFile(ERROR_LOG,"TEST: The address of the char** array is: 0x%08x",pppFileName);
+////	LogFile(ERROR_LOG,"TEST: The address of the char* array is: 0x%08x or 0x%08x",*pppFileName,ppFiles);
+//	for( k = numNames - 1; k >= 0; k-- )
+//	{
+//		pFile = ppFiles[k];
+////		LogFile(ERROR_LOG,"Point 5.1.%d of %d - Addr: 0x%08x\tString [%s]",k,numNames,pFile,pFile);
+//		delete [] ppFiles[k];
+////		LogFile(ERROR_LOG,"Point 5.1.%d.2",k);
+//		pFile = NULL;
+//		//SAFEDELETE( pFile );
+//	}
+////	LogFile(ERROR_LOG,"Point 5.2");
+//
+//	SAFEDELETE( ppFiles );
+////	LogFile(ERROR_LOG,"Point 5.3");
 }
 
 
-
-	
 //----------------------------------------------------------------------------/
-//-                                                                          -/
-//-                                                                          -/
+//- Name: GetDirectoryFileList                                               -/
+//- Desc: The new and more unified version of GetDirectoryFileList.			 -/
+//	It uses a regex string to search for a specific kind of asset			 -/
 //----------------------------------------------------------------------------/
-int GetSH2DirectoryFilelist(filesystem::path& fileDirExt, string& fileExt, vector<filesystem::path>& foundFileNames, bool getFiles )
+int GetDirectoryFileList(const filesystem::path& rootDataDir, const string& fileExtRegexPattern, vector<filesystem::path>& foundFileNames)
 {
-	int numFiles;
+	regex::flag_type flags = regex::icase;
+	regex rx(fileExtRegexPattern, flags);
+	filesystem::directory_options opts = filesystem::directory_options::skip_permission_denied;
+
+	for (const filesystem::directory_entry& e : filesystem::recursive_directory_iterator(rootDataDir, opts))
+	{
+		if (!e.is_regular_file()) continue;
+
+		const string name = e.path().filename().string();
+		if (regex_match(name, rx))
+			foundFileNames.emplace_back(e.path());
+	}
+
+	return (int)foundFileNames.size();
+}
+	
+
+////----------------------------------------------------------------------------/
+////-                                                                          -/
+////-                                                                          -/
+////----------------------------------------------------------------------------/
+//int GetSH2DirectoryFilelist(filesystem::path& fileDirExt, string& fileExt, vector<filesystem::path>& foundFileNames, bool getFiles )
+//{
+//	int numFiles;
+////	WIN32_FIND_DATA fileData;	
+////	HANDLE fileHandle;
+//	string searchStr;
+//
+//	//if( fileDirExt != NULL && fileDirExt[ strlen( fileDirExt ) - 1 ] != '\\' )
+//	if (!fileDirExt.empty() && fileDirExt.native().back() != '\\')
+//		//sprintf( searchStr, "%s\\",fileDirExt );
+//		searchStr = format("%s\\", fileDirExt.string());
+//	else
+//		//sprintf( searchStr, "%s",fileDirExt );
+//		searchStr = format("%s", fileDirExt.string());
+//
+//	if( getFiles )
+//		GetSH2DirectoryFilelistAux( searchStr, fileExt, foundFileNames );
+//	else
+//		GetSH2DirectoryListAux( searchStr, fileExt, foundFileNames );
+//
+//	if( foundFileName == NULL )
+//		return foundFileNames.size( );
+//
+////LogFile(TEST_LOG,"+-+-+-+-+-+-+-+-GetSH2DirectoryFilelist-+-+-+-+-+-+-+-+-+");
+////LogFile(TEST_LOG,"CREATING: Dest-  foundFileName = 0x%08x", foundFileName);
+////LogFile(TEST_LOG,"CREATING: Pre - *foundFileName = 0x%08x",*foundFileName);
+//	*foundFileName = new char *[ foundFileNames.size( ) ];
+////LogFile(TEST_LOG,"CREATING: Post- *foundFileName = 0x%08x",*foundFileName);
+//
+//	for( numFiles = 0; numFiles < foundFileNames.size( ); numFiles ++ )
+//	{
+//		(*foundFileName)[ numFiles ] = new char[ foundFileNames[ numFiles ].length( ) + 1 ];
+//		strcpy( (*foundFileName)[ numFiles ], foundFileNames[ numFiles ].c_str() );
+////LogFile(TEST_LOG,"CREATING: %ld  - *foundFileName[%2.2ld] = 0x%08x\tval[%s]",numFiles,numFiles,(*foundFileName)[numFiles],(*foundFileName)[numFiles]);
+//	}
+//
+//	return numFiles;
+//
+//}
+
+////----------------------------------------------------------------------------/
+////-                                                                          -/
+////-                                                                          -/
+////----------------------------------------------------------------------------/
+//void GetSH2DirectoryListAux(char *pDirName,char *fileExt, vector< string > & tempList )
+//{
 //	WIN32_FIND_DATA fileData;	
 //	HANDLE fileHandle;
-	char searchStr[512];
-
-	//if( fileDirExt != NULL && fileDirExt[ strlen( fileDirExt ) - 1 ] != '\\' )
-	if (!fileDirExt.empty() && fileDirExt.native().back() != '\\')
-		sprintf( searchStr, "%s\\",fileDirExt );
-	else
-		sprintf( searchStr, "%s",fileDirExt );
-
-	if( getFiles )
-		GetSH2DirectoryFilelistAux( searchStr, fileExt, foundFileNames );
-	else
-		GetSH2DirectoryListAux( searchStr, fileExt, foundFileNames );
-
-	if( foundFileName == NULL )
-		return foundFileNames.size( );
-
-//LogFile(TEST_LOG,"+-+-+-+-+-+-+-+-GetSH2DirectoryFilelist-+-+-+-+-+-+-+-+-+");
-//LogFile(TEST_LOG,"CREATING: Dest-  foundFileName = 0x%08x", foundFileName);
-//LogFile(TEST_LOG,"CREATING: Pre - *foundFileName = 0x%08x",*foundFileName);
-	*foundFileName = new char *[ foundFileNames.size( ) ];
-//LogFile(TEST_LOG,"CREATING: Post- *foundFileName = 0x%08x",*foundFileName);
-
-	for( numFiles = 0; numFiles < foundFileNames.size( ); numFiles ++ )
-	{
-		(*foundFileName)[ numFiles ] = new char[ foundFileNames[ numFiles ].length( ) + 1 ];
-		strcpy( (*foundFileName)[ numFiles ], foundFileNames[ numFiles ].c_str() );
-//LogFile(TEST_LOG,"CREATING: %ld  - *foundFileName[%2.2ld] = 0x%08x\tval[%s]",numFiles,numFiles,(*foundFileName)[numFiles],(*foundFileName)[numFiles]);
-	}
-
-	return numFiles;
-
-}
-
-//----------------------------------------------------------------------------/
-//-                                                                          -/
-//-                                                                          -/
-//----------------------------------------------------------------------------/
-void GetSH2DirectoryListAux(char *pDirName,char *fileExt, vector< string > & tempList )
-{
-	WIN32_FIND_DATA fileData;	
-	HANDLE fileHandle;
-	char dirName[512];
-	char fileName[512];
-	bool addSlash = false;
-
-	if( pDirName[ strlen( pDirName ) - 1 ] == '\\' )
-	{
-		addSlash = false;
-		sprintf( dirName,"%s*",pDirName );
-	}
-	else
-	{
-		addSlash = true;
-		sprintf( dirName, "%s\\*",pDirName );
-	}
-
-	if((fileHandle = FindFirstFile( dirName, &fileData)) != INVALID_HANDLE_VALUE )
-	{
-		do
-		{
-			if( fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY && fileData.cFileName[0] != '.' )
-			{
-				if( addSlash )
-					sprintf( dirName, "%s\\%s",pDirName, fileData.cFileName );
-				else
-					sprintf( dirName, "%s%s",pDirName, fileData.cFileName );
-
-				if( debugMode )LogFile( ERROR_LOG, "GetSH2DirectoryListAux( %s ) - Switching to directory '%s'",pDirName, dirName );
-
-				GetSH2DirectoryListAux( dirName, fileExt, tempList );
-
-				if( addSlash )
-					sprintf( dirName, "%s\\*",pDirName );
-				else
-					sprintf( dirName, "%s*",pDirName );
-			}
-			else
-			{
-				if( strncmp( &( fileData.cFileName[ strlen( fileData.cFileName ) - strlen( fileExt ) ] ), fileExt, strlen( fileExt ) ) == 0 )
-				{
-					if( addSlash )
-						sprintf( fileName, "%s\\",pDirName );
-					else
-						sprintf( fileName, "%s",pDirName );
-
-					tempList.push_back( string( fileName ) );
-					FindClose(fileHandle);
-					return;
-				}
-			}
-			
-		}
-		while(FindNextFile(fileHandle, &fileData));
-		FindClose(fileHandle);
-	}
-	else
-	{
-		LogFile(ERROR_LOG,"GetSH2DirectoryFilelistAux( ) - ERROR: Unable to find any files that match the search path [%s]", dirName);
-	}
-
-}
+//	char dirName[512];
+//	char fileName[512];
+//	bool addSlash = false;
+//
+//	if( pDirName[ strlen( pDirName ) - 1 ] == '\\' )
+//	{
+//		addSlash = false;
+//		sprintf( dirName,"%s*",pDirName );
+//	}
+//	else
+//	{
+//		addSlash = true;
+//		sprintf( dirName, "%s\\*",pDirName );
+//	}
+//
+//	if((fileHandle = FindFirstFile( dirName, &fileData)) != INVALID_HANDLE_VALUE )
+//	{
+//		do
+//		{
+//			if( fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY && fileData.cFileName[0] != '.' )
+//			{
+//				if( addSlash )
+//					sprintf( dirName, "%s\\%s",pDirName, fileData.cFileName );
+//				else
+//					sprintf( dirName, "%s%s",pDirName, fileData.cFileName );
+//
+//				if( debugMode )LogFile( ERROR_LOG, "GetSH2DirectoryListAux( %s ) - Switching to directory '%s'",pDirName, dirName );
+//
+//				GetSH2DirectoryListAux( dirName, fileExt, tempList );
+//
+//				if( addSlash )
+//					sprintf( dirName, "%s\\*",pDirName );
+//				else
+//					sprintf( dirName, "%s*",pDirName );
+//			}
+//			else
+//			{
+//				if( strncmp( &( fileData.cFileName[ strlen( fileData.cFileName ) - strlen( fileExt ) ] ), fileExt, strlen( fileExt ) ) == 0 )
+//				{
+//					if( addSlash )
+//						sprintf( fileName, "%s\\",pDirName );
+//					else
+//						sprintf( fileName, "%s",pDirName );
+//
+//					tempList.push_back( string( fileName ) );
+//					FindClose(fileHandle);
+//					return;
+//				}
+//			}
+//			
+//		}
+//		while(FindNextFile(fileHandle, &fileData));
+//		FindClose(fileHandle);
+//	}
+//	else
+//	{
+//		LogFile(ERROR_LOG,"GetSH2DirectoryFilelistAux( ) - ERROR: Unable to find any files that match the search path [%s]", dirName);
+//	}
+//
+//}
 	
-//----------------------------------------------------------------------------/
-//-                                                                          -/
-//-                                                                          -/
-//----------------------------------------------------------------------------/
-void GetSH2DirectoryFilelistAux(char *pDirName,char *fileExt, vector< string > & tempList )
-{
-	WIN32_FIND_DATA fileData;	
-	HANDLE fileHandle;
-	char dirName[512];
-	char fileName[512];
-	bool addSlash = false;
-
-	if( pDirName[ strlen( pDirName ) - 1 ] == '\\' )
-	{
-		addSlash = false;
-		sprintf( dirName,"%s*",pDirName );
-	}
-	else
-	{
-		addSlash = true;
-		sprintf( dirName, "%s\\*",pDirName );
-	}
-
-	if((fileHandle = FindFirstFile( dirName, &fileData)) != INVALID_HANDLE_VALUE )
-	{
-		do
-		{
-			if( fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY && fileData.cFileName[0] != '.' )
-			{
-				if( strncmp( fileData.cFileName, "demo", 4 ) == 0 )
-				{
-					if( debugMode )LogFile( ERROR_LOG, "GetSH2DirectoryFilelistAux( ) - NOTE: Ignoring demo dirs '%s'",dirName );
-					continue;
-				}
-
-				if( addSlash )
-					sprintf( dirName, "%s\\%s",pDirName, fileData.cFileName );
-				else
-					sprintf( dirName, "%s%s",pDirName, fileData.cFileName );
-
-				if( debugMode )LogFile( ERROR_LOG, "GetSH2DirectoryFilelistAux( %s ) - Switching to directory '%s'",pDirName, dirName );
-
-				GetSH2DirectoryFilelistAux( dirName, fileExt, tempList );
-
-				if( addSlash )
-					sprintf( dirName, "%s\\*",pDirName );
-				else
-					sprintf( dirName, "%s*",pDirName );
-			}
-			else
-			{
-				if( strncmp( &( fileData.cFileName[ strlen( fileData.cFileName ) - strlen( fileExt ) ] ), fileExt, strlen( fileExt ) ) == 0 )
-				{
-					if( addSlash )
-						sprintf( fileName, "%s\\%s",pDirName, fileData.cFileName );
-					else
-						sprintf( fileName, "%s%s",pDirName, fileData.cFileName );
-
-					tempList.push_back( string( fileName ) );
-					//FindClose(fileHandle);
-				}
-			}
-			
-		}
-		while(FindNextFile(fileHandle, &fileData));
-		FindClose(fileHandle);
-	}
-	else
-	{
-		LogFile(ERROR_LOG,"GetSH2DirectoryFilelistAux( ) - ERROR: Unable to find any files that match the search path [%s]", dirName);
-	}
-
-}
+////----------------------------------------------------------------------------/
+////-                                                                          -/
+////-                                                                          -/
+////----------------------------------------------------------------------------/
+//void GetSH2DirectoryFilelistAux(string& pDirName, string& fileExt, vector<filesystem::path>& tempList )
+//{
+//	WIN32_FIND_DATA fileData;	
+//	HANDLE fileHandle;
+//	char dirName[512];
+//	char fileName[512];
+//	bool addSlash = false;
+//
+//	if( pDirName[ strlen( pDirName ) - 1 ] == '\\' )
+//	{
+//		addSlash = false;
+//		sprintf( dirName,"%s*",pDirName );
+//	}
+//	else
+//	{
+//		addSlash = true;
+//		sprintf( dirName, "%s\\*",pDirName );
+//	}
+//
+//	if((fileHandle = FindFirstFile( dirName, &fileData)) != INVALID_HANDLE_VALUE )
+//	{
+//		do
+//		{
+//			if( fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY && fileData.cFileName[0] != '.' )
+//			{
+//				if( strncmp( fileData.cFileName, "demo", 4 ) == 0 )
+//				{
+//					if( debugMode )LogFile( ERROR_LOG, "GetSH2DirectoryFilelistAux( ) - NOTE: Ignoring demo dirs '%s'",dirName );
+//					continue;
+//				}
+//
+//				if( addSlash )
+//					sprintf( dirName, "%s\\%s",pDirName, fileData.cFileName );
+//				else
+//					sprintf( dirName, "%s%s",pDirName, fileData.cFileName );
+//
+//				if( debugMode )LogFile( ERROR_LOG, "GetSH2DirectoryFilelistAux( %s ) - Switching to directory '%s'",pDirName, dirName );
+//
+//				GetSH2DirectoryFilelistAux( dirName, fileExt, tempList );
+//
+//				if( addSlash )
+//					sprintf( dirName, "%s\\*",pDirName );
+//				else
+//					sprintf( dirName, "%s*",pDirName );
+//			}
+//			else
+//			{
+//				if( strncmp( &( fileData.cFileName[ strlen( fileData.cFileName ) - strlen( fileExt ) ] ), fileExt, strlen( fileExt ) ) == 0 )
+//				{
+//					if( addSlash )
+//						sprintf( fileName, "%s\\%s",pDirName, fileData.cFileName );
+//					else
+//						sprintf( fileName, "%s%s",pDirName, fileData.cFileName );
+//
+//					tempList.push_back( string( fileName ) );
+//					//FindClose(fileHandle);
+//				}
+//			}
+//			
+//		}
+//		while(FindNextFile(fileHandle, &fileData));
+//		FindClose(fileHandle);
+//	}
+//	else
+//	{
+//		LogFile(ERROR_LOG,"GetSH2DirectoryFilelistAux( ) - ERROR: Unable to find any files that match the search path [%s]", dirName);
+//	}
+//
+//}
 	
 
 
@@ -2307,21 +2113,21 @@ void GetSH2DirectoryFilelistAux(char *pDirName,char *fileExt, vector< string > &
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-void Load_SH2_SceneFile( char *fileToLoad )
+void Load_SH2_SceneFile(filesystem::path& fileToLoad )
 {
 	int k;
 	int numLoaded;
 	bool doTrans, looped = false;
 	bool origDebugMode = debugMode;
-	char nameLen = strlen( fileToLoad );
+	//char nameLen = strlen( fileToLoad );
 //	long startIndex;
 	int badLoopCounter = 0;
 
 
-	if( !fileToLoad || dirLooped > 1 )
+	if( dirLooped > 1 )
 		return;
 
-	if( nameLen != 0 && nameLen > 2 )
+	/*if( nameLen != 0 && nameLen > 2 )
 	{
 		if( fileToLoad[ nameLen - 1 ] == '\\' )
 			nameLen -= 3;
@@ -2334,14 +2140,16 @@ void Load_SH2_SceneFile( char *fileToLoad )
 			doTrans = false;
 	}
 	else
-		doTrans = false;
+		doTrans = false;*/
+
+	doTrans = true;
 
 	if( debugMode )
 		LogFile( ERROR_LOG,"Load_SH2_SceneFile( %s ) - NOTE: %s",fileToLoad,(doTrans)?"Multiple maps will be loaded":"Single map loading mode");
 
 	clearAllTex = !doTrans;
 
-	CleanDirectoryFilelist( numSH2SceneFiles, &sceneSH2Files );
+	//CleanDirectoryFilelist( SH2SceneFiles );
 
 	//---[ CLEAN UP OLD SCENE, IF IT EXISTS ]---//
 	if( testSceneSH2 )
@@ -2361,7 +2169,7 @@ void Load_SH2_SceneFile( char *fileToLoad )
 	}
 
 	curSH2SceneFile = 0;
-	numSH2SceneFiles = GetDirectoryFilelist( fileToLoad, "*.map",&sceneSH2Files);
+	//numSH2SceneFiles = GetDirectoryFileList(fileToLoad, SH2_MAP, SH2SceneFiles);
 
 	if( ! numSH2SceneFiles )
 	{
@@ -2369,10 +2177,10 @@ void Load_SH2_SceneFile( char *fileToLoad )
 		return;
 	}
 //debugMode = true;
-	sh2TexList.BuildTexList( fileToLoad );
+	sh2TexList.BuildTexList();
 //debugMode = origDebugMode;
 	
-	if( debugMode )LogFile(ERROR_LOG,"Load_SH2_SceneFile() - FILE [%s]  Map Files [ first: \"%s\"  last: \"%s\" ]",fileToLoad,sceneSH2Files[0],sceneSH2Files[numSH2SceneFiles-1]);
+	if( debugMode )LogFile(ERROR_LOG,"Load_SH2_SceneFile() - FILE [%s]  Map Files [ first: \"%s\"  last: \"%s\" ]",fileToLoad,SH2SceneFiles[0],SH2SceneFiles[numSH2SceneFiles-1]);
 
 	if( doTrans )
 		numScenes = sceneLimit;
@@ -2389,9 +2197,9 @@ void Load_SH2_SceneFile( char *fileToLoad )
 		testSceneSH2[numLoaded] = new SH2_MapLoader;
 
 		if( debugMode )
-			LogFile(ERROR_LOG,"Load_SH2_SceneFile() - CHECK: numLoaded=%ld\tcurSH2SceneFile is [%ld]= %s",numLoaded,curSH2SceneFile,sceneSH2Files[curSH2SceneFile]);
+			LogFile(ERROR_LOG,"Load_SH2_SceneFile() - CHECK: numLoaded=%ld\tcurSH2SceneFile is [%ld]= %s",numLoaded,curSH2SceneFile,SH2SceneFiles[curSH2SceneFile]);
 
-		while( !testSceneSH2[numLoaded]->LoadMap( sceneSH2Files[curSH2SceneFile] ) 
+		while( !testSceneSH2[numLoaded]->LoadMap( SH2SceneFiles[curSH2SceneFile].string().c_str() )
 			&& curSceneFile < numSH2SceneFiles 
 			&& numLoaded < numScenes )
 		{
@@ -2410,14 +2218,14 @@ void Load_SH2_SceneFile( char *fileToLoad )
 						if( curSH2SceneDir < 0 )
 						{
 							dirLooped ++;
-							curSH2SceneDir +=numSH2SceneDirs;
+							curSH2SceneDir +=numSH2SceneFiles;
 						}
 					}
 					else
 					{
-						if( curSH2SceneDir + 1 == numSH2SceneDirs )
+						if( curSH2SceneDir + 1 == numSH2SceneFiles )
 							dirLooped ++;
-						curSH2SceneDir = (curSH2SceneDir + 1)%numSH2SceneDirs;
+						curSH2SceneDir = (curSH2SceneDir + 1)%numSH2SceneFiles;
 					}
 
 					if( badLoopCounter > 50 + numScenes )
@@ -2425,7 +2233,7 @@ void Load_SH2_SceneFile( char *fileToLoad )
 					if( !numSH2SceneFiles || numSH2SceneFiles == 1)
 						LogFile( ERROR_LOG, "Load_SH2_SceneFile( %s ) - ERROR: No Map Files Found In Directory",fileToLoad);
 	
-					Load_SH2_SceneFile( sceneSH2Dirs[curSH2SceneDir] );
+					Load_SH2_SceneFile( SH2SceneFiles[curSH2SceneDir] );
 					return;
 				//}
 				curSH2SceneFile = 0;
@@ -2433,7 +2241,7 @@ void Load_SH2_SceneFile( char *fileToLoad )
 			}
 
 			if( debugMode )
-				LogFile(ERROR_LOG,"Load_SH2_SceneFile() - POST CHECK: numLoaded=%ld\tcurSH2SceneFile is [%ld]= %s",numLoaded,curSH2SceneFile,sceneSH2Files[curSH2SceneFile]);
+				LogFile(ERROR_LOG,"Load_SH2_SceneFile() - POST CHECK: numLoaded=%ld\tcurSH2SceneFile is [%ld]= %s",numLoaded,curSH2SceneFile,SH2SceneFiles[curSH2SceneFile]);
 			
 		}
 
@@ -2464,10 +2272,10 @@ void Load_SH2_SceneFile( char *fileToLoad )
 	if( curSH2SceneFile )
 		curSH2SceneFile --;
 
-	sprintf(curFileInfo,"FILE: %s",sceneSH2Files[curSH2SceneFile]);
+	sprintf(curFileInfo,"FILE: %s",SH2SceneFiles[curSH2SceneFile]);
 
 	if( debugMode )
-		LogFile(ERROR_LOG,"Load_SH2_SceneFile() - EXIT CHECK: numLoaded=%ld\tcurSH2SceneFile is [%ld]= %s",numLoaded,curSH2SceneFile,sceneSH2Files[curSH2SceneFile]);
+		LogFile(ERROR_LOG,"Load_SH2_SceneFile() - EXIT CHECK: numLoaded=%ld\tcurSH2SceneFile is [%ld]= %s",numLoaded,curSH2SceneFile,SH2SceneFiles[curSH2SceneFile]);
 }
 
 
@@ -2483,28 +2291,28 @@ void Process_SH2_SceneKeyInput( )
 	{
 		curSH2SceneDir --;
 		if( curSH2SceneDir < 0 )
-			curSH2SceneDir = numSH2SceneDirs - 1;
-		curSH2SceneDir %= numSH2SceneDirs;
+			curSH2SceneDir = numSH2SceneFiles - 1;
+		curSH2SceneDir %= numSH2SceneFiles;
 
 		g_iMoveDir = -1;
 		dirLooped = 0;
 		curSH2SceneFile = 0;
 		
-		Load_SH2_SceneFile( sceneSH2Dirs[ curSH2SceneDir ] );
-		sprintf(curFileInfo,"FILE: %s",sceneSH2Files[curSH2SceneFile]);
+		Load_SH2_SceneFile( SH2SceneFiles[ curSH2SceneDir ] );
+		sprintf(curFileInfo,"FILE: %s",SH2SceneFiles[curSH2SceneFile]);
 	}
 
 	if (GetAsyncKeyState(VK_RCONTROL) & 0x8000)
 	{
 		curSH2SceneDir ++;
-		curSH2SceneDir %= numSH2SceneDirs;
+		curSH2SceneDir %= numSH2SceneFiles;
 
 		g_iMoveDir = 1;
 		dirLooped = 0;
 		curSH2SceneFile = 0;
 
-		Load_SH2_SceneFile( sceneSH2Dirs[ curSH2SceneDir ] );
-		sprintf(curFileInfo,"FILE: %s",sceneSH2Files[curSH2SceneFile]);
+		Load_SH2_SceneFile( SH2SceneFiles[ curSH2SceneDir ] );
+		sprintf(curFileInfo,"FILE: %s",SH2SceneFiles[curSH2SceneFile]);
 	}
 
 	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
@@ -2512,7 +2320,7 @@ void Process_SH2_SceneKeyInput( )
 		if( curSH2SceneFile > 0 )
 		{
 			int k;
-			char offsetStr[20];
+			string offsetStr;
 //			SH2_MapLoader *tScenePtr;
 			if(testSceneSH2[numScenes-1])
 			{
@@ -2522,9 +2330,10 @@ void Process_SH2_SceneKeyInput( )
 				{
 					for( k = 0; k < testSceneSH2[numScenes-1]->m_sOffsetUnknown.numUnknowDataSets; k++ )
 					{
-						sprintf(offsetStr,"%15ld",testSceneSH2[numScenes-1]->m_psUnknownData[ k ].id );
+						//sprintf(offsetStr,"%15ld",testSceneSH2[numScenes-1]->m_psUnknownData[ k ].id );
+						offsetStr = format("%15ld", testSceneSH2[numScenes - 1]->m_psUnknownData[k].id);
 						//LogFile(TEST_LOG,"CHECK: About to clean texture [%s]",offsetStr);
-						sh2TexList.DeleteTex( string( offsetStr ) );
+						sh2TexList.DeleteTex( offsetStr );
 					}
 				}
 
@@ -2544,16 +2353,16 @@ void Process_SH2_SceneKeyInput( )
 			testSceneSH2[0] = new SH2_MapLoader;
 			if( numScenes != 1 )
 			{
-				if(!testSceneSH2[0]->LoadMap( sceneSH2Files[ curSH2SceneFile ] ) )
+				if(!testSceneSH2[0]->LoadMap( SH2SceneFiles[ curSH2SceneFile ].string().c_str() ) )
 				{
-					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",sceneSH2Files[ curSH2SceneFile ]);
+					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",SH2SceneFiles[ curSH2SceneFile ]);
 					delete testSceneSH2[0];
 					testSceneSH2[0] = NULL;
 				}
 			}
 			else
 			{
-				while( !testSceneSH2[0]->LoadMap( sceneSH2Files[ curSH2SceneFile ] )&& curSH2SceneFile >= 0 )
+				while( !testSceneSH2[0]->LoadMap( SH2SceneFiles[ curSH2SceneFile ].string().c_str() )&& curSH2SceneFile >= 0 )
 				{
 					curSH2SceneFile--;
 					if( curSH2SceneFile < 0 )
@@ -2562,9 +2371,9 @@ void Process_SH2_SceneKeyInput( )
 						{
 							curSH2SceneDir = (curSH2SceneDir - 1);
 							if( curSH2SceneDir < 0 )
-								curSH2SceneDir +=numSH2SceneDirs;
+								curSH2SceneDir +=numSH2SceneFiles;
 							dirLooped = 0;
-							Load_SH2_SceneFile( sceneSH2Dirs[curSH2SceneDir] );
+							Load_SH2_SceneFile( SH2SceneFiles[curSH2SceneDir] );
 							return;
 						}
 						curSH2SceneFile += numSH2SceneFiles;
@@ -2574,7 +2383,7 @@ void Process_SH2_SceneKeyInput( )
 
 				if(!testSceneSH2[0]->isSceneValid())
 				{
-					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",sceneSH2Files[ curSH2SceneFile ]);
+					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",SH2SceneFiles[ curSH2SceneFile ]);
 					delete testSceneSH2[0];
 					testSceneSH2[0] = NULL;
 				}
@@ -2602,7 +2411,7 @@ void Process_SH2_SceneKeyInput( )
 
 		}
 
-		sprintf(curFileInfo,"FILE: %s",sceneSH2Files[curSH2SceneFile]);
+		sprintf(curFileInfo,"FILE: %s",SH2SceneFiles[curSH2SceneFile]);
 	}
 
 	if (GetAsyncKeyState(VK_RSHIFT) & 0x8000)
@@ -2610,7 +2419,7 @@ void Process_SH2_SceneKeyInput( )
 		if( curSH2SceneFile < numSH2SceneFiles )
 		{
 			int k;
-			char offsetStr[20];
+			string offsetStr;
 //			SH2_MapLoader *tScenePtr;
 			if(testSceneSH2[0])
 			{
@@ -2623,9 +2432,10 @@ void Process_SH2_SceneKeyInput( )
 	
 					for( k = 0; k < testSceneSH2[0]->m_sOffsetUnknown.numUnknowDataSets; k++ )
 					{
-						sprintf(offsetStr,"%15ld",testSceneSH2[0]->m_psUnknownData[ k ].id );
+						//sprintf(offsetStr,"%15ld",testSceneSH2[0]->m_psUnknownData[ k ].id );
+						offsetStr = format("%15ld", testSceneSH2[0]->m_psUnknownData[k].id);
 						//LogFile(TEST_LOG,"CHECK: About to clean texture [%s]",offsetStr);
-						sh2TexList.DeleteTex( string( offsetStr ) );
+						sh2TexList.DeleteTex(offsetStr);
 					}
 				}
 
@@ -2642,16 +2452,16 @@ void Process_SH2_SceneKeyInput( )
 			testSceneSH2[numScenes-1] = new SH2_MapLoader;
 			if( numScenes != 1 )
 			{
-				if(!testSceneSH2[numScenes-1]->LoadMap( sceneSH2Files[ curSH2SceneFile ] ) )
+				if(!testSceneSH2[numScenes-1]->LoadMap( SH2SceneFiles[ curSH2SceneFile ].string().c_str() ) )
 				{
-					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",sceneSH2Files[ curSH2SceneFile ]);
+					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",SH2SceneFiles[ curSH2SceneFile ]);
 					delete testSceneSH2[numScenes-1];
 					testSceneSH2[numScenes-1] = NULL;
 				}
 			}
 			else
 			{
-				while( !testSceneSH2[numScenes-1]->LoadMap( sceneSH2Files[ curSH2SceneFile ] ) 
+				while( !testSceneSH2[numScenes-1]->LoadMap( SH2SceneFiles[ curSH2SceneFile ].string().c_str() )
 					&& curSH2SceneFile < numSH2SceneFiles )
 				{
 					curSH2SceneFile++;
@@ -2659,9 +2469,9 @@ void Process_SH2_SceneKeyInput( )
 					{
 						if( looped )
 						{
-							curSH2SceneDir = (curSH2SceneDir + 1)%numSH2SceneDirs;
+							curSH2SceneDir = (curSH2SceneDir + 1)%numSH2SceneFiles;
 							dirLooped = 0;
-							Load_SH2_SceneFile( sceneSH2Dirs[curSH2SceneDir] );
+							Load_SH2_SceneFile( SH2SceneFiles[curSH2SceneDir] );
 							return;
 						}
 						curSH2SceneFile = 0;
@@ -2672,7 +2482,7 @@ void Process_SH2_SceneKeyInput( )
 
 				if(!testSceneSH2[numScenes-1]->isSceneValid())
 				{
-					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",sceneSH2Files[ curSH2SceneFile ]);
+					LogFile(ERROR_LOG,"Process_SH2_SceneKeyInput() - ERROR: Could not load map file [%s]",SH2SceneFiles[ curSH2SceneFile ]);
 					delete testSceneSH2[numScenes-1];
 					testSceneSH2[numScenes-1] = NULL;
 				}
@@ -2702,7 +2512,7 @@ void Process_SH2_SceneKeyInput( )
 
 		}
 
-		sprintf(curFileInfo,"FILE: %s",sceneSH2Files[curSH2SceneFile]);
+		sprintf(curFileInfo,"FILE: %s",SH2SceneFiles[curSH2SceneFile]);
 	}
 	
 
@@ -2779,25 +2589,25 @@ void Process_SH2_SceneKeyInput( )
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-void Load_SH3_SceneFile( char *fileToLoad )
+void Load_SH3_SceneFile( filesystem::path& fileToLoad )
 {
 	int k;
 	int numLoaded;
-	bool doTrans;
+	bool doTrans = true;
 
-	k = strlen(fileToLoad) - strlen("bgcc.arc");
+	/*k = strlen(fileToLoad) - strlen("bgcc.arc");
 
 	if( strcmp(&(fileToLoad[k]),"bgcc.arc") == 0 )
 		doTrans = true;
 	else
-		doTrans = false;
+		doTrans = false;*/
 
 	clearAllTex = !doTrans;
 
 	//---[ CLEAN UP OLD SCENE, IF IT EXISTS ]---//
 
-	minSceneNum = sceneModelNum = testScene.getMinScene( fileToLoad );
-	maxSceneNum   = testScene.getMaxScene( fileToLoad );
+	minSceneNum = sceneModelNum = testScene.getMinScene( fileToLoad.string().c_str() );
+	maxSceneNum   = testScene.getMaxScene( fileToLoad.string().c_str() );
 
 	if( testScene2 )
 	{
@@ -2837,7 +2647,7 @@ void Load_SH3_SceneFile( char *fileToLoad )
 		testScene2[numLoaded] = new SceneMap;
 		printText(dScreenRes[screenDimMode].w - 64,dScreenRes[screenDimMode].h - numLoaded*20,0,"Loading...",&white);
 
-		while(!testScene2[numLoaded]->loadArcScene( fileToLoad, k) && k < maxSceneNum && numLoaded < numScenes )
+		while(!testScene2[numLoaded]->loadArcScene( fileToLoad.string().c_str(), k) && k < maxSceneNum && numLoaded < numScenes )
 			k++;
 
 		if( k < maxSceneNum && numLoaded < numScenes)
@@ -2905,16 +2715,16 @@ void Process_SH3_SceneKeyInput( )
 	{
 		curSceneFile --;
 		if( curSceneFile < 0 )
-			curSceneFile = numSceneFiles - 1;
-		curSceneFile %= numSceneFiles;
-		Load_SH3_SceneFile( sceneFiles[curSceneFile] );
+			curSceneFile = numSH3SceneFiles - 1;
+		curSceneFile %= numSH3SceneFiles;
+		Load_SH3_SceneFile( SH3SceneFiles[curSceneFile] );
 	}
 
 	if (GetAsyncKeyState(VK_RCONTROL) & 0x8000)
 	{
 		curSceneFile ++;
-		curSceneFile %= numSceneFiles;
-		Load_SH3_SceneFile( sceneFiles[curSceneFile] );
+		curSceneFile %= numSH3SceneFiles;
+		Load_SH3_SceneFile( SH3SceneFiles[curSceneFile] );
 	}
 
 	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
@@ -2954,7 +2764,7 @@ void Process_SH3_SceneKeyInput( )
 			testScene2[0] = new SceneMap;
 			if( numScenes != 1 )
 			{
-				if(!testScene2[0]->loadArcScene( sceneFiles[curSceneFile], sceneModelNum ))
+				if(!testScene2[0]->loadArcScene( SH3SceneFiles[curSceneFile].string().c_str(), sceneModelNum ))
 				{
 					LogFile(ERROR_LOG,"MessagePump::Paint - Could not load scene # %d",sceneModelNum);
 					delete testScene2[0];
@@ -2963,7 +2773,7 @@ void Process_SH3_SceneKeyInput( )
 			}
 			else
 			{
-				while( !testScene2[0]->loadArcScene( sceneFiles[curSceneFile], sceneModelNum ) && sceneModelNum > minSceneNum)
+				while( !testScene2[0]->loadArcScene( SH3SceneFiles[curSceneFile].string().c_str(), sceneModelNum ) && sceneModelNum > minSceneNum)
 					sceneModelNum--;
 				if(!testScene2[0]->isSceneValid())
 				{
@@ -3044,7 +2854,7 @@ void Process_SH3_SceneKeyInput( )
 
 			if( numScenes != 1 )
 			{
-				if(!testScene2[numScenes-1]->loadArcScene( sceneFiles[curSceneFile], sceneModelNum+numScenes-1))
+				if(!testScene2[numScenes-1]->loadArcScene( SH3SceneFiles[curSceneFile].string().c_str(), sceneModelNum+numScenes-1))
 				{
 					LogFile(ERROR_LOG,"MessagePump::Paint - Could not load scene # %d",sceneModelNum+numScenes-1);
 					delete testScene2[numScenes-1];
@@ -3053,7 +2863,7 @@ void Process_SH3_SceneKeyInput( )
 			}
 			else
 			{
-				while( !testScene2[numScenes-1]->loadArcScene( sceneFiles[curSceneFile], sceneModelNum ) && sceneModelNum < maxSceneNum)
+				while( !testScene2[numScenes-1]->loadArcScene( SH3SceneFiles[curSceneFile].string().c_str(), sceneModelNum ) && sceneModelNum < maxSceneNum)
 					sceneModelNum++;
 				if(!testScene2[numScenes-1]->isSceneValid())
 				{
@@ -3132,7 +2942,7 @@ void Process_SH3_SceneKeyInput( )
 
 		testScene2[j] = new SceneMap;
 
-		if(!testScene2[j]->loadArcScene( sceneFiles[curSceneFile], sceneModelNum ))
+		if(!testScene2[j]->loadArcScene( SH3SceneFiles[curSceneFile].string().c_str(), sceneModelNum ))
 		{
 			LogFile(ERROR_LOG,"MessagePump::Paint - Could not load scene # %d",sceneModelNum);
 			delete testScene2[j];
@@ -3141,7 +2951,7 @@ void Process_SH3_SceneKeyInput( )
 		textureMgr.checkResident();
 	}
 
-	sprintf(curFileInfo,"FILE: %s  SCENE: %d of [%d - %d]",sceneFiles[curSceneFile], sceneModelNum,minSceneNum,maxSceneNum-1);
+	sprintf(curFileInfo,"FILE: %s  SCENE: %d of [%d - %d]",SH3SceneFiles[curSceneFile], sceneModelNum,minSceneNum,maxSceneNum-1);
 }
 
 
@@ -3150,7 +2960,7 @@ void Process_SH3_SceneKeyInput( )
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-bool Load_SH3_ModelFile( char *fileToLoad )
+bool Load_SH3_ModelFile( filesystem::path& fileToLoad )
 {
 	int k;
 
@@ -3172,8 +2982,8 @@ bool Load_SH3_ModelFile( char *fileToLoad )
 	
 	if( debugMode )
 		LogFile( ERROR_LOG, "                      - Checking for minimum and maximum model numbers");
-	minModelNum = modelNum = testAct.getMinModel( fileToLoad );
-	maxModelNum   = testAct.getMaxModel( fileToLoad );
+	minModelNum = modelNum = testAct.getMinModel( fileToLoad.string().c_str() );
+	maxModelNum   = testAct.getMaxModel( fileToLoad.string().c_str() );
 
 	if( debugMode )
 		LogFile( ERROR_LOG, "                      - Model Numbers [ min: %d  max: %d ]",minModelNum,maxModelNum);
@@ -3182,7 +2992,7 @@ bool Load_SH3_ModelFile( char *fileToLoad )
 	k = modelNum;
 	while( k <= maxModelNum )
 	{
-		if(testAct.loadModel(fileToLoad,k))
+		if(testAct.loadModel(fileToLoad.string().c_str(),k))
 			break;
 		++k;
 	}
@@ -3226,29 +3036,29 @@ void Process_SH3_ModelKeyInput( )
 				if( sh3ModelLooped )
 				{
 					MessageBox( NULL, "ERROR","No SH3 Model Files Exist In The Data Directory - Check default.cfg",MB_OK);
-					if( numSH2SceneDirs )
+					if( numSH2SceneFiles )
 					{
 						sh2_sceneMode = true;
 						sh3_sceneMode = false;
 						sh3_modelMode = false;
 						dirLooped = 0;
-						Load_SH2_SceneFile( sceneSH2Dirs[ curSH2SceneDir ] );
+						Load_SH2_SceneFile( SH2SceneFiles[ curSH2SceneDir ] );
 					}
-					else if( numSceneFiles )
+					else if( numSH3SceneFiles )
 					{
 						sh2_sceneMode = false;
 						sh3_sceneMode = true;
 						sh3_modelMode = false;
-						Load_SH3_SceneFile( sceneFiles[curSceneFile] );
+						Load_SH3_SceneFile( SH3SceneFiles[curSceneFile] );
 					}
 					return;
 				}
 				sh3ModelLooped = true;
-				curModelFile = numModelFiles - 1;
+				curModelFile = numSH3ModelFiles - 1;
 			}
-			curModelFile %= numModelFiles;
+			curModelFile %= numSH3ModelFiles;
 //LogFile( ERROR_LOG, "Process_SH3_ModelKeyInput - Count Model Files: %ld   Cur File Num: %ld   Model: %ld",numModelFiles,curModelFile, modelNum);
-		}while(!Load_SH3_ModelFile( modelFiles[curModelFile] ));
+		}while(!Load_SH3_ModelFile( SH3ModelFiles[curModelFile]));
 	}
 
 	if (GetAsyncKeyState(VK_RCONTROL) & 0x8000)
@@ -3262,7 +3072,7 @@ void Process_SH3_ModelKeyInput( )
 		{
 			curModelFile ++;
 	
-			if( curModelFile == numModelFiles )
+			if( curModelFile == numSH3ModelFiles )
 			{
 				if( sh3ModelLooped )
 				{
@@ -3271,9 +3081,9 @@ void Process_SH3_ModelKeyInput( )
 				}
 				sh3ModelLooped = true;
 			}
-			curModelFile %= numModelFiles;
+			curModelFile %= numSH3ModelFiles;
 //LogFile( ERROR_LOG, "Process_SH3_ModelKeyInput - Count Model Files: %ld   Cur File Num: %ld   Model: %ld",numModelFiles,curModelFile, modelNum);
-		}while(!Load_SH3_ModelFile( modelFiles[curModelFile] ));
+		}while(!Load_SH3_ModelFile( SH3ModelFiles[curModelFile]));
 	}
 
 
@@ -3300,15 +3110,15 @@ void Process_SH3_ModelKeyInput( )
 				{
 					if( sh3ModelLooped )
 					{
-						curModelFile = (curModelFile + 1 ) % numModelFiles;
+						curModelFile = (curModelFile + 1 ) % numSH3ModelFiles;
 						if( curModelFile == k )
 						{
 							MessageBox( NULL, "TERMINAL ERROR","Check your default config, or contact perdedork@yahoo.com",MB_OK);
 							PostQuitMessage(1);
 							return;
 						}
-						minModelNum = testAct.getMinModel( modelFiles[curModelFile] );
-						maxModelNum = modelNum = testAct.getMaxModel( modelFiles[curModelFile] );
+						minModelNum = testAct.getMinModel( SH3ModelFiles[curModelFile].string().c_str() );
+						maxModelNum = modelNum = testAct.getMaxModel( SH3ModelFiles[curModelFile].string().c_str() );
 						sh3ModelLooped = false;
 						--modelNum;
 					}
@@ -3319,7 +3129,7 @@ void Process_SH3_ModelKeyInput( )
 					}
 				}
 //	LogFile( ERROR_LOG, "Process_SH3_ModelKeyInput - Count Model Files: %ld   Cur File Num: %ld   Model: %ld",numModelFiles,curModelFile, modelNum);
-			}while(!testAct.loadModel(modelFiles[curModelFile], modelNum ));
+			}while(!testAct.loadModel(SH3ModelFiles[curModelFile].string().c_str(), modelNum ));
 
 			testActAnim.AttachModel( & testAct );
 			if( testActAnim.LoadAnim( ) )
@@ -3355,15 +3165,15 @@ void Process_SH3_ModelKeyInput( )
 				{
 					if( sh3ModelLooped )
 					{
-						curModelFile = (curModelFile + 1 ) % numModelFiles;
+						curModelFile = (curModelFile + 1 ) % numSH3ModelFiles;
 						if( curModelFile == k )
 						{
 							MessageBox( NULL, "TERMINAL ERROR","Check your default config, or contact perdedork@yahoo.com",MB_OK);
 							PostQuitMessage(1);
 							return;
 						}
-						minModelNum = modelNum = testAct.getMinModel( modelFiles[curModelFile] );
-						maxModelNum = testAct.getMaxModel( modelFiles[curModelFile] );
+						minModelNum = modelNum = testAct.getMinModel( SH3ModelFiles[curModelFile].string().c_str());
+						maxModelNum = testAct.getMaxModel( SH3ModelFiles[curModelFile].string().c_str());
 						sh3ModelLooped = false;
 					}
 					else
@@ -3373,7 +3183,7 @@ void Process_SH3_ModelKeyInput( )
 					}
 				}
 //	LogFile( ERROR_LOG, "Process_SH3_ModelKeyInput - Count Model Files: %ld   Cur File Num: %ld   Model: %ld",numModelFiles,curModelFile, modelNum);
-			}while(!testAct.loadModel(modelFiles[curModelFile], modelNum ));
+			}while(!testAct.loadModel(SH3ModelFiles[curModelFile].string().c_str(), modelNum ));
 
 			testActAnim.AttachModel( & testAct );
 			if( testActAnim.LoadAnim( ) )
@@ -3392,7 +3202,7 @@ void Process_SH3_ModelKeyInput( )
 			if(!textureMgr.DeleteTex(textureMgr.textures[k-1].texName.c_str()))
 				LogFile(TEST_LOG,"ERROR: DID NOT Successfully delete tex");
 		}
-		testAct.loadModel(modelFiles[curModelFile], modelNum );
+		testAct.loadModel(SH3ModelFiles[curModelFile].string().c_str(), modelNum );
 		
 
 		testActAnim.ReleaseData( );
@@ -3414,7 +3224,7 @@ void Process_SH3_ModelKeyInput( )
 
 		dumpModel = false;
 	}
-	sprintf(curFileInfo,"FILE: %s  SCENE: %d of %d",modelFiles[curModelFile], modelNum, maxModelNum - 1 );
+	sprintf(curFileInfo,"FILE: %s  SCENE: %d of %d",SH3ModelFiles[curModelFile], modelNum, maxModelNum - 1 );
 }
 
 
@@ -3424,25 +3234,25 @@ void Process_SH3_ModelKeyInput( )
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-void Load_SH2_ModelFile( char *fileToLoad )
+void Load_SH2_ModelFile( filesystem::path& fileToLoad )
 {
 //	int k;
 //	int numLoaded;
 	bool looped = false;
 	bool origDebugMode = debugMode;
 	bool foundAnim = false;
-	char nameLen = strlen( fileToLoad );
+	//char nameLen = strlen( fileToLoad );
 //	long startIndex;
 	int badLoopCounter = 0;
 
-	if( !fileToLoad || dirLooped > 1 )
-		return;
+	/*if( !fileToLoad || dirLooped > 1 )
+		return;*/
 
 	clearAllTex = true;
 
-	if( debugMode )
+	/*if( debugMode )
 		LogFile( ERROR_LOG, "Load_SH2_ModelFile( %s ) - About to clean model file listing", fileToLoad );
-	CleanDirectoryFilelist( numSH2ModelFiles, &modelSH2Files );
+	CleanDirectoryFilelist( SH2ModelFiles );*/
 	
 	if( debugMode )
 		LogFile( ERROR_LOG, "Load_SH2_ModelFile( %s ) - About to clean anim file listing - num: %ld", fileToLoad, numSH2AnimFiles );
@@ -3461,18 +3271,18 @@ void Load_SH2_ModelFile( char *fileToLoad )
 
 
 	curSH2ModelFile = 0;
-	numSH2ModelFiles = GetDirectoryFilelist( fileToLoad, "*.mdl",&modelSH2Files);
+	//numSH2ModelFiles = GetDirectoryFileList( fileToLoad, "*.mdl", SH2ModelFiles);
 
 //	curSH2AnimFile = 0;
 //	numSH2AnimFiles = GetDirectoryFilelist( fileToLoad, "*.anm",&animSH2Files);
 
 //debugMode = true;
-	sh2TexList.BuildTexList( fileToLoad );
+	sh2TexList.BuildTexList( );
 //debugMode = origDebugMode;
 	
-	if( debugMode )LogFile(ERROR_LOG,"Load_SH2_ModelFile() - FILE [%s]  Model Files [ first: \"%s\"  last: \"%s\" ]",fileToLoad,modelSH2Files[0],modelSH2Files[numSH2ModelFiles-1]);
+	if( debugMode )LogFile(ERROR_LOG,"Load_SH2_ModelFile() - FILE [%s]  Model Files [ first: \"%s\"  last: \"%s\" ]",fileToLoad,SH2ModelFiles[0],SH2ModelFiles[numSH2ModelFiles-1]);
 
-	while( !sh2Act.loadData( modelSH2Files[ curSH2ModelFile ] )
+	while( !sh2Act.loadData( SH2ModelFiles[ curSH2ModelFile ].string().c_str())
 			&& curSH2ModelFile < numSH2ModelFiles )
 	{
 		badLoopCounter++;
@@ -3490,14 +3300,14 @@ void Load_SH2_ModelFile( char *fileToLoad )
 					if( curSH2ModelDir < 0 )
 					{
 						dirLooped ++;
-						curSH2ModelDir +=numSH2ModelDirs;
+						curSH2ModelDir +=numSH2ModelFiles;
 					}
 				}
 				else
 				{
-					if( curSH2ModelDir + 1 == numSH2ModelDirs )
+					if( curSH2ModelDir + 1 == numSH2ModelFiles )
 						dirLooped ++;
-					curSH2ModelDir = (curSH2ModelDir + 1)%numSH2ModelDirs;
+					curSH2ModelDir = (curSH2ModelDir + 1)%numSH2ModelFiles;
 				}
 
 				if( badLoopCounter > 50 )
@@ -3505,7 +3315,7 @@ void Load_SH2_ModelFile( char *fileToLoad )
 				if( !numSH2ModelFiles || numSH2ModelFiles == 1)
 					LogFile( ERROR_LOG, "Load_SH2_ModelFile( %s ) - ERROR: No MDL Files Found In Directory",fileToLoad);
 	
-				Load_SH2_ModelFile( modelSH2Dirs[curSH2ModelDir] );
+				Load_SH2_ModelFile( SH2ModelFiles[curSH2ModelDir]);
 				return;
 			//}
 			curSH2ModelFile = 0;
@@ -3513,7 +3323,7 @@ void Load_SH2_ModelFile( char *fileToLoad )
 		}
 
 		if( debugMode )
-			LogFile(ERROR_LOG,"Load_SH2_ModelFile() - POST CHECK: curSH2SceneFile is [%ld]= %s",curSH2ModelFile,modelSH2Files[curSH2ModelFile]);
+			LogFile(ERROR_LOG,"Load_SH2_ModelFile() - POST CHECK: curSH2SceneFile is [%ld]= %s",curSH2ModelFile,SH2ModelFiles[curSH2ModelFile]);
 			
 	}
 
@@ -3524,14 +3334,14 @@ void Load_SH2_ModelFile( char *fileToLoad )
 		{
 			char l_cModelName[ 256 ];
 
-			if( baseName( modelSH2Files[ curSH2ModelFile ], l_cModelName ) )
+			if( baseName( (char*)SH2ModelFiles[ curSH2ModelFile ].string().c_str(), l_cModelName))
 			{
-				LogFile( ERROR_LOG, "CHECKKKKKKKKKKK: The model '%s' basename is '%s'",modelSH2Files[ curSH2ModelFile ], l_cModelName );
+				LogFile( ERROR_LOG, "CHECKKKKKKKKKKK: The model '%s' basename is '%s'",SH2ModelFiles[ curSH2ModelFile ], l_cModelName );
 				for( curSH2AnimFile = 0; curSH2AnimFile < numSH2AnimFiles && ! foundAnim; curSH2AnimFile ++ )
 				{
-					if( strstr( animSH2Files[ curSH2AnimFile ], l_cModelName ) )
+					if( strstr( SH2AnimFiles[ curSH2AnimFile ].string().c_str(), l_cModelName))
 					{
-						if( sh2Act.loadAnim( testActAnim, animSH2Files[ curSH2AnimFile ] ) )
+						if( sh2Act.loadAnim( testActAnim, SH2AnimFiles[ curSH2AnimFile ].string().c_str()) )
 							foundAnim = true;
 					}
 				//	LogFile( ERROR_LOG, "CHEXXXXXXXXX: Just compared '%s' to '%s'",animSH2Files[ curSH2AnimFile ], l_cModelName );
@@ -3555,10 +3365,10 @@ void Load_SH2_ModelFile( char *fileToLoad )
 //	if( curSH2ModelFile )
 //		curSH2ModelFile --;
 
-	sprintf(curFileInfo,"FILE: %s",modelSH2Files[curSH2ModelFile]);
+	sprintf(curFileInfo,"FILE: %s",SH2ModelFiles[curSH2ModelFile]);
 
 	if( debugMode )
-		LogFile(ERROR_LOG,"Load_SH2_ModelFile() - EXIT CHECK: curSH2ModelFile is [%ld]= %s",curSH2ModelFile,modelSH2Files[curSH2ModelFile]);
+		LogFile(ERROR_LOG,"Load_SH2_ModelFile() - EXIT CHECK: curSH2ModelFile is [%ld]= %s",curSH2ModelFile,SH2ModelFiles[curSH2ModelFile]);
 }
 
 
@@ -3578,29 +3388,29 @@ void Process_SH2_ModelKeyInput( )
 	//	if( debugMode ) LogFile( ERROR_LOG, "Process_SH2_ModelKeyInput( ) - Left Control");
 		curSH2ModelDir --;
 		if( curSH2ModelDir < 0 )
-			curSH2ModelDir = numSH2ModelDirs - 1;
-		curSH2ModelDir %= numSH2ModelDirs;
+			curSH2ModelDir = numSH2ModelFiles - 1;
+		curSH2ModelDir %= numSH2ModelFiles;
 
 		g_iMoveDir = -1;
 		dirLooped = 0;
 		curSH2ModelFile = 0;
 		
-		Load_SH2_ModelFile( modelSH2Dirs[ curSH2ModelDir ] );
-		sprintf(curFileInfo,"FILE: %s",modelSH2Files[curSH2ModelFile]);
+		Load_SH2_ModelFile( SH2ModelFiles[ curSH2ModelDir ] );
+		sprintf(curFileInfo,"FILE: %s",SH2ModelFiles[curSH2ModelFile]);
 	}
 
 	if (GetAsyncKeyState(VK_RCONTROL) & 0x8000)
 	{
 	//	if( debugMode ) LogFile( ERROR_LOG, "Process_SH2_ModelKeyInput( ) - Right Control");
 		curSH2ModelDir ++;
-		curSH2ModelDir %= numSH2ModelDirs;
+		curSH2ModelDir %= numSH2ModelFiles;
 
 		g_iMoveDir = 1;
 		dirLooped = 0;
 		curSH2ModelFile = 0;
 
-		Load_SH2_ModelFile( modelSH2Dirs[ curSH2ModelDir ] );
-		sprintf(curFileInfo,"FILE: %s",modelSH2Files[curSH2ModelFile]);
+		Load_SH2_ModelFile( SH2ModelFiles[ curSH2ModelDir ] );
+		sprintf(curFileInfo,"FILE: %s",SH2ModelFiles[curSH2ModelFile]);
 	}
 
 	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
@@ -3619,7 +3429,7 @@ void Process_SH2_ModelKeyInput( )
 
 			sh2Act.deleteData( );
 			
-			while( !sh2Act.loadData( modelSH2Files[ curSH2ModelFile ] ) && curSH2ModelFile >= 0 )
+			while( !sh2Act.loadData( SH2ModelFiles[ curSH2ModelFile ].string().c_str()) && curSH2ModelFile >= 0 )
 			{
 				curSH2ModelFile--;
 				if( curSH2ModelFile < 0 )
@@ -3628,9 +3438,9 @@ void Process_SH2_ModelKeyInput( )
 					{
 						curSH2ModelDir = (curSH2ModelDir - 1);
 						if( curSH2ModelDir < 0 )
-							curSH2ModelDir +=numSH2ModelDirs;
+							curSH2ModelDir +=numSH2ModelFiles;
 						dirLooped = 0;
-						Load_SH2_ModelFile( modelSH2Dirs[curSH2ModelDir] );
+						Load_SH2_ModelFile( SH2ModelFiles[curSH2ModelDir] );
 						return;
 					}
 					curSH2ModelFile += numSH2ModelFiles;
@@ -3643,14 +3453,14 @@ void Process_SH2_ModelKeyInput( )
 			{
 				char l_cModelName[ 256 ];
 
-				if( baseName( modelSH2Files[ curSH2ModelFile ], l_cModelName ) )
+				if( baseName( (char*)SH2ModelFiles[ curSH2ModelFile ].string().c_str(), l_cModelName ) )
 				{
-					LogFile( ERROR_LOG, "CHECKKKKKKKKKKK: The model '%s' basename is '%s'",modelSH2Files[ curSH2ModelFile ], l_cModelName );
+					LogFile( ERROR_LOG, "CHECKKKKKKKKKKK: The model '%s' basename is '%s'",SH2ModelFiles[ curSH2ModelFile ], l_cModelName );
 					for( curSH2AnimFile = 0; curSH2AnimFile < numSH2AnimFiles && ! foundAnim; curSH2AnimFile ++ )
 					{
-						if( strstr( animSH2Files[ curSH2AnimFile ], l_cModelName ) )
+						if( strstr( SH2AnimFiles[ curSH2AnimFile ].string().c_str(), l_cModelName ) )
 						{
-							if( sh2Act.loadAnim( testActAnim, animSH2Files[ curSH2AnimFile ] ) )
+							if( sh2Act.loadAnim( testActAnim, SH2AnimFiles[ curSH2AnimFile ].string().c_str()) )
 								foundAnim = true;
 						}
 					//	LogFile( ERROR_LOG, "CHEXXXXXXXXX: Just compared '%s' to '%s'",animSH2Files[ curSH2AnimFile ], l_cModelName );
@@ -3671,7 +3481,7 @@ void Process_SH2_ModelKeyInput( )
 			}
 		}
 
-		sprintf(curFileInfo,"FILE: %s",modelSH2Files[curSH2ModelFile]);
+		sprintf(curFileInfo,"FILE: %s",SH2ModelFiles[curSH2ModelFile]);
 	}
 
 	if (GetAsyncKeyState(VK_RSHIFT) & 0x8000)
@@ -3690,18 +3500,18 @@ void Process_SH2_ModelKeyInput( )
 
 			sh2Act.deleteData( );
 			
-			while( !sh2Act.loadData( modelSH2Files[ curSH2ModelFile ] ) && curSH2ModelFile < numSH2ModelFiles )
+			while( !sh2Act.loadData( SH2ModelFiles[ curSH2ModelFile ].string().c_str()) && curSH2ModelFile < numSH2ModelFiles )
 			{
 				if( debugMode )LogFile( ERROR_LOG, "Process_SH2_ModelKeyInput( ) - NOTE: Couldn't load model file %ld of %ld, '%s' in dir '%s'\n\tAttempting next load...",
-					curSH2ModelFile+1, numSH2ModelFiles, modelSH2Files[ curSH2ModelFile ],modelSH2Dirs[ curSH2ModelDir ] );
+					curSH2ModelFile+1, numSH2ModelFiles, SH2ModelFiles[ curSH2ModelFile ],SH2ModelFiles[ curSH2ModelDir ] );
 				curSH2ModelFile++;
 				if( curSH2ModelFile == numSH2ModelFiles )
 				{
 					if( looped )
 					{
-						curSH2ModelDir = (curSH2ModelDir + 1) % numSH2ModelDirs;
+						curSH2ModelDir = (curSH2ModelDir + 1) % numSH2ModelFiles;
 						dirLooped = 0;
-						Load_SH2_ModelFile( modelSH2Dirs[curSH2ModelDir] );
+						Load_SH2_ModelFile( SH2ModelFiles[curSH2ModelDir] );
 						return;
 					}
 					curSH2ModelFile = 0;
@@ -3714,14 +3524,14 @@ void Process_SH2_ModelKeyInput( )
 			{
 				char l_cModelName[ 256 ];
 
-				if( baseName( modelSH2Files[ curSH2ModelFile ], l_cModelName ) )
+				if( baseName( (char*)SH2ModelFiles[ curSH2ModelFile ].string().c_str(), l_cModelName ) )
 				{
-					LogFile( ERROR_LOG, "CHECKKKKKKKKKKK: The model '%s' basename is '%s'",modelSH2Files[ curSH2ModelFile ], l_cModelName );
+					LogFile( ERROR_LOG, "CHECKKKKKKKKKKK: The model '%s' basename is '%s'",SH2ModelFiles[ curSH2ModelFile ], l_cModelName );
 					for( curSH2AnimFile = 0; curSH2AnimFile < numSH2AnimFiles && ! foundAnim; curSH2AnimFile ++ )
 					{
-						if( strstr( animSH2Files[ curSH2AnimFile ], l_cModelName ) )
+						if( strstr( SH2AnimFiles[ curSH2AnimFile ].string().c_str(), l_cModelName ) )
 						{
-							if( sh2Act.loadAnim( testActAnim, animSH2Files[ curSH2AnimFile ] ) )
+							if( sh2Act.loadAnim( testActAnim, SH2AnimFiles[ curSH2AnimFile ].string().c_str()) )
 								foundAnim = true;
 						}
 					//	LogFile( ERROR_LOG, "CHEXXXXXXXXX: Just compared '%s' to '%s'",animSH2Files[ curSH2AnimFile ], l_cModelName );
@@ -3743,7 +3553,7 @@ void Process_SH2_ModelKeyInput( )
 		
 		}
 
-		sprintf(curFileInfo,"FILE: %s",modelSH2Files[curSH2ModelFile]);
+		sprintf(curFileInfo,"FILE: %s",SH2ModelFiles[curSH2ModelFile]);
 	}
 
 	
@@ -3802,18 +3612,18 @@ void Process_SH2_ModelKeyInput( )
 //-                                                                          -/
 //-                                                                          -/
 //----------------------------------------------------------------------------/
-void Load_SH4_File( char *fileToLoad )
+void Load_SH4_File( filesystem::path& fileToLoad )
 {
 	int k;
 //	int numLoaded;
 	bool looped = false;
 	bool origDebugMode = debugMode;
-	char nameLen = strlen( fileToLoad );
+	//char nameLen = strlen( fileToLoad );
 //	long startIndex;
 	int badLoopCounter = 0;
 
 
-	if( !fileToLoad || dirLooped > 1 )
+	if( dirLooped > 1 )
 		return;
 
 	clearAllTex = true;
@@ -3827,7 +3637,7 @@ void Load_SH4_File( char *fileToLoad )
 
 	sh4Act.deleteData( );
 
-	while( !sh4Act.loadData( allSH4Files[ curSH4File ] )
+	while( !sh4Act.loadData( SH4Files[ curSH4File ].string().c_str() )
 			&& curSH4File < numSH4Files )
 	{
 		badLoopCounter++;
@@ -3844,12 +3654,12 @@ void Load_SH4_File( char *fileToLoad )
 		}
 		
 		if( badLoopCounter > 500 )
-			LogFile( ERROR_LOG,"Load_SH4_File( %s ) - ERROR: Bad Loop Counter Reached threshold %d In Directory",fileToLoad,badLoopCounter);
+			LogFile( ERROR_LOG,"Load_SH4_File( %s ) - ERROR: Bad Loop Counter Reached threshold %d In Directory",fileToLoad.string().c_str(),badLoopCounter);
 		if( !numSH4Files || numSH4Files == 1)
-			LogFile( ERROR_LOG, "Load_SH4_File( %s ) - ERROR: No Files Found In Directory",fileToLoad);
+			LogFile( ERROR_LOG, "Load_SH4_File( %s ) - ERROR: No Files Found In Directory",fileToLoad.string().c_str());
 	
 		if( debugMode )
-			LogFile(ERROR_LOG,"Load_SH4_File() - POST CHECK: curSH4File is [%ld]= %s",curSH4File,allSH4Files[curSH4File]);
+			LogFile(ERROR_LOG,"Load_SH4_File() - POST CHECK: curSH4File is [%ld]= %s",curSH4File,SH4Files[curSH4File]);
 			
 	}
 
@@ -3858,7 +3668,7 @@ void Load_SH4_File( char *fileToLoad )
 		viewCam.reset( );
 		if( false ) //sh2_anim )
 		{
-			while( !sh2Act.loadAnim( testActAnim, animSH2Files[ curSH2AnimFile ] ) && curSH2AnimFile < numSH2AnimFiles )
+			while( !sh2Act.loadAnim( testActAnim, SH2AnimFiles[ curSH2AnimFile ].string().c_str() ) && curSH2AnimFile < numSH2AnimFiles )
 				curSH2AnimFile++;
 			if( curSH2AnimFile == numSH2AnimFiles )
 			{
@@ -3873,10 +3683,10 @@ void Load_SH4_File( char *fileToLoad )
 //	if( curSH2ModelFile )
 //		curSH2ModelFile --;
 
-	sprintf(curFileInfo,"FILE: %s",allSH4Files[curSH4File]);
+	sprintf(curFileInfo,"FILE: %s",SH4Files[curSH4File]);
 
 	if( debugMode )
-		LogFile(ERROR_LOG,"Load_SH4_File() - EXIT CHECK: curSH2ModelFile is [%ld]= %s",curSH4File,allSH4Files[curSH4File]);
+		LogFile(ERROR_LOG,"Load_SH4_File() - EXIT CHECK: curSH2ModelFile is [%ld]= %s",curSH4File,SH4Files[curSH4File]);
 }
 
 //----------------------------------------------------------------------------/
@@ -3907,7 +3717,7 @@ void Process_SH4_KeyInput( )
 
 			curSH4File--;
 
-			while( !sh4Act.loadData( allSH4Files[ curSH4File ] ) && curSH4File >=0)
+			while( !sh4Act.loadData( SH4Files[ curSH4File ].string().c_str() ) && curSH4File >=0)
 			{
 				badLoopCounter++;
 				curSH4File--;
@@ -3931,7 +3741,7 @@ void Process_SH4_KeyInput( )
 				
 
 				if( debugMode )
-					LogFile(ERROR_LOG,"Process_SH4_KeyInput() - POST CHECK: curSH4File is [%ld]= %s",curSH4File,allSH4Files[curSH4File]);
+					LogFile(ERROR_LOG,"Process_SH4_KeyInput() - POST CHECK: curSH4File is [%ld]= %s",curSH4File,SH4Files[curSH4File]);
 			
 			}
 
@@ -3940,7 +3750,7 @@ void Process_SH4_KeyInput( )
 				viewCam.reset( );
 				if( false ) //sh2_anim )
 				{
-					while( !sh2Act.loadAnim( testActAnim, animSH2Files[ curSH2AnimFile ] ) && curSH2AnimFile < numSH2AnimFiles )
+					while( !sh2Act.loadAnim( testActAnim, SH2AnimFiles[ curSH2AnimFile ].string().c_str() ) && curSH2AnimFile < numSH2AnimFiles )
 						curSH2AnimFile++;
 					if( curSH2AnimFile == numSH2AnimFiles )
 					{
@@ -3953,7 +3763,7 @@ void Process_SH4_KeyInput( )
 			}
 		}
 
-		sprintf(curFileInfo,"FILE: %s",allSH4Files[curSH4File]);
+		sprintf(curFileInfo,"FILE: %s",SH4Files[curSH4File]);
 	}
 
 	if (GetAsyncKeyState(VK_RSHIFT) & 0x8000 || GetAsyncKeyState(VK_RCONTROL) & 0x8000)
@@ -3970,7 +3780,7 @@ void Process_SH4_KeyInput( )
 
 			curSH4File = ( curSH4File + 1 ) % numSH4Files;
 
-			while( !sh4Act.loadData( allSH4Files[ curSH4File ] ) )
+			while( !sh4Act.loadData( SH4Files[ curSH4File ].string().c_str()) )
 			{
 				badLoopCounter++;
 				curSH4File++;
@@ -3992,7 +3802,7 @@ void Process_SH4_KeyInput( )
 				}
 
 				if( debugMode )
-					LogFile(ERROR_LOG,"Process_SH4_KeyInput() - POST CHECK: curSH4File is [%ld]= %s",curSH4File,allSH4Files[curSH4File]);
+					LogFile(ERROR_LOG,"Process_SH4_KeyInput() - POST CHECK: curSH4File is [%ld]= %s",curSH4File,SH4Files[curSH4File]);
 			
 			}
 
@@ -4004,9 +3814,9 @@ void Process_SH4_KeyInput( )
 					
 					char l_cModelName[ 256 ];
 					curSH2AnimFile = 0;
-					if( baseName( allSH4Files[ curSH4File ], l_cModelName ) )
+					if( baseName( (char*)SH4Files[ curSH4File ].string().c_str(), l_cModelName ) )
 					{
-						while( !sh2Act.loadAnim( testActAnim, animSH2Files[ curSH2AnimFile ] ) && curSH2AnimFile < numSH2AnimFiles )
+						while( !sh2Act.loadAnim( testActAnim, SH2AnimFiles[ curSH2AnimFile ].string().c_str() ) && curSH2AnimFile < numSH2AnimFiles )
 							curSH2AnimFile++;
 						if( curSH2AnimFile == numSH2AnimFiles )
 						{
@@ -4022,7 +3832,7 @@ void Process_SH4_KeyInput( )
 			}
 		}
 
-		sprintf(curFileInfo,"FILE: %s",allSH4Files[curSH4File]);
+		sprintf(curFileInfo,"FILE: %s",SH4Files[curSH4File]);
 	}
 
 	

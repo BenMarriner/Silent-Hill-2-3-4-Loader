@@ -111,7 +111,7 @@ typedef struct {
 
 /* 'Public' functions */
 void tgaDebugHeader(tgaHeader_t *info);
-void   tgaLoad        ( char *file_name, image_t *p, tgaFLAG mode );
+void   tgaLoad        ( const char *file_name, image_t *p, tgaFLAG mode );
 GLuint tgaLoadAndBind ( const char *file_name, tgaFLAG mode, int *flags=NULL );
 int tgaLoadAndBind2( const char *file_name, tgaFLAG mode,GLuint texture_id );
 int tgaLoadAndBind3( const char *file_name, tgaFLAG mode,GLuint texture_id );
@@ -119,5 +119,5 @@ void tgaSetTexParams  ( unsigned int min_filter, unsigned int mag_filter, float 
 int tgaLoadSeperateChannels(const char *redTex, const char *greenTex, const char *blueTex, const char *alphaTex, tgaFLAG mode, GLuint texture_id );
 void tgaFree ( image_t *p );
 
-int tgaSave( char *filename, image_t *p, bool swapRB = false, bool debugVals = false);
+int tgaSave( const char *filename, image_t *p, bool swapRB = false, bool debugVals = false);
 #endif

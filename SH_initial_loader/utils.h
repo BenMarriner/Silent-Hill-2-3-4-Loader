@@ -65,7 +65,7 @@ typedef undefBlock4Type( 2 ) utype8;
 #define COUNT_LONG_BITS( x )	( BITOP_ONES_COUNT( (x) ) )
 
 long baseName( char *i_pcFilename, char *o_pcBasename );
-long getFileSize( char *i_pcFilename );
+long getFileSize( const char *i_pcFilename );
 /*
 typedef struct
 {

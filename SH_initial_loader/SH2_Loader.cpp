@@ -24,6 +24,7 @@
 #include "SH2_Loader.h"
 #include "utils.h"
 #include "OBJ_Exporter.h"
+#include "AssetLists.h"
 
 
 extern OBJ_Exporter	OBJ_Dump;
@@ -50,7 +51,7 @@ long g_lBothList[]= { 515, 259, 1, 0 };
 //===------====<[ G E N E R A L   F U N C T I O N S ]>====------===/
 
 
-static void clearGLerrors(int lineNum, char *filename,char *module)
+static void clearGLerrors(int lineNum, const char *filename,const char *module)
 {
 	GLenum errorCode;
 	int    eFlag = 0;
@@ -786,7 +787,7 @@ if(debugMode)LogFile(ERROR_LOG,"About to open file %s",pTD->texFile.c_str());
 /* sh2_tex_index::LoadFileInfo                                                 */
 /*    Loads tex info from a map & saves it in ascending order in the tex list  */
 /*-----------------------------------------------------------------------------*/
-int sh2_tex_index::LoadFileInfo( char *mapName )
+int sh2_tex_index::LoadFileInfo( const char *mapName )
 {
 	sh2_map_file_header		m_sFileHeader;
 	FILE *inFile;
@@ -827,7 +828,7 @@ int sh2_tex_index::LoadFileInfo( char *mapName )
 /* sh2_tex_index::LoadModelFileInfo                                            */
 /*    Loads tex info from a map & saves it in ascending order in the tex list  */
 /*-----------------------------------------------------------------------------*/
-int sh2_tex_index::LoadModelFileInfo( char *modelName )
+int sh2_tex_index::LoadModelFileInfo( const char *modelName )
 {
 	sh2_model_base_header	m_sFileHeader;
 	FILE *inFile;
@@ -878,7 +879,7 @@ int sh2_tex_index::LoadModelFileInfo( char *modelName )
 /* sh2_tex_index::LoadFileInfoAux                                              */
 /*    Loads tex info from a starting point & saves it in order in the tex list */
 /*-----------------------------------------------------------------------------*/
-int sh2_tex_index::LoadFileInfoAux( FILE *inFile, char *mapName, long _lTexDataSize )
+int sh2_tex_index::LoadFileInfoAux( FILE *inFile, const char *mapName, long _lTexDataSize )
 {
 	sh2_tex_base_header		m_sTexBaseHeader;
 	sh2_tex_batch_header	m_sTexBatchHeader;
@@ -1131,7 +1132,7 @@ int sh2_tex_index::AddToTexList( sh2_tex_data *pTD )
 /* sh2_tex_index::BuildTexList                                                 */
 /*    Builds Tex List from map files from starting dir & records them in order */
 /*-----------------------------------------------------------------------------*/
-void sh2_tex_index::BuildTexList( char *pDirName )
+void sh2_tex_index::BuildTexList()
 {
 	WIN32_FIND_DATA fileData;	
 	HANDLE fileHandle;
@@ -1139,9 +1140,11 @@ void sh2_tex_index::BuildTexList( char *pDirName )
 	char fileName[512];
 	bool addSlash = false;
 	bool origDebug;
+	vector<filesystem::path>* mapList = &SH2SceneFiles;
+	vector<filesystem::path>* modelList = &SH2ModelFiles;
 
 
-	if( pDirName[ strlen( pDirName ) - 1 ] == '\\' )
+	/*if( pDirName[ strlen( pDirName ) - 1 ] == '\\' )
 	{
 		addSlash = false;
 		sprintf( dirName,"%s*",pDirName );
@@ -1150,12 +1153,46 @@ void sh2_tex_index::BuildTexList( char *pDirName )
 	{
 		addSlash = true;
 		sprintf( dirName, "%s\\*",pDirName );
-	}
+	}*/
 		
 	origDebug = debugMode;
 	//debugMode = false;
+
+	
+
+	if (mapList)
+	{
+		for (auto& mapPath : *mapList)
+		{
+			if (!LoadFileInfo(mapPath.string().c_str()))
+			{
+				LogFile(TEST_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", mapPath.filename());
+				LogFile(ERROR_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", mapPath.filename());
+			}
+		}
+	}
+	else
+	{
+		LogFile(ERROR_LOG, "ERROR: mapList invalid! sh2_tex_index::BuildTexList() has failed");
+	}
+
+	if (modelList)
+	{
+		for (auto& modelPath : *modelList)
+		{
+			if (!LoadFileInfo(modelPath.string().c_str()))
+			{
+				LogFile(TEST_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", modelPath.filename());
+				LogFile(ERROR_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", modelPath.filename());
+			}
+		}
+	}
+	else
+	{
+		LogFile(ERROR_LOG, "ERROR: modelList invalid! sh2_tex_index::BuildTexList() has failed");
+	}
 		
-	if((fileHandle = FindFirstFile( dirName, &fileData)) != INVALID_HANDLE_VALUE )
+	/*if((fileHandle = FindFirstFile( dirName, &fileData)) != INVALID_HANDLE_VALUE )
 	{
 		do
 		{
@@ -1220,7 +1257,7 @@ void sh2_tex_index::BuildTexList( char *pDirName )
 	{
 		LogFile( TEST_LOG,"sh2_tex_index::BuildTexList( %s ) - ERROR: Unable to find first file",pDirName );
 		LogFile(ERROR_LOG,"sh2_tex_index::BuildTexList( %s ) - ERROR: Unable to find first file",pDirName );
-	}
+	}*/
 	
 	debugMode = origDebug;
 	//{
@@ -1853,7 +1890,8 @@ if( m_bFirstTime && debugMode )	LogFile( ERROR_LOG, "Point ");
 			}
 		}
 */
-		texID = sh2TexList.GetTex( string( texName ), true);
+		string texNameStr = string(texName);
+		texID = sh2TexList.GetTex(texNameStr, true);
 		if( !isResident( texID ) && debugMode )
 			LogFile(ERROR_LOG,"SH2_MapPrimitiveStatic::RenderPrimitive( ) - TERMINAL ERROR\n#############################\n  TexID %ld is not resident!!!\n##############################",texID);
 //		if( psUnknownData[ m_sStaticTexRanges[ k ].texNum ].q1 != 1 )
@@ -2465,7 +2503,8 @@ void SH2_MapPrimitiveVar::RenderPrimitive( sh2_map_unknown_data *psUnknownData )
 		sprintf( texName, "%15ld", texNum);
 		if( debugMode && m_bFirstTime )LogFile( ERROR_LOG, "Here 1 - texName: %s", texName);
 
-		texID = sh2TexList.GetTex( string( texName ), true);
+		string texNameStr = string(texName);
+		texID = sh2TexList.GetTex(texNameStr, true);
 
 		if( !isResident( texID ) && debugMode )
 			LogFile(ERROR_LOG,"SH2_MapPrimitiveVar::RenderPrimitive( ) - TERMINAL ERROR\n#############################\n  TexID %ld is not resident!!!\n##############################",texID);
@@ -2588,7 +2627,7 @@ void SH2_MapPrimitiveVar::RenderPrimitive( sh2_map_unknown_data *psUnknownData )
 /* SH2_MapLoader::LoadMap                                                      */
 /*   Loads the map, calling sub funcs for textures and primitives.             */
 /*-----------------------------------------------------------------------------*/
-int SH2_MapLoader::LoadMap( char *fileName )
+int SH2_MapLoader::LoadMap( const char *fileName )
 {
 	SH2_MapPrimitiveStatic	*primStatic = NULL;	//=[ Temp Variables For Primitives ]=/
 	SH2_MapPrimitiveVar		*primVar = NULL;
@@ -3025,7 +3064,7 @@ int SH2_MapLoader::LoadTextureData( FILE *inFile, long texDataSize )
 	long lTotalRead = 0;
 	long k;
 	unsigned char *pixels = NULL;
-	char texStr[128];
+	char texName[128];
 
 	if( debugMode )
 		LogFile( ERROR_LOG, "SH2_MapLoader::LoadTextureData( ) -------------- Start -------------- (total size: %ld)", texDataSize);
@@ -3169,11 +3208,12 @@ LogFile( ERROR_LOG, "TEST - PASSED COMPRESSED TEX CALL");
 		//k = m_sFilename.find_last_of('\\');
 
 		//sprintf( texStr, "%s_%ld",( k > 0 )?( m_sFilename.substr( k )).c_str():m_sFilename.c_str(), m_vTexData.size());
-		sprintf( texStr, "%ld",sTexData.batchHeader.texSetID);
+		sprintf( texName, "%ld",sTexData.batchHeader.texSetID);
 LogFile( ERROR_LOG, "TEST - PASSED Here?");
 		m_vTexData.push_back( sTexData );
 LogFile( ERROR_LOG, "TEST - PASSED Or Here? - Total read = %ld",lTotalRead);
-		textureMgr.AddTex(string(texStr), sTexData.texID, 0);
+		string texNameStr = string(texName);
+		textureMgr.AddTex(texNameStr, sTexData.texID, 0);
 LogFile( ERROR_LOG, "TEST - PASSED Or Here? 2 - Total read = %ld",lTotalRead);
 	}
 

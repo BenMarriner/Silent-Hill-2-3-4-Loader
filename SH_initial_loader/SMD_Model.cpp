@@ -102,15 +102,15 @@ bool		SMD_Model::Load( FileCrawler & _is )
 		l_curLine = _is.readLine( ).toLower();
 
 		//---[ Use Tag To Determine Action ]---/
-		if( l_curLine.substr( 0, 7 ) == "version" )
+		if( l_curLine.substr( 0, 7 ) == (char*)"version" )
 		{
 			continue;
 		}
-		else if( l_curLine == "nodes" )
+		else if( l_curLine == (char*)"nodes" )
 		{
 
 		}
-		else if( l_curLine == "skeleton" )
+		else if( l_curLine == (char*)"skeleton" )
 		{
 			SMD::SMD_Animation_Frame l_curFrame;
 
@@ -121,7 +121,7 @@ bool		SMD_Model::Load( FileCrawler & _is )
 				this->AddAnimationFrame( l_curFrame );
 			}
 		}
-		else if( l_curLine == "triangles" )
+		else if( l_curLine == (char*)"triangles" )
 		{
 			SMD_Triangle l_curTriangle;
 
@@ -130,9 +130,9 @@ bool		SMD_Model::Load( FileCrawler & _is )
 				this->AddTriangle( l_curTriangle );
 			}
 		}
-		else if( l_curLine == "vertexanimation" )
+		else if( l_curLine == (char*)"vertexanimation" )
 		{
-			while( l_curLine != "end" )
+			while( l_curLine != (char*)"end" )
 			{
 				l_curLine = _is.readLine().toLower();
 			}

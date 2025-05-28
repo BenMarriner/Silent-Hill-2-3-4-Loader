@@ -274,9 +274,9 @@ public:
 	bool IsFrameValid( long _lFrame ){ if( _lFrame < 0 || _lFrame >= m_lNumSets ) return false; return true; }
 
 	long LoadAnim( FILE *inFile, unsigned char *ps_mSeq, long _lNumSeq, long sectionSize, bool sh2_load = false );	//Returns # of Animation Frames, or 0 for failure
-	long LoadAnim( char *_fName = NULL, long modelNum = -1, long startInd = 0 );	//Returns # of animation frames, or 0 for failure
-	long LoadAnimSH2( char *_fName = NULL, long startInd = 0 );	//Returns # of animation frames, or 0 for failure. Var 'startInd' refers in this case to the index of the file within the directory
-	bool LoadNextAnim( char * _fName = NULL);			//Returns true or false based on finding and loading another animation for the current model
+	long LoadAnim( const char *_fName = NULL, long modelNum = -1, long startInd = 0 );	//Returns # of animation frames, or 0 for failure
+	long LoadAnimSH2( const char *_fName = NULL, long startInd = 0 );	//Returns # of animation frames, or 0 for failure. Var 'startInd' refers in this case to the index of the file within the directory
+	bool LoadNextAnim( const char * _fName = NULL);			//Returns true or false based on finding and loading another animation for the current model
 
 	//---[ Export Functions ]---/
 	void ExportSMD(  );
@@ -297,7 +297,7 @@ public:
 	sh2_model		*m_pcModel_SH2;
 	vector<sh2_model *>	m_vAttachedSH2;
 	long			m_lNumSets;			//Number of m_pcAnimSet
-	SH_AnimSet	*m_pcAnimSet;		//Each Animation Frame
+	SH_AnimSet		*m_pcAnimSet;		//Each Animation Frame
 	long			m_lNumDispMat;		//Number of matricies for current frame of animation
 	long			m_lNumDispMat2;		//Number of matricies for current frame of animation
 	matrix			*m_pcDispMat;		//Matricies created using 

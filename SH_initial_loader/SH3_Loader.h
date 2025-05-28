@@ -217,11 +217,11 @@ public:
 	GLuint loadTex( long offset, char *texName, int tTexIndex, FILE *infile );
 	void draw( int modelPart = -1 );
 	bool isModel( model_base_header *pHeader );
-	int  loadModel( char *filename, int modelNum );
+	int  loadModel( const char *filename, int modelNum );
 	int  loadModelPrimitive( long offset, model_primitive *pPrim, FILE *infile);
 	void releaseModelData();
-	int  getMinModel( char *filename );
-	int  getMaxModel( char *filename );
+	int  getMinModel( const char *filename );
+	int  getMaxModel( const char *filename );
 
 	int  findAnimFile( long modelNum, char *filename );			//Returns -1 if index not found
 	int  loadAnimFile( FILE *infile, long offset, long size );
@@ -711,9 +711,9 @@ public:
 
 	int  loadScene( FILE *sceneFile, long bOffset );	//Loads scene from file that already points to scene start
 	void loadTexture( FILE *sceneFile );
-	int  loadArcScene( char *filename, int sceneNum );	//Loads scene from arc file - uses loadScene
-	int  getMinScene( char *filename );					//Determines first scene offset
-	int  getMaxScene( char *filename );					//Returns last scene offset
+	int  loadArcScene( const char *filename, int sceneNum );	//Loads scene from arc file - uses loadScene
+	int  getMinScene( const char *filename );					//Determines first scene offset
+	int  getMaxScene( const char *filename );					//Returns last scene offset
 	bool isSceneValid(){ return (numScenePrimitives > 0 && sceneData );}	//Determines if a scene is loaded
 	bool isMainSceneHeader( main_scene_header *h );		//Determines if a main header is actually a main header
 

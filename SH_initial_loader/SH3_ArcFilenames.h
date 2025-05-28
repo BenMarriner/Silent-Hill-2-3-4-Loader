@@ -50,7 +50,7 @@ public:
 	sh3_arc_filename & operator=( const sh3_arc_filename & rhs );
 
 	int Load( gzFile iHandle );
-	bool IsFileType( char *pcFileExt );
+	bool IsFileType( const char *pcFileExt );
 };
 
 
@@ -77,7 +77,7 @@ public:
 
 	int Load( gzFile iHandle );
 
-	long GetCountFileType( char *pcFileExt );	//Returns count of a particular file extension
+	long GetCountFileType( const char *pcFileExt );	//Returns count of a particular file extension
 };
 
 
@@ -112,9 +112,9 @@ public:
 
 	void deleteData( ){ delete [] m_pcFilename; m_lNumFilenames = 0; }
 
-	bool buildList( sh3_arc_section_header *pcArcSection, char *pFileExt );
-	bool buildListMDL( sh3_arc_section_header *pcArcSection ){ return buildList( pcArcSection, ".mdl" ); }
-	bool buildListMAP( sh3_arc_section_header *pcArcSection ){ return buildList( pcArcSection, ".map" ); }
+	bool buildList( sh3_arc_section_header *pcArcSection, const char *pFileExt );
+	bool buildListMDL( sh3_arc_section_header *pcArcSection ){ return buildList( pcArcSection, ".mdl"); }
+	bool buildListMAP( sh3_arc_section_header *pcArcSection ){ return buildList( pcArcSection, ".map"); }
 };
 
 

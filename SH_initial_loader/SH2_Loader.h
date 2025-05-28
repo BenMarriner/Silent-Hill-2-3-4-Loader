@@ -216,12 +216,12 @@ public:
 	GLuint GetTex( string & name, 				//Returns the texture ID for it's openGL handle
 				bool alpha = false );			//If alpha is set to true, it will turn on alpha if the tex is RGBA
 	GLuint LoadTex( sh2_tex_data *pTD );		//Loads the texture by name from it's map file
-	int LoadFileInfo( char *mapName );			//Loads a single map file, and reads the texture info, saving in the texList
-	int LoadModelFileInfo( char *modelName );	//Loads a single model file, and reads the texture info, saving in the texList
-	int LoadFileInfoAux( FILE *inFile,char *mapName, 
+	int LoadFileInfo( const char *mapName );			//Loads a single map file, and reads the texture info, saving in the texList
+	int LoadModelFileInfo( const char *modelName );	//Loads a single model file, and reads the texture info, saving in the texList
+	int LoadFileInfoAux( FILE *inFile,const char *mapName, 
 		long _lTexDataSize );		//Aux to Load*FileInfo functions.  Since the only part that differs is the beginning..
 	int AddToTexList( sh2_tex_data *pTD );		//Adds the texture to the texlist in ascending order
-	void BuildTexList( char *pDirName );		//Loads all files in the directory, and subdirectory, and reads in the texture info
+	void BuildTexList();		//Loads all files in the directory, and subdirectory, and reads in the texture info
 	GLuint	GetBadTex( );						//Returns an ID for the "Bad Texture" - A texture that doesn't exist
 
 	vector< sh2_tex_data >	m_vTexList;
@@ -557,11 +557,11 @@ class SH2_MapLoader
 {
 public:
 	SH2_MapLoader( ){ memset( (void*)this,0, sizeof((*this))); m_bFirstTime = true;}
-	SH2_MapLoader( char *fileName ){ LoadMap( fileName ); }
+	SH2_MapLoader( const char *fileName ){ LoadMap( fileName ); }
 	~SH2_MapLoader( ){ DeleteDynamicData( ); }
 
 	void DeleteDynamicData( ){ SAFEDELETE( m_psUnknownData ); SAFEDELETE( m_pcVarPrim ); SAFEDELETE( m_pcStaticPrim ); }
-	int LoadMap( char *fileName );
+	int LoadMap( const char *fileName );
 	int LoadTextureData( FILE *inFile, long texDataSize );
 	int	LoadPrimOffsetIndex( FILE *inFile, sh2_map_offset_index *pOffIndex );
 	void RenderMap( );

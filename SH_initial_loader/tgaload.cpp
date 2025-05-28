@@ -281,7 +281,7 @@ void tgaChecker ( image_t *p )
 }
 
 
-void tgaError ( char *error_string, char *file_name, FILE *file, image_t *p )
+void tgaError ( const char *error_string, char *file_name, FILE *file, image_t *p )
 {
 	char messageString[200];
 	sprintf  (messageString, "TGA LOAD ERROR::%s - %s\n", error_string, file_name );
@@ -423,7 +423,7 @@ int tgaLoadTheImage ( char *file_name, image_t *p, tgaFLAG mode )
 }
 
 
-int tgaSave( char *filename, image_t *p, bool swapRB, bool debugVals )
+int tgaSave( const char *filename, image_t *p, bool swapRB, bool debugVals )
 {
 	FILE *file;
 	tgaHeader_t *info = &p->info;
