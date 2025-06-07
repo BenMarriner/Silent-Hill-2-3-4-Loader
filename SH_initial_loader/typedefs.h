@@ -20,6 +20,7 @@
 #include "vertex.h"
 #include "quat.h"
 #include "matrix.h"
+#include <unordered_map>
 //#include "LinkedList.H"
 
 
@@ -30,8 +31,36 @@
 //############## PLACE IN APPROPRIATE OTHER CLASSES, ie CollisionDetection, Texture,
 //#######  Geometry Data Structs, ect..
 
+// Config default values
+#define DISPLAY_MODE_DEFAULT 2
+#define REFRESH_DEFAULT 60
+#define COLOR_DEPTH_DEFAULT 32
+#define DEPTH_BUFFER_DEFAULT 24
+#define STENCIL_DEFAULT 8
+#define FULLSCREEN_DEFAULT 1
+#define Z_DISTANCE_DEFAULT 25000.0
+#define SCREEN_COLOR_R_DEFAULT 0.0
+#define SCREEN_COLOR_G_DEFAULT 0.0
+#define SCREEN_COLOR_B_DEFAULT 0.0
+#define SH2_DATA_DIR_DEFAULT filesystem::path("C:\\Program Files\\KONAMI\\SILENT HILL 2\\data")
+#define SH3_DATA_DIR_DEFAULT filesystem::path("C:\\Program Files\\KONAMI\\SILENT HILL 3\\data")
+#define SH4_DATA_DIR_DEFAULT filesystem::path("C:\\Program Files\\KONAMI\\SILENT HILL 4\\data")
+#define NUM_SCENES_DEFAULT 1
+#define DEBUG_DEFAULT 1
+#define ANIM_DEBUG_DEFAULT 0
+#define DUMP_MESH_DATA_DEFAULT 1
+#define MOVEMENT_RATE_DEFAULT 100.0
+#define MOUSE_RATE_DEFAULT 1.0f
+#define ANIM_FRAMERATE_DEFAULT 24.0
+#define SH2_ANIM_DEFAULT 0
+#define DEBUG_RENDER_DEFAULT 0
+#define THROTTLE_KEYS_DEFAULT 8.0
+#define TEST_MODE_DEFAULT 0
 
-
+struct Config
+{
+	std::unordered_map<std::string, std::string> values;
+};
 
 typedef struct{
 	WORD w,h;
@@ -41,8 +70,6 @@ const dim2d dScreenRes[]={{640,480},{800,600},{1024,768},{1280,1024},{1600,1200}
 
 enum resScreen {_640x480 = 0, _800x600, _1024x768, _1280x960, _1280x1024, _1600x1200, _1280x800 };
 enum refreshScreen {r60 = 60 ,r70 = 70 ,r72 = 72 ,r75 = 75 ,r85 = 85 ,r100 = 100};
-
-
 
 #ifndef LOG_OUTPUT
 #define LOG_OUTPUT

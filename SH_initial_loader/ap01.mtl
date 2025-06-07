@@ -1,0 +1,140 @@
+# Silent Hill Viewer - Model Export
+#
+# Created by perdedork - E-mail: perdedork@yahoo.com
+#
+
+newmtl             1850_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1850.tga
+
+
+newmtl             1851_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1851.tga
+
+
+newmtl             1852_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1852.tga
+
+
+newmtl             1854_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1854.tga
+
+
+newmtl             1855_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1855.tga
+
+
+newmtl             1856_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1856.tga
+
+
+newmtl             1858_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1858.tga
+
+
+newmtl             1859_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1859.tga
+
+
+newmtl             1860_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1860.tga
+
+
+newmtl             1862_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1862.tga
+
+
+newmtl             1863_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1863.tga
+
+
+newmtl             1864_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1864.tga
+
+
+newmtl             1865_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 1.000000
+map_Kd            1865.tga
+
+
+newmtl             1862alpha_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 0.080000
+map_Kd            1862.tga
+
+
+newmtl             1866alpha_mtl
+Kd      1.0000 1.000 1.000
+Ka      1.0000 1.000 1.000
+Ks      1.0000 1.000 1.000
+illum 0
+d 0.080000
+map_Kd            1866.tga
+
+

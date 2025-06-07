@@ -44,6 +44,7 @@
 #include "OBJ_Exporter.h"
 #include <filesystem>
 #include <regex>
+#include <fstream>
 
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
@@ -165,6 +166,7 @@ float fClearColorGreen = 0.4f;
 float fClearColorBlue = 0.2f;
 float d_frameRate = 24.0f;
 float fThrottleRatio = 4.0f;
+float zDist = 1000.0f;
 
 int g_iMoveDir = 1;
 int gTestInt = 0;
@@ -1201,6 +1203,175 @@ dumpModel = false;
 	return 0;
 }
 
+void Trim(string& inputString)
+{
+	auto itl = std::find_if_not(
+		inputString.begin(),
+		inputString.end(),
+		[](unsigned char ch)
+		{
+			return std::isspace(ch);
+		}
+	);
+	inputString.erase(inputString.begin(), itl);
+
+	auto itr = std::find_if_not(
+		inputString.rbegin(),
+		inputString.rend(),
+		[](unsigned char ch)
+		{
+			return std::isspace(ch);
+		}
+	);
+	inputString.erase(itr.base(), inputString.end());
+}
+
+//-----------------------------------------------------------------------------
+// Name: InitConfig()
+// Desc: Initialises settings from the config file
+//-----------------------------------------------------------------------------
+int InitConfig(Config& outConfig)
+{
+	namespace fs = std::filesystem;
+
+	fs::path exeDir = fs::current_path();
+	fs::path cfgPath = exeDir / "default.cfg";
+
+	if (!fs::exists(cfgPath))
+	{
+		LogFile(ERROR_LOG, "Couldn't find the configuration file at %s\n", cfgPath.string());
+		return 0;
+	}
+
+	ifstream file(cfgPath);
+	if (!file.is_open())
+	{
+		LogFile(ERROR_LOG, "Couldn't open the configuration file at %s\n", cfgPath.string());
+		return 0;
+	}
+
+	std::string line;
+	while (std::getline(file, line))
+	{
+		if (line.empty())
+			continue;
+
+		Trim(line);
+
+		if (line[0] == '#')
+			continue;
+
+		auto eqPos = line.find(' ');
+		if (eqPos == string::npos)
+		{
+			if (line.find("data_dir")) // Just skip this line and move onto the next if a data directory doesn't exist. No need to throw an error
+				continue;
+
+			LogFile(ERROR_LOG, "Invalid key-value pair while reading line: %s", line);
+			return 0;
+		}
+
+		string key = line.substr(0, eqPos);
+		string value = line.substr(eqPos + 1);
+		Trim(key);
+		Trim(value);
+
+		outConfig.values[key] = value;
+	}
+
+	file.close();
+	return 1;
+}
+
+template<typename T>
+bool ParseString(const string& text, T& out)
+{
+	std::istringstream iss(text);
+	if (!(iss >> out))
+		return false;
+	if (!iss.eof())
+		return false;
+	return true;
+}
+
+template<>
+bool ParseString<bool>(const string& text, bool& out)
+{
+	string s = text;
+	for (auto& c : s) c = static_cast<char>(std::tolower(c));
+	if (s == "true" || s == "1") { out = true; return true; }
+	if (s == "false" || s == "0") { out = false; return false; }
+	return false;
+}
+
+template<typename T>
+T GetConfigVariable(
+	const std::unordered_map<string, string>& values,
+	const string& key,
+	const T& defaultValue)
+{
+	auto it = values.find(key);
+	if (it == values.end())
+	{
+		LogFile(ERROR_LOG, "Couldn't read config variable %s. Reverting to default value", key);
+		return defaultValue;
+	}
+
+	T result{};
+	if (!ParseString<T>(it->second, result))
+	{
+		LogFile(ERROR_LOG, "Couldn't read config variable %s's value. Reverting to default value", key);
+		return defaultValue;
+	}
+
+	return result;
+}
+
+template<>
+filesystem::path GetConfigVariable<filesystem::path>(
+	const std::unordered_map<string, string>& values,
+	const string& key,
+	const filesystem::path& defaultValue)
+{
+	auto it = values.find(key);
+	if (it == values.end())
+	{
+		LogFile(ERROR_LOG, "Couldn't read path for %s", key);
+		return defaultValue;
+	}
+
+	filesystem::path path = it->second;
+	return path;
+}
+
+void AssignConfigVars(const Config& config)
+{
+	colorBits = GetConfigVariable(config.values, "d_colordepth", COLOR_DEPTH_DEFAULT);
+	depthBits = GetConfigVariable(config.values, "d_depthbuff", DEPTH_BUFFER_DEFAULT);
+	stencilBits = GetConfigVariable(config.values, "d_stencil", STENCIL_DEFAULT);
+	screenDimMode = GetConfigVariable(config.values, "d_dispmode", DISPLAY_MODE_DEFAULT) % NUM_SCREEN_DIMS;
+	refreshRate = GetConfigVariable(config.values, "d_refresh", REFRESH_DEFAULT);
+	fullScreen = GetConfigVariable(config.values, "d_fullscreen", FULLSCREEN_DEFAULT);
+	sceneLimit = GetConfigVariable(config.values, "o_num_scenes", NUM_SCENES_DEFAULT);
+	baseSH2dir = GetConfigVariable(config.values, "o_sh2_data_dir", SH2_DATA_DIR_DEFAULT);
+	baseSH3dir = GetConfigVariable(config.values, "o_sh3_data_dir", SH3_DATA_DIR_DEFAULT);
+	baseSH4dir = GetConfigVariable(config.values, "o_sh4_data_dir", SH4_DATA_DIR_DEFAULT);
+	sh2_anim = GetConfigVariable(config.values, "o_sh2_anim", SH2_ANIM_DEFAULT);
+	zDist = GetConfigVariable(config.values, "d_zdist", Z_DISTANCE_DEFAULT);
+	debugRender = GetConfigVariable(config.values, "o_debug_render", DEBUG_RENDER_DEFAULT);
+	debugMode = GetConfigVariable(config.values, "o_debug", DEBUG_DEFAULT);
+	animDebugMode = GetConfigVariable(config.values, "o_anim_debug", ANIM_DEBUG_DEFAULT);
+	dumpModel = GetConfigVariable(config.values, "o_dumpmeshdata", DUMP_MESH_DATA_DEFAULT);
+	testMode = GetConfigVariable(config.values, "o_test_mode", TEST_MODE_DEFAULT);
+	fMoveRate = GetConfigVariable(config.values, "o_movement_rate", MOVEMENT_RATE_DEFAULT);
+	fMouseRate = GetConfigVariable(config.values, "o_mouse_rate", MOUSE_RATE_DEFAULT);
+	fThrottleRatio = GetConfigVariable(config.values, "o_throttle_ratio", THROTTLE_KEYS_DEFAULT);
+	d_frameRate = GetConfigVariable(config.values, "o_anim_frame_rate", ANIM_FRAMERATE_DEFAULT);
+	fClearColorRed = GetConfigVariable(config.values, "d_screen_color", SCREEN_COLOR_R_DEFAULT);
+	fClearColorGreen = GetConfigVariable(config.values, "d_screen_color", SCREEN_COLOR_G_DEFAULT);
+	fClearColorBlue = GetConfigVariable(config.values, "d_screen_color", SCREEN_COLOR_B_DEFAULT);
+}
+
 //-----------------------------------------------------------------------------
 // Name: init()
 // Desc: 
@@ -1208,11 +1379,12 @@ dumpModel = false;
 int init( void )
 {
 	char configFile[128]="default.cfg";
+	Config config;
 	int nMode = 0;
 	DEVMODE devMode;
 	bool bDesiredDevModeFound = false;
 	FILE *fp;
-	float zDist = 1000.0f;
+	
 
 	// Variables for setting pixel format and display settings
 	DWORD flagPtr=PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
@@ -1221,77 +1393,17 @@ int init( void )
 
 	char errorString[128];
 
-	if((fp=fopen(configFile,"r"))!=NULL)
+	if (!InitConfig(config))
 	{
-		while(!feof(fp))
-		{
-			char command[20],option[512],junkStr[128];
-			char configLine[4096], *optionStart;
-			int k = 0;
-
-			
-			fgets(configLine,4096,fp);
-
-			while( configLine[k] == ' ' && configLine[k] == '\t' && configLine[k] != '\0')
-				k++;
-
-			optionStart = strchr( &(configLine[k]), ' ');
-			optionStart = (optionStart)?optionStart:strchr( &(configLine[k]), '\t');
-
-			if( configLine[k] != '\0' && configLine[k] != '\n' && (!optionStart || optionStart - &(configLine[k]) > 20 || strlen( optionStart ) > 512 ))
-				LogFile(ERROR_LOG,"init( %d ) - ERROR: Config File Line Appears to be invalid:\n[%s]\n\t...Ignoring Line",__LINE__, &(configLine[k]));
-			else if(configLine[k] != '\0' && configLine[k] != '#' && configLine[k] != '\n' )
-			{
-				sscanf(&(configLine[k]),"%20s%128[\t ]%512[^\n\0\r]",command,junkStr,option);
-				//--------------------------------------------------/
-				// Config file options - add as more are added... --/
-				//--------------------------------------------------/
-
-				if( debugMode )
-					LogFile(ERROR_LOG,"TEST: command [%s] space[%s] option [%s]",command,junkStr,option);
-				if     (strncmp(command,"d_colordepth",12)==0)		colorBits=atoi(option);
-				else if(strncmp(command,"d_depthbuff",11)==0)		depthBits=atoi(option);
-				else if(strncmp(command,"d_stencil",9)==0)			stencilBits=atoi(option);
-				else if(strncmp(command,"d_dispmode",10)==0)		screenDimMode=atoi(option) % NUM_SCREEN_DIMS;
-				else if(strncmp(command,"d_refresh",9)==0)			refreshRate=atoi(option);
-				else if(strncmp(command,"d_fullscreen",12)==0)		fullScreen=atoi(option);
-				else if(strncmp(command,"o_num_scenes",12)==0)		sceneLimit=atoi(option);
-				/*else if(strncmp(command,"o_sh2_data_dir",14)==0)	sprintf(baseSH2dir,"%.256s",option);
-				else if(strncmp(command,"o_sh3_data_dir",14)==0)	sprintf(baseSH3dir,"%.256s",option);
-				else if(strncmp(command,"o_sh4_data_dir",14)==0)	sprintf(baseSH4dir,"%.256s",option);*/
-				else if(strncmp(command,"o_sh2_data_dir",14)==0)	baseSH2dir = option;
-				else if(strncmp(command,"o_sh3_data_dir",14)==0)	baseSH3dir = option;
-				else if(strncmp(command,"o_sh4_data_dir",14)==0)	baseSH4dir = option;
-				else if(strncmp(command,"o_sh2_anim",10)==0)		sh2_anim = (atoi(option) != 0 );
-				else if(strncmp(command,"d_zdist",7)==0)			zDist = (float)atof(option);
-				else if(strncmp(command,"o_debug_render",14)==0)	debugRender = (atoi(option) != 0);
-				else if(strncmp(command,"o_debug",7)==0)			debugMode = (atoi(option) != 0);				
-				else if(strncmp(command,"o_anim_debug",12)==0)		animDebugMode = (atoi(option) != 0);
-				else if(strncmp(command,"o_dumpmeshdata",14)==0)	dumpModel=(atoi(option) != 0 );
-				else if(strncmp(command,"o_test_mode",11)==0)		testMode=(atoi(option) != 0 );
-				else if(strncmp(command,"o_movementrate",14)==0)	fMoveRate = (float)atof(option);
-				else if(strncmp(command,"o_mouse_rate",12)==0)		fMouseRate = (float)atof(option);
-				else if(strncmp(command,"o_throttle_keys",15)==0)	fThrottleRatio = (float)atof(option);
-				else if(strncmp(command,"o_anim_frame_rate",17)==0)	d_frameRate = (float)atof(option);
-				else if(strncmp(command,"d_screen_color",14)==0)	sscanf(option,"%f %f %f",&fClearColorRed,&fClearColorGreen,&fClearColorBlue);
-				else 
-					LogFile( ERROR_LOG, "init( ) - ERROR: Config command '%s' not recognized\n\t...Ignored",command);
-
-			}
-		}
-	}
-	else
-	{
-
 		sprintf( errorString, "init( ) - ERROR: Couldn't load default.cfg - REASON: %s",strerror( errno ) );
 		LogFile( ERROR_LOG, errorString );
 		MessageBox( NULL, errorString, "FATAL ERROR: Config", MB_OK );
-		if( MessageBox( NULL, "Do you want to create a generic 'default.cfg'?","NOTICE",MB_YESNO ) )
-			createEmptyConfig( );
+		/*if( MessageBox( NULL, "Do you want to create a generic 'default.cfg'?","NOTICE",MB_YESNO ) )
+			createEmptyConfig( );*/
 		return 0;
 	}
+	AssignConfigVars(config);
 
-	fclose( fp );
 
 	//---[ Validate debug settings, to avoid invalid values ]---/
 	if( zDist < F_EPS )
@@ -1394,18 +1506,55 @@ int init( void )
 	if (!gladLoadGL(glad_win32_loader))
 	{
 		MessageBox(NULL, "gladLoadGL failed", "Error", MB_OK);
-		return -1;
+		//return 0;
 	}
-	//if (!gladLoadWGL(hdc, glad_win32_loader))
-	//{
-	//	/*for (size_t i = 0; i < glad_wgl_max_function; ++i)
-	//	{
+	
+	if (!gladLoadWGL(hdc, glad_win32_loader))
+	{
+		MessageBox(NULL, "gladLoadWGL failed", "Error", MB_OK);
+		//return 0;
+	}
 
-	//	}*/
+	using GetExtsFn = const char* (WINAPI*)(HDC);
+	auto wglGetExts = (PFNWGLGETEXTENSIONSSTRINGARBPROC)wglGetProcAddress("wglGetExtensionsStringARB");
+	const char* wglExts = wglGetExts ? wglGetExts(hdc) : "";
+	static const  char* wglRequired[] = {
+		"WGL_ARB_pixel_format",
+		"WGL_ARB_create_context",
+		"WGL_EXT_swap_control",
+		"WGL_ARB_extensions_string",
+		"WGL_ARB_pbuffer",
+		"WGL_ARB_pixel_format",
+		"WGL_ARB_pixel_format_float",
+		"WGL_ARB_render_texture"
+	};
 
-	//	MessageBox(NULL, "gladLoadWGL failed", "Error", MB_OK);
-	//	return -1;
-	//}
+	for (auto& name : wglRequired)
+	{
+		if (std::strstr(wglExts, name) == nullptr)
+		{
+			LogFile(ERROR_LOG, "Missing WGL extension %s", name);
+		}
+	}
+
+	const char* glExts = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+	static const char* glRequired[] = {
+		"GL_ARB_fragment_program",
+		"GL_ARB_multitexture",
+		"GL_ARB_texture_compression",
+		"GL_ARB_texture_cube_map",
+		"GL_ARB_vertex_program",
+		"GL_EXT_texture_compression_s3tc",
+		"GL_EXT_texture_filter_anisotropic"
+	};
+
+	for (auto& name : glRequired)
+	{
+		if (std::strstr(glExts, name))
+		{
+			LogFile(ERROR_LOG, "Missing GL extension %s", name);
+		}
+	}
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -1433,7 +1582,7 @@ int init( void )
 //-----------------------------------------------------------------------------
 GLADapiproc glad_win32_loader(const char* name)
 {
-	GLADapiproc proc = (GLADapiproc)wglGetProcAddress(name);
+	/*GLADapiproc proc = (GLADapiproc)wglGetProcAddress(name);
 	if (proc == nullptr ||
 		proc == (GLADapiproc)0x1 || (GLADapiproc)0x2 ||
 		proc == (GLADapiproc)0x3 || (GLADapiproc)-1)
@@ -1442,7 +1591,13 @@ GLADapiproc glad_win32_loader(const char* name)
 		proc = (GLADapiproc)GetProcAddress(ogl32, name);
 	}
 
-	return proc;
+	return proc;*/
+
+	void* ptr = (void*)wglGetProcAddress(name);
+	if (ptr) return (GLADapiproc)ptr;
+
+	static HMODULE module = LoadLibraryA("opengl32.dll");
+	return (GLADapiproc)GetProcAddress(module, name);
 }
 
 int pixelFormatSetup(DWORD *flags, BYTE *cbits, BYTE *depthBits, BYTE *stencil,BOOL check)
@@ -1506,7 +1661,7 @@ void createEmptyConfig( )
 		fprintf( outFile, "# This will print out the data for the animations as they load...  It's a *LOT* of data... I don't\n");
 		fprintf( outFile, "#recommend turning it on.  Loading 6 or so models will write out like 10 Megs of logging - Have Fun!\n");
 		fprintf( outFile, "o_anim_debug 1\n\n#NOTE: Because my USB drive was stolen, this only dumps texture data for SH2... I'm not really sure about");
-		fprintf( outFile, "SH3 stuff tho...\no_dumpmeshdata 0\n\n#Constant movement rate per second (Note: This can't be 0)\no_movementrate 100.0\n");
+		fprintf( outFile, "SH3 stuff tho...\no_dumpmeshdata 0\n\n#Constant movement rate per second (Note: This can't be 0)\no_movement_rate 100.0\n");
 		fprintf( outFile, "\n#Mouse sensitivity - The lower it is, the slower the mouse moves when looking around (Note: This can't be 0)o_mouse_rate 1.0\n");
 		fprintf( outFile, "\n#Frame Rate For Animated Models - It seems like they are run at 24 frames per second.  Play around w/ this\n");
 		fprintf( outFile, "o_anim_frame_rate 24.0\n\n#Load SH2 Animations - NOTE: These animations aren't quite right, so it won't look all that good....\n");
@@ -4001,4 +4156,6 @@ void readFileDataAtLocation( char *filename, int numLongs, long offset )
 	delete [] buffer;
 	LogFile(ERROR_LOG,"");
 }
+
+
 
