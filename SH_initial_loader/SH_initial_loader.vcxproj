@@ -148,6 +148,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetLists.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="external\glad\src\wgl.c" />

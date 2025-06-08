@@ -1140,8 +1140,8 @@ void sh2_tex_index::BuildTexList()
 	char fileName[512];
 	bool addSlash = false;
 	bool origDebug;
-	vector<filesystem::path>* mapList = &SH2SceneFiles;
-	vector<filesystem::path>* modelList = &SH2ModelFiles;
+	vector<filesystem::path>& mapList = SH2SceneFiles;
+	vector<filesystem::path>& modelList = SH2ModelFiles;
 
 
 	/*if( pDirName[ strlen( pDirName ) - 1 ] == '\\' )
@@ -1160,36 +1160,22 @@ void sh2_tex_index::BuildTexList()
 
 	
 
-	if (mapList)
+	for (auto& mapPath : mapList)
 	{
-		for (auto& mapPath : *mapList)
+		if (!LoadFileInfo(mapPath.string().c_str()))
 		{
-			if (!LoadFileInfo(mapPath.string().c_str()))
-			{
-				LogFile(TEST_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", mapPath.filename());
-				LogFile(ERROR_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", mapPath.filename());
-			}
+			LogFile(TEST_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", mapPath.filename());
+			LogFile(ERROR_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", mapPath.filename());
 		}
-	}
-	else
-	{
-		LogFile(ERROR_LOG, "ERROR: mapList invalid! sh2_tex_index::BuildTexList() has failed");
 	}
 
-	if (modelList)
+	for (auto& modelPath : modelList)
 	{
-		for (auto& modelPath : *modelList)
+		if (!LoadFileInfo(modelPath.string().c_str()))
 		{
-			if (!LoadFileInfo(modelPath.string().c_str()))
-			{
-				LogFile(TEST_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", modelPath.filename());
-				LogFile(ERROR_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", modelPath.filename());
-			}
+			LogFile(TEST_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", modelPath.filename());
+			LogFile(ERROR_LOG, "sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file \"%s\" to texture list", modelPath.filename());
 		}
-	}
-	else
-	{
-		LogFile(ERROR_LOG, "ERROR: modelList invalid! sh2_tex_index::BuildTexList() has failed");
 	}
 		
 	/*if((fileHandle = FindFirstFile( dirName, &fileData)) != INVALID_HANDLE_VALUE )

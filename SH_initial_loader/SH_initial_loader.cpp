@@ -2147,6 +2147,7 @@ int GetDirectoryFileList(const filesystem::path& rootDataDir, const string& file
 //		{
 //			if( fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY && fileData.cFileName[0] != '.' )
 //			{
+// 
 //				if( addSlash )
 //					sprintf( dirName, "%s\\%s",pDirName, fileData.cFileName );
 //				else

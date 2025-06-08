@@ -952,3 +952,842 @@ NOTE: Unknkown data 17 - TEX: 1863  f1 [0]  q1 [1]  q2 [255]  q3 [255]  q4 [255]
 NOTE: Unknkown data 18 - TEX: 1862  f1 [0]  q1 [0]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
 NOTE: Unknkown data 19 - TEX: 1862  f1 [0]  q1 [0]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
 LoadMap( E:\Archived Games\Konami\Silent Hill 2\data\bg\ap\ap01.map : off: 1836032 ) - TRACKING: Prim Block[ 1 of 1 ]  -  Value of f1 var in prim offset header:  0
+NOTE: Unknkown data 1 - TEX: 6553  f1 [1]  q1 [2305]  q2 [0]  q3 [0]  q4 [0]  q5 [0]  f1 [1]  endMarker [ 0x00000000 ]
+NOTE: Unknkown data 1 - TEX: 1850  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 2 - TEX: 1852  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 3 - TEX: 1851  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 4 - TEX: 1856  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 5 - TEX: 1854  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 6 - TEX: 1855  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 7 - TEX: 1858  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 8 - TEX: 1859  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 9 - TEX: 1860  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 10 - TEX: 1864  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 11 - TEX: 1866  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 12 - TEX: 1864  f1 [0]  q1 [1]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 13 - TEX: 1863  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 14 - TEX: 1865  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 15 - TEX: 0  f1 [1112014848]  q1 [2]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [1112014848]  endMarker [ 0xffffffff ]
+NOTE: Unknkown data 16 - TEX: 1862  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 17 - TEX: 1863  f1 [0]  q1 [1]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 18 - TEX: 1862  f1 [0]  q1 [0]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 19 - TEX: 1862  f1 [0]  q1 [0]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+LoadMap( E:\Archived Games\Konami\Silent Hill 2\data\bg\ap\ap01.map : off: 1836032 ) - TRACKING: Prim Block[ 1 of 1 ]  -  Value of f1 var in prim offset header:  0
+NOTE: Unknkown data 1 - TEX: 1868  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 2 - TEX: 0  f1 [1112014848]  q1 [2]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [1112014848]  endMarker [ 0xffffffff ]
+NOTE: Unknkown data 3 - TEX: 1870  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 4 - TEX: 1871  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 5 - TEX: 1872  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 6 - TEX: 0  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 7 - TEX: 1875  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 8 - TEX: 1874  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 9 - TEX: 1876  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 10 - TEX: 1880  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 11 - TEX: 1881  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 12 - TEX: 1879  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 13 - TEX: 1882  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 14 - TEX: 1882  f1 [1112014848]  q1 [2]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [1112014848]  endMarker [ 0xffffffff ]
+NOTE: Unknkown data 15 - TEX: 1862  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+LoadMap( E:\Archived Games\Konami\Silent Hill 2\data\bg\ap\ap06.map : off: 1836608 ) - TRACKING: Prim Block[ 1 of 1 ]  -  Value of f1 var in prim offset header:  0
+NOTE: Unknkown data 1 - TEX: 1937  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 2 - TEX: 1936  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 3 - TEX: 0  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 4 - TEX: 1938  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 5 - TEX: 1940  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 6 - TEX: 1942  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 7 - TEX: 1941  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 8 - TEX: 1944  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 9 - TEX: 1946  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 10 - TEX: 1945  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 11 - TEX: 1951  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 12 - TEX: 1949  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 13 - TEX: 1950  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 14 - TEX: 1862  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 15 - TEX: 1952  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+LoadMap( E:\Archived Games\Konami\Silent Hill 2\data\bg\ap\ap10.map : off: 1835936 ) - TRACKING: Prim Block[ 1 of 1 ]  -  Value of f1 var in prim offset header:  0
+NOTE: Unknkown data 1 - TEX: 6553  f1 [1]  q1 [2305]  q2 [0]  q3 [0]  q4 [0]  q5 [0]  f1 [1]  endMarker [ 0x00000000 ]
+NOTE: Unknkown data 1 - TEX: 1850  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 2 - TEX: 1852  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 3 - TEX: 1851  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 4 - TEX: 1856  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 5 - TEX: 1854  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 6 - TEX: 1855  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 7 - TEX: 1858  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 8 - TEX: 1859  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 9 - TEX: 1860  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 10 - TEX: 1864  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 11 - TEX: 1866  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 12 - TEX: 1864  f1 [0]  q1 [1]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 13 - TEX: 1863  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 14 - TEX: 1865  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 15 - TEX: 0  f1 [1112014848]  q1 [2]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [1112014848]  endMarker [ 0xffffffff ]
+NOTE: Unknkown data 16 - TEX: 1862  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 17 - TEX: 1863  f1 [0]  q1 [1]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 18 - TEX: 1862  f1 [0]  q1 [0]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 19 - TEX: 1862  f1 [0]  q1 [0]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+LoadMap( C:\Program Files (x86)\Konami\SILENT HILL 2\data\bg\ap\ap01.map : off: 1836032 ) - TRACKING: Prim Block[ 1 of 1 ]  -  Value of f1 var in prim offset header:  0
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\bg\ps\ps67.map ) - ERROR: Incorrect Tex Batch Marker (0x20010730) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "Tο" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\bg\ru\ru74.map ) - ERROR: Incorrect Tex Batch Marker (0x20010730) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "Tο" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\bg\ru\ruGB.map ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "Tο" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\agl\agl.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\agl\ragl.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\arm\arm.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\boat\boat.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\bos\bos.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\edi\hhh_edi.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\edi\hhh_edi_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\edi\lll_edi.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\edi\rhhh_edi.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\ike\ike.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\3sk.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ali_01.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ali_02.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ali_03.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ali_04.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ali_05.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ate_01.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ate_02.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ate_03.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ate_04.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ate_05.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\bab.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\baf.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\box.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\box_01.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\box_02.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_ami.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_bol.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_cha.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_clo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d00.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d01.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d02.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d03.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d05.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d06.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d08.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_d10.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_dha.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_do4.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_doo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_dor.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_ell.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_hul.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_nat.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_nik.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_ori.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_pia.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_piz.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_pop.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_rei.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_rop.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_sti.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_tan.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\b_tel.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c1b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c2b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c3b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c4b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c5b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c6b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c7b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c8b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\c9b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\cab.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfo( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\car03.mdl ) - ERROR: Couldn't read sh2_map_file_header (0 of 32 bytes read)  -  Exiting
+		REASON: No error
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\cbb.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ccb.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\cda.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\cdb.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\cua.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\cub.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\d09.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\dhb.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\dhv.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\dlg.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\dm2.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfo( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\dma_st.mdl ) - ERROR: Couldn't read sh2_map_file_header (0 of 32 bytes read)  -  Exiting
+		REASON: No error
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\dmr.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\evj.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\evk.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\fan.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\gom.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_drink.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_firstaid.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_hair.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_handbul.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_handgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_jlight.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_kakuzai.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_keyelevator.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_keypurple.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_letterm.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_needle.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\g_radio.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\hed.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\hin.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\hou.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\inu.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_bear.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_bear2.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_colt.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_flight.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_handgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_hari.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_headphone.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_juice.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_j_light.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_kakuzai.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_keycou.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_keyelevator.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_keyspe.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_key_clock.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_knife.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_letter.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_letterm.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_lring.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_magazine.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_mdrug.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_mtablet.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_needle.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_photo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_purse.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_radio.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\i_video.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\kab.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\kum.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\lsi.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\mal.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\mne.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\mx2.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\nak.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\nat.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\nef.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\neo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\nep.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\noa.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\nor.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\org.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ori.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\piz.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\pxx.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\rboat.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\rinu.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ri_knife.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ri_photo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\rlau.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\rmry.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\rmxx.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s00.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s01.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s02.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s03.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s04.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s05.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s06.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s07.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s08.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s09.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0a.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0b.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0c.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0d.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0e.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0f.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0g.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0h.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0i.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0j.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0k.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0l.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0m.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0n.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0o.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\s0p.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfo( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\smb_dmcan1.mdl ) - ERROR: Couldn't read sh2_map_file_header (0 of 32 bytes read)  -  Exiting
+		REASON: No error
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfo( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\smb_trush1.mdl ) - ERROR: Couldn't read sh2_map_file_header (0 of 32 bytes read)  -  Exiting
+		REASON: No error
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfo( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\smb_trush3.mdl ) - ERROR: Couldn't read sh2_map_file_header (0 of 32 bytes read)  -  Exiting
+		REASON: No error
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfo( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\smb_trush4.mdl ) - ERROR: Couldn't read sh2_map_file_header (0 of 32 bytes read)  -  Exiting
+		REASON: No error
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\tlr.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\tom.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\tre.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\tvc.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ty2.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ty3.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ura0.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ura1.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ura2.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\ura3.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\xag.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_ample.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_battery.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_bear.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_canopen.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_cinderella.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_coinelder.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_coinprisoner.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_coinsnake.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_cup.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_drink.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_eggred.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_eggrust.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_firstaid.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_hair.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_handbul.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_handgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_horse.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_jlight.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_juice.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_kakuzai.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_key202.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_key312.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_key3f.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keybar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keybase.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keybronze.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyclock.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keycourt.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyelevator.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyemerg.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyemploy.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyfalse.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyfish.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keygate.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyhos.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keylyne.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keynorth.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keypurple.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyrapis.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyroof.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_keyspiral.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_letterm.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_lightbulb.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_lighter.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_lostmemory.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_magazine.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_mermaid.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_needle.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_oil.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_pictstand.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_plate_female.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_plate_kick.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_plate_pig.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_plier.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_purse.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_radio.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_redrelig.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_riflebul.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_ringcopper.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_ringlead.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_shotbul.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_snow.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_spanner.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_thinner.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_video.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_waxdoll.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_wp_csaw.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_wp_pipe.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_wp_riflgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_wp_shotgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\item\x_wp_sp.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\hhh_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\hhh_jms_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\hhl_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\hhl_jms_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\hll_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\hll_jms_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\lll_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\lll_jms_hand.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\lll_jms_kaku.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\lll_jms_n.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\lll_jms_normal.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\lll_jms_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\rhhh_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\rhhl_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\rhll_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\jms\rlll_jms.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\lau\lau.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mar\hhh_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mar\hhh_mar_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mar\lll_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mar\rhhh_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mar\rhhh_mar_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mar\rlll_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mkn\mkn.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mry\mry.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\mxx\mxx.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\nse\nse.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\nse\nse_st.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\oni\oni.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\pap\pap.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\red\red.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\scu\scu.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\scu\scu_st.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\tyu\tyu.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\tyu\tyu_st.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_csaw.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_handgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_kakuzai.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_nata.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_pipe.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_riflgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_shotgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\rwp_sp.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_csaw.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_handgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_kakuzai.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_nata.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_pipe.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_riflgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_shotgun.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\wp\wp_sp.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr\xoo\xoo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\bdcard.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\b_d1x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\b_d2x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\b_d8x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\enx.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\i_oil.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\i_revo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\ri_revo.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\ri_revo_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\s0x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\s1x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\u0x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w1x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w2x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w2x_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w3x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w3x_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w4x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w4x_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w5x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w5x_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w6x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w6x_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w7x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w8x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\w9x.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_birthday.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_bullet_rivolver.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_bullt_revolver.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_chinanife.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_cosmos.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_houban_black.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_houban_red.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_houban_white.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_keyacacia.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_mach.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_present.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_revolver.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_sekihi_black.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_sekihi_red.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\item\x_sekihi_white.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\mar\hhh_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\mar\lxx_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\mar\rhhh_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\mar\rhhh_mar_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\mar\rlxx_mar.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\mar\rlxx_mar_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\wp\rwp_chinanife.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\wp\rwp_chinanife_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\wp\rwp_colt.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\wp\rwp_colt_notex.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\wp\wp_chinanife.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+sh2_tex_index::LoadFileInfoAux( C:\Program Files (x86)\Konami\SILENT HILL 2\data\chr2\wp\wp_colt.mdl ) - ERROR: Invalid Tex Batch Marker (0x00000000, should be 0x19990901) - Skipping file.
+sh2_tex_index::BuildTexList() - ERROR: Couldn't Add file "άξ" to texture list
+NOTE: Unknkown data 1 - TEX: 6553  f1 [1]  q1 [2305]  q2 [0]  q3 [0]  q4 [0]  q5 [0]  f1 [1]  endMarker [ 0x00000000 ]
+NOTE: Unknkown data 1 - TEX: 1850  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 2 - TEX: 1852  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 3 - TEX: 1851  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 4 - TEX: 1856  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 5 - TEX: 1854  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 6 - TEX: 1855  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 7 - TEX: 1858  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 8 - TEX: 1859  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 9 - TEX: 1860  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 10 - TEX: 1864  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 11 - TEX: 1866  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 12 - TEX: 1864  f1 [0]  q1 [1]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 13 - TEX: 1863  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 14 - TEX: 1865  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 15 - TEX: 0  f1 [1112014848]  q1 [2]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [1112014848]  endMarker [ 0xffffffff ]
+NOTE: Unknkown data 16 - TEX: 1862  f1 [0]  q1 [1]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 17 - TEX: 1863  f1 [0]  q1 [1]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 18 - TEX: 1862  f1 [0]  q1 [0]  q2 [255]  q3 [255]  q4 [255]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+NOTE: Unknkown data 19 - TEX: 1862  f1 [0]  q1 [0]  q2 [178]  q3 [178]  q4 [178]  q5 [255]  f1 [0]  endMarker [ 0xff000000 ]
+LoadMap( C:\Program Files (x86)\Konami\SILENT HILL 2\data\bg\ap\ap01.map : off: 1836032 ) - TRACKING: Prim Block[ 1 of 1 ]  -  Value of f1 var in prim offset header:  0

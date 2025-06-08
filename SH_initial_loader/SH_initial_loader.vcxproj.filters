@@ -114,6 +114,9 @@
     <ClCompile Include="external\glad\src\wgl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AssetLists.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="debugDrawing.h">
