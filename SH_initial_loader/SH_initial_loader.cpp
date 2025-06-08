@@ -1456,16 +1456,16 @@ int init( void )
 			LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't find correct display mode\n\t...Exiting",__LINE__);
 			return 0;
 		}
+	
+		if( ChangeDisplaySettings( &devMode, CDS_FULLSCREEN ) != DISP_CHANGE_SUCCESSFUL )
+		{
+			// TO DO: Respond to failure of ChangeDisplaySettings
+			LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't change the display\n\t...Exiting",__LINE__);
+			return 0;
+		}
 	}
 
 
-
-	//if( ChangeDisplaySettings( &devMode, CDS_FULLSCREEN ) != DISP_CHANGE_SUCCESSFUL )
-	//{
-	//	// TO DO: Respond to failure of ChangeDisplaySettings
-	//	LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't change the display\n\t...Exiting",__LINE__);
-	//	return 0;
-	//}
 
 	RECT winRect;
 	winRect.left	= 0;			
