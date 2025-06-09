@@ -52,7 +52,7 @@
 
 extern int errno;
 
-#define NUM_SCREEN_DIMS 7
+#define NUM_SCREEN_DIMS 8
 
 //PLACE IN IT"S OWN STATIC CLASS
 void createFont();
@@ -769,36 +769,39 @@ LRESULT CALLBACK WindowProc( HWND   hWnd,
 			//if (GetAsyncKeyState(VK_END) & 0x8000 )
 			
 			//-- Viewer Camera Update --/
-			GetCursorPos(&screenLoc);              //Calculate the movement of the mouse for free viewing
-
-			//--[ Set Timestep Based On Mouse Movement ]--/
-
-			xrot+=halfWidth - screenLoc.x;
-			yrot+=screenLoc.y - halfHeight;
-			SetCursorPos(halfWidth,halfHeight);
-
-		//	xRotStep += 400.0f * timeStep * fMouseRate * (float)(halfWidth - screenLoc.x);
-		//	yRotStep += 400.0f * timeStep * fMouseRate * (float)(screenLoc.y - halfHeight);
-		//	
-		//	xrot = (int)xRotStep;
-		//	yrot = (int)yRotStep;
-
-			//--[ Reset y rotation into proper range ]--/
-			if( yrot > 89 )
+			if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
 			{
-				yrot = 89;
-				yRotStep = 89.0f;
-			}
-			else if( yrot < -89 )
-			{
-				yrot = -89;
-				yRotStep = -89.0f;
-			}
+				GetCursorPos(&screenLoc);              //Calculate the movement of the mouse for free viewing
 
-			//--[ Reset x rotation into proper range ]--/
-			xrot %= 360;                           
+				//--[ Set Timestep Based On Mouse Movement ]--/
 
-			viewCam.rotateView(xrot,yrot);         //figure out some way to use the screenDims and time to slow rotation
+				xrot+=halfWidth - screenLoc.x;
+				yrot+=screenLoc.y - halfHeight;
+				SetCursorPos(halfWidth,halfHeight);
+
+			//	xRotStep += 400.0f * timeStep * fMouseRate * (float)(halfWidth - screenLoc.x);
+			//	yRotStep += 400.0f * timeStep * fMouseRate * (float)(screenLoc.y - halfHeight);
+			//	
+			//	xrot = (int)xRotStep;
+			//	yrot = (int)yRotStep;
+
+				//--[ Reset y rotation into proper range ]--/
+				if( yrot > 89 )
+				{
+					yrot = 89;
+					yRotStep = 89.0f;
+				}
+				else if( yrot < -89 )
+				{
+					yrot = -89;
+					yRotStep = -89.0f;
+				}
+
+				//--[ Reset x rotation into proper range ]--/
+				xrot %= 360;                           
+
+				viewCam.rotateView(xrot,yrot);         //figure out some way to use the screenDims and time to slow rotation
+			}
 			//-- END Viewer Camera Update --/
 
 			if( numScenes == 1 || model_mode || testMode )
@@ -1372,6 +1375,99 @@ void AssignConfigVars(const Config& config)
 	fClearColorBlue = GetConfigVariable(config.values, "d_screen_color", SCREEN_COLOR_B_DEFAULT);
 }
 
+int InitWindow(BYTE& fullscreenMode, HWND& outHWND)
+{
+	// Configure fullscreen mode
+	if (fullscreenMode)
+	{
+		DEVMODE devMode = {};
+		devMode.dmSize = sizeof(devMode);
+		if (!EnumDisplaySettings(
+			nullptr,
+			ENUM_CURRENT_SETTINGS,
+			&devMode))
+		{
+			MessageBox(nullptr, "EnumDisplaySettings failed!", "Error", MB_OK);
+			fullscreenMode = false;
+		}
+		else
+		{
+			devMode.dmBitsPerPel = 32;
+			devMode.dmFields =
+				DM_PELSWIDTH |
+				DM_PELSHEIGHT |
+				DM_BITSPERPEL |
+				DM_DISPLAYFREQUENCY;
+
+			if (ChangeDisplaySettings(&devMode, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL)
+			{
+				MessageBox(nullptr, "ChangeDisplaySettings failed!", "Error", MB_OK);
+				fullscreenMode = false;
+			}
+		}
+	}
+	
+	// Configure window style
+	DWORD dwStyle;
+	if (fullscreenMode)
+		dwStyle = WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
+	else
+		dwStyle = WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
+	DWORD dwExStyle = WS_EX_APPWINDOW;
+
+	// Window dimensions
+	RECT winRect = { 0, 0, dScreenRes[screenDimMode].w, dScreenRes[screenDimMode].h };
+	AdjustWindowRect(&winRect, dwStyle, FALSE);
+
+	int winX = fullscreenMode ? 0 : (GetSystemMetrics(SM_CXSCREEN) - (winRect.right - winRect.left)) / 2;
+	int winY = fullscreenMode ? 0 : (GetSystemMetrics(SM_CYSCREEN) - (winRect.bottom - winRect.top)) / 2;
+
+	// Create and output window
+	outHWND = CreateWindowEx(
+		dwExStyle,
+		className,
+		"Silent Hill 2, 3 & 4 Level Viewer",
+		dwStyle,
+		winX, winY,
+		winRect.right - winRect.left,
+		winRect.bottom - winRect.top,
+		NULL, NULL, g_hInstance, NULL);
+
+	if (!outHWND)
+	{
+		if (fullscreenMode)
+			ChangeDisplaySettings(nullptr, 0);
+
+		DWORD err = GetLastError();
+		LogFile(ERROR_LOG, "CreateWindowEx failed: %lu", err);
+
+		return 0;
+	}
+
+	// Device context
+	if (hdc == NULL)
+		hdc = GetDC(outHWND);
+
+	// Pixel format setup
+	DWORD flagPtr = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+	if (int pfErr = pixelFormatSetup(&flagPtr, &colorBits, &depthBits, &stencilBits, FALSE))
+	{
+		LogFile(ERROR_LOG, "pixelFormatSetup failed (err %lu", pfErr);
+		return 0;
+	}
+
+	// OpenGL context
+	if (hglrc = wglCreateContext(hdc))
+		wglMakeCurrent(hdc, hglrc);
+	else
+	{
+		LogFile(ERROR_LOG, "wglCreateContext failed");
+		return 0;
+	}
+
+	return 1;
+}
+
 //-----------------------------------------------------------------------------
 // Name: init()
 // Desc: 
@@ -1381,15 +1477,8 @@ int init( void )
 	char configFile[128]="default.cfg";
 	Config config;
 	int nMode = 0;
-	DEVMODE devMode;
-	bool bDesiredDevModeFound = false;
 	FILE *fp;
 	
-
-	// Variables for setting pixel format and display settings
-	DWORD flagPtr=PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-	DWORD dwStyle = WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
-	DWORD retVal;
 
 	char errorString[128];
 
@@ -1418,91 +1507,84 @@ int init( void )
 	EnumDisplaySettings( NULL, ENUM_CURRENT_SETTINGS, &oldMode );
 
 
-	
-
-
 	//
 	// Enumerate Device modes...
 	//
-	if(fullScreen)
-	{
-
-		while( EnumDisplaySettings( NULL, nMode++, &devMode ) )
-		{
-			// Does this device mode support a 640 x 480 setting?
-			if( devMode.dmPelsWidth  != dScreenRes[screenDimMode].w || 
-				devMode.dmPelsHeight !=dScreenRes[screenDimMode].h )
-				continue;
-
-			// Does this device mode support 32-bit color?
-			if( devMode.dmBitsPerPel != colorBits )
-				continue;
-
-			// Does this device mode support a refresh rate of 75 MHz?
-			if( devMode.dmDisplayFrequency != refreshRate )
-				continue;
-
-			// We found a match, but can it be set without rebooting?
-			if( ChangeDisplaySettings( &devMode, CDS_TEST ) == DISP_CHANGE_SUCCESSFUL )
-			{
-				bDesiredDevModeFound = true;
-				break;
-			}
-		}
-
-		if( bDesiredDevModeFound == false )
-		{
-			fullScreen=0;
-			LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't find correct display mode\n\t...Exiting",__LINE__);
-			return 0;
-		}
+	//if(fullScreen)
+	//{
+	//
+	//	while( EnumDisplaySettings( NULL, nMode++, &devMode ) )
+	//	{
+	//		// Does this device mode support a 640 x 480 setting?
+	//		if( devMode.dmPelsWidth  != dScreenRes[screenDimMode].w || 
+	//			devMode.dmPelsHeight !=dScreenRes[screenDimMode].h )
+	//			continue;
+	//
+	//		// Does this device mode support 32-bit color?
+	//		if( devMode.dmBitsPerPel != colorBits )
+	//			continue;
+	//
+	//		// Does this device mode support a refresh rate of 75 MHz?
+	//		if( devMode.dmDisplayFrequency != refreshRate )
+	//			continue;
+	//
+	//		// We found a match, but can it be set without rebooting?
+	//		if( ChangeDisplaySettings( &devMode, CDS_TEST ) == DISP_CHANGE_SUCCESSFUL )
+	//		{
+	//			bDesiredDevModeFound = true;
+	//			break;
+	//		}
+	//	}
+	//
+	//	if( bDesiredDevModeFound == false )
+	//	{
+	//		fullScreen=0;
+	//		LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't find correct display mode\n\t...Exiting",__LINE__);
+	//		return 0;
+	//	}
+	//
+	//	if( ChangeDisplaySettings( &devMode, CDS_FULLSCREEN ) != DISP_CHANGE_SUCCESSFUL )
+	//	{
+	//		// TO DO: Respond to failure of ChangeDisplaySettings
+	//		LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't change the display\n\t...Exiting",__LINE__);
+	//		return 0;
+	//	}
+	//}
+	//
+	//
+	//
+	//RECT winRect;
+	//winRect.left	= 0;			
+	//winRect.right	= dScreenRes[screenDimMode].w;	
+	//winRect.top	    = 0;
+	//winRect.bottom	= dScreenRes[screenDimMode].h;	
+	//
+	//AdjustWindowRect( &winRect, dwStyle, false);
+	//
+	//hwnd = CreateWindowEx( NULL, className, "Silent Hill 3 - Level Viewer",
+	//					     dwStyle,
+	//				         0, 0, winRect.right-winRect.left, winRect.bottom-winRect.top, NULL, NULL, g_hInstance, NULL );
 	
-		if( ChangeDisplaySettings( &devMode, CDS_FULLSCREEN ) != DISP_CHANGE_SUCCESSFUL )
-		{
-			// TO DO: Respond to failure of ChangeDisplaySettings
-			LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't change the display\n\t...Exiting",__LINE__);
-			return 0;
-		}
-	}
-
-
-
-	RECT winRect;
-	winRect.left	= 0;			
-	winRect.right	= dScreenRes[screenDimMode].w;	
-	winRect.top	    = 0;
-	winRect.bottom	= dScreenRes[screenDimMode].h;	
-
-	AdjustWindowRect( &winRect, dwStyle, false);
-
-	hwnd = CreateWindowEx( NULL, className, "Silent Hill 3 - Level Viewer",
-						     dwStyle,
-					         0, 0, winRect.right-winRect.left, winRect.bottom-winRect.top, NULL, NULL, g_hInstance, NULL );
-	if( hwnd == NULL )
+	
+	if( !InitWindow(fullScreen, hwnd) )
 	{
 		LogFile(ERROR_LOG,"init( %d ) - ERROR: Couldn't create the Windo\n\t...Exiting",__LINE__);
 		return 0;
   	}
 
+	
 
-	sprintf(errorString,"Requested: %dx%d:%d bpp @ %d, with %d and %d bits depth and stencil\n",
-		dScreenRes[screenDimMode].w,dScreenRes[screenDimMode].h,colorBits,refreshRate,depthBits,stencilBits);
+	//sprintf(errorString,"Requested: %dx%d:%d bpp @ %d, with %d and %d bits depth and stencil\n",
+	//	dScreenRes[screenDimMode].w,dScreenRes[screenDimMode].h,colorBits,refreshRate,depthBits,stencilBits);
 
-	if((retVal=pixelFormatSetup(&flagPtr,&colorBits,&depthBits,&stencilBits,FALSE))!=0)
-	{
-		char messageString[128];
-		sprintf(messageString,"%s Initialized: %d bpp with %d and %d bits depth and stencil",errorString,colorBits,
-			depthBits,stencilBits);
-		//MessageBox(NULL,messageString,"ERROR: Display Init",MB_OK);
-	}
+	//if((retVal=pixelFormatSetup(&flagPtr,&colorBits,&depthBits,&stencilBits,FALSE))!=0)
+	//{
+	//	char messageString[128];
+	//	sprintf(messageString,"%s Initialized: %d bpp with %d and %d bits depth and stencil",errorString,colorBits,
+	//		depthBits,stencilBits);
+	//	//MessageBox(NULL,messageString,"ERROR: Display Init",MB_OK);
+	//}
 
-	if(hdc==NULL)
-		hdc=GetDC(hwnd);
-
-	hglrc = wglCreateContext( hdc );
-	wglMakeCurrent(hdc, hglrc);
-
-	// Using compatibility profile for OpenGL for now. Uncomment this when moving to modern OpenGL and consequently, the core profile.
 	if (!gladLoadGL(glad_win32_loader))
 	{
 		MessageBox(NULL, "gladLoadGL failed", "Error", MB_OK);
@@ -1649,7 +1731,7 @@ void createEmptyConfig( )
 		fprintf( outFile, "d_dispmode 2\n\n");
 		fprintf( outFile, "#NOTE: I wouldn't mess w/ these display settings, unless you know what you're doing...\n\n");
 		fprintf( outFile, "d_refresh 60\nd_colordepth 32\nd_depthbuff 24\nd_stencil 8\n\n");
-		fprintf( outFile, "# I Never implemented the windowed version, and I didn't test what would happen if I tried it windowed... Have fun\n");
+		fprintf( outFile, "# Windowed mode is now supported. Give it a go!\n");
 		fprintf( outFile, "d_fullscreen 1\n\n#For large models, you may want to change this (Note: This can't be 0)\nd_zdist 25000.0\n\n#Background Color\n");
 		fprintf( outFile, "d_screen_color 0.2 0.4 0.2\n\n# This is the directory where the data files reside. Don't forget the '\\' at the end...\n");
 		fprintf( outFile, "o_sh2_data_dir h:\\Silent Hill 2\\data\\\no_sh3_data_dir C:\\Program Files\\KONAMI\\SILENT HILL 3\\data\\\n");
