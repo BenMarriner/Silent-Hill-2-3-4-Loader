@@ -1195,7 +1195,16 @@ dumpModel = false;
 		//	ReleaseDC(hwnd,hdc);
 			//LogFile(ERROR_LOG,"Check bad exit - MOUSE: %ld",wParam);
 			return(0);
-		}break;		
+		}break;
+		case WM_SIZE:
+		{
+			int newW = LOWORD(lParam);
+			int newH = HIWORD(lParam);
+			if (newH == 0) newH = 1;
+			glViewport(0, 0, newW, newH);
+			viewCam.createCamView(75.0f, (float)newW / newH, 1.0f, zDist);
+			return 0;
+		}
 		default:
 		{
 			return DefWindowProc( hWnd, msg, wParam, lParam );
